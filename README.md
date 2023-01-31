@@ -9,8 +9,116 @@
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
 Convert the LwM2M JSON encoding written by
-[AVSystem's Coiote Azure integration]()
+[AVSystem's Coiote Azure integration](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tracking_tutorial/)
 
 ## Status: Work in progress
-Currently there is any functionality in this project. This is work in progress.
- 
+Currently there is no functionality in this project. This is work in progress.
+
+
+## Expected input
+
+Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tracking_tutorial/)
+
+## Expected output
+``` javascript
+{
+  '6': { '0': 0, '1': 0, '2': 0, '3': 0, '4': '', '5': 0, '6': 0 },
+  '10256': [
+    { '0': 247, '1': 0, '2': 6400, '3': -96, '4': -12, '5': 0 },
+    { '0': 425, '1': 0, '2': 300, '3': -115, '4': -12, '5': 23 },
+    { '0': 195, '1': 0, '2': 300, '3': -119, '4': -16, '5': 23 }
+  ],
+  '4:1.3@1.1': {
+    '0': 6,
+    '1': [ 6, 7 ],
+    '2': -96,
+    '3': 0,
+    '4': [ '10.160.225.39' ],
+    '7': [ 'ibasis.iot' ],
+    '8': 21627653,
+    '9': 1,
+    '10': 242,
+    '11': 0,
+    '12': 30401
+  },
+  '50009@1.2': {
+    '1': 10,
+    '2': 5,
+    '3': 60,
+    '4': 120,
+    '5': true,
+    '6': 30,
+    '7': 120,
+    '8': 3600,
+    '9': true,
+    '10': true
+  },
+  '3:1.2@1.1': {
+    '0': 'Nordic Semiconductor ASA',
+    '1': 'thingy91_nrf9160',
+    '2': '351358815340515',
+    '3': '0.0.0-development',
+    '7': [ 4113 ],
+    '11': [ 0 ],
+    '13': 1665149602,
+    '14': '',
+    '15': '',
+    '16': 'U',
+    '17': '',
+    '18': 'nRF9160_SICA',
+    '19': 'mfw_nrf9160_1.3.2'
+  },
+  '5:1.1@1.1': { '0': 'Package', '1': '', '3': 0, '5': 1, '6': '', '7': '', '9': 2 },
+  '3304:1.1': [
+    {
+      '5518': 1665149602,
+      '5601': 31.064,
+      '5602': 31.064,
+      '5603': 0,
+      '5604': 100,
+      '5700': 28.927,
+      '5701': '%',
+      '5750': ''
+    }
+  ],
+  '1:1.2@1.2': [
+    {
+      '0': 101,
+      '1': 43200,
+      '2': 0,
+      '3': 0,
+      '5': 86400,
+      '6': 0,
+      '7': 'U',
+      '22': '',
+      '23': 0
+    }
+  ],
+  '3323:1.1': [
+    {
+      '5518': 1665149602,
+      '5601': 98.236,
+      '5602': 98.236,
+      '5603': 30,
+      '5604': 110,
+      '5700': 98.226,
+      '5701': 'kPa',
+      '5750': ''
+    }
+  ],
+  '3347:1.1': [ { '5500': 0, '5501': 0, '5518': 0, '5750': 'Push button 1' } ],
+  '3303:1.1': [
+    {
+      '5518': 1665149602,
+      '5601': 23.51,
+      '5602': 23.51,
+      '5603': -40,
+      '5604': 85,
+      '5700': 24.57,
+      '5701': 'Celsius degrees',
+      '5750': ''
+    }
+  ]
+}
+
+```
