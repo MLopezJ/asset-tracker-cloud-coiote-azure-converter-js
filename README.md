@@ -18,6 +18,293 @@ Currently there is no functionality in this project. This is work in progress.
 ## Expected input
 
 Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tracking_tutorial/)
+``` javascript
+{
+    "properties": {
+        "desired": {
+            "$metadata": {
+                "$lastUpdated": "2023-02-08T14:59:36.5459563Z"
+            },
+            "$version": 1
+        },
+        "reported": {
+            "lwm2m": {
+                "1": {
+                    "0": {
+                        "0": {
+                            "value": 1
+                        },
+                        "1": {
+                            "value": 50
+                        },
+                        "6": {
+                            "value": false
+                        },
+                        "7": {
+                            "value": "U"
+                        },
+                        "16": {
+                            "value": true
+                        },
+                        "23": {
+                            "value": false
+                        },
+                        "attributes": {
+                            "pmax": "600"
+                        }
+                    },
+                    "attributes": {
+                        "pmax": "600"
+                    },
+                    "observed": true
+                },
+                "3": {
+                    "0": {
+                        "0": {
+                            "value": "Nordic Semiconductor"
+                        },
+                        "1": {
+                            "value": "Thingy:91"
+                        },
+                        "2": {
+                            "value": "351358815340515"
+                        },
+                        "3": {
+                            "value": "22.8.1+0"
+                        },
+                        "11": {
+                            "0": {
+                                "value": 0
+                            },
+                            "attributes": {
+                                "dim": "1"
+                            }
+                        },
+                        "13": {
+                            "value": 1675874731000
+                        },
+                        "16": {
+                            "value": "UQ"
+                        },
+                        "19": {
+                            "value": "3.2.1"
+                        }
+                    }
+                },
+                "4": {
+                    "0": {
+                        "0": {
+                            "value": 6
+                        },
+                        "1": {
+                            "0": {
+                                "value": 6
+                            },
+                            "1": {
+                                "value": 7
+                            },
+                            "attributes": {
+                                "dim": "2"
+                            }
+                        },
+                        "2": {
+                            "value": -85
+                        },
+                        "3": {
+                            "value": 23
+                        },
+                        "4": {
+                            "0": {
+                                "value": "10.160.120.155"
+                            },
+                            "attributes": {
+                                "dim": "1"
+                            }
+                        },
+                        "8": {
+                            "value": 34237196
+                        },
+                        "9": {
+                            "value": 2
+                        },
+                        "10": {
+                            "value": 242
+                        }
+                    },
+                    "attributes": {
+                        "ver": "1.2"
+                    }
+                },
+                "5": {
+                    "0": {
+                        "0": {},
+                        "1": {
+                            "value": ""
+                        },
+                        "3": {
+                            "value": 0
+                        },
+                        "5": {
+                            "value": 1
+                        },
+                        "8": {
+                            "0": {
+                                "value": 0
+                            },
+                            "1": {
+                                "value": 1
+                            },
+                            "attributes": {
+                                "dim": "2"
+                            }
+                        },
+                        "9": {
+                            "value": 2
+                        }
+                    }
+                },
+                "6": {
+                    "0": {
+                        "0": {
+                            "attributes": {
+                                "pmin": "600",
+                                "pmax": "3600"
+                            }
+                        },
+                        "1": {
+                            "attributes": {
+                                "pmin": "600",
+                                "pmax": "3600"
+                            }
+                        },
+                        "2": {},
+                        "3": {},
+                        "5": {},
+                        "6": {}
+                    }
+                },
+                "3303": {
+                    "0": {
+                        "5601": {},
+                        "5602": {},
+                        "5700": {
+                            "attributes": {
+                                "pmax": "3600",
+                                "pmin": "600"
+                            }
+                        },
+                        "5701": {
+                            "value": "Cel"
+                        },
+                        "attributes": {
+                            "pmin": "300",
+                            "pmax": "600"
+                        }
+                    },
+                    "attributes": {
+                        "pmax": "600",
+                        "pmin": "300"
+                    },
+                    "observed": true
+                },
+                "3304": {
+                    "0": {
+                        "5601": {},
+                        "5602": {},
+                        "5700": {
+                            "attributes": {
+                                "pmax": "3600",
+                                "pmin": "600"
+                            }
+                        },
+                        "5701": {
+                            "value": "%RH"
+                        }
+                    }
+                },
+                "3313": {
+                    "0": {
+                        "5701": {
+                            "value": "m/s2"
+                        },
+                        "5702": {},
+                        "5703": {},
+                        "5704": {}
+                    }
+                },
+                "3315": {
+                    "0": {
+                        "5601": {},
+                        "5602": {},
+                        "5700": {
+                            "attributes": {
+                                "pmax": "3600",
+                                "pmin": "600"
+                            }
+                        },
+                        "5701": {
+                            "value": "Pa"
+                        }
+                    }
+                },
+                "3347": {
+                    "0": {
+                        "5500": {},
+                        "5501": {},
+                        "5750": {
+                            "value": "Button 0"
+                        }
+                    }
+                },
+                "3420": {
+                    "0": {
+                        "1": {
+                            "value": "#000000"
+                        }
+                    }
+                },
+                "10256": {
+                    "0": {
+                        "0": {
+                            "value": 428
+                        },
+                        "2": {
+                            "value": 6300
+                        },
+                        "3": {
+                            "value": 52
+                        },
+                        "4": {
+                            "value": 14
+                        },
+                        "5": {
+                            "value": 0
+                        }
+                    }
+                },
+                "50001": {
+                    "0": {
+                        "0": {
+                            "value": 5
+                        },
+                        "1": {
+                            "value": 128
+                        },
+                        "6": {},
+                        "7": {},
+                        "8": {},
+                        "9": {},
+                        "10": {},
+                        "11": {}
+                    }
+                }
+            },
+            "$metadata": {},
+            "$version": 31
+        }
+    },
+}
+```
 
 ## Expected output
 ``` javascript
