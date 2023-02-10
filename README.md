@@ -340,16 +340,16 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         '10': 242,
     },
     '5:1.1@1.1': { '1': '', '3': 0, '5': 1, '8': [0, 1], '9': 2 },
-    '6': { '0': { 'pmin': 600, 'pmax': 3600 }, '1': { 'pmin': 600, 'pmax': 3600 } },
+    '6': { '0': undefined, '1': undefined },
     '3303:1.1': [
         {
-          '5700': { 'pmin': 600, 'pmax': 3600 },
+          '5700': undefined,
           '5701': 'Cel',
         }
     ],
     '3304:1.1': [
         {
-          '5700': { 'pmin': 600, 'pmax': 3600 },
+          '5700': undefined,
           '5701': '%RH',
         }
     ],
@@ -357,7 +357,7 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         "5701": "m/s2"
     },
     '3315': {
-        '5700': { 'pmin': 600, 'pmax': 3600 },
+        '5700': undefined,
         "5701": "Pa"
     },
     '3347:1.1': [ { '5750': 'Button 0' } ],
