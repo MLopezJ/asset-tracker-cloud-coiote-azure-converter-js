@@ -14,7 +14,7 @@ Convert the LwM2M JSON encoding written by
 ## Status: Work in progress
 Currently there is no functionality in this project. This is work in progress.
 
-There is a situation with the following values:
+There is a situation with the following values in the `Expected input` object:
 
 | ID  |  Object  | Prop | Name | Received Value | Expects | LwM2M Def |
 |---|---|---|---|---|---|---|
@@ -25,7 +25,9 @@ There is a situation with the following values:
 | 3315  | Barometer | 5700 | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |   [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3315.xml) |
 
 
-where received value is `{ 'pmin': 600, 'pmax': 3600 }` but it is expecting a `float` value. Rigth now there is an [investigation about how to interpretate this](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/7)
+where received value is `{ 'pmin': 600, 'pmax': 3600 }` but it is expecting a `float` value.
+
+This make not possible to generate the `Expected output` object. Rigth now there is an [investigation about how to interpretate this](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/7)
 
 ## Expected input
 
