@@ -14,6 +14,18 @@ Convert the LwM2M JSON encoding written by
 ## Status: Work in progress
 Currently there is no functionality in this project. This is work in progress.
 
+There is a situation with the following values:
+
+| ID  |  Object  | Prop | Name | Received Value | Expects | LwM2M Def |
+|---|---|---|---|---|---|---|
+|  6 |  Location | 0 | Latitude | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/6.xml) | 
+|  6 |  Location | 1 | Longitude | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/6.xml) | 
+| 3304  | Temperature  | 5700  | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3303.xml)  | 
+| 3304  | Humidity  | 5700  | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3304.xml)  | 
+| 3315  | Barometer | 5700 | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |   [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3315.xml) |
+
+
+where received value is `{ 'pmin': 600, 'pmax': 3600 }` but it is expecting a `float` value. Rigth now there is an [investigation about how to interpretate this](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/7)
 
 ## Expected input
 
@@ -340,16 +352,16 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         '10': 242,
     },
     '5:1.1@1.1': { '1': '', '3': 0, '5': 1, '8': [0, 1], '9': 2 },
-    '6': { '0': undefined, '1': undefined },
+    '6': { '0': 115.6, '1': 34.7 },
     '3303:1.1': [
         {
-          '5700': undefined,
+          '5700': 27.3,
           '5701': 'Cel',
         }
     ],
     '3304:1.1': [
         {
-          '5700': undefined,
+          '5700': 12,
           '5701': '%RH',
         }
     ],
@@ -357,7 +369,7 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         "5701": "m/s2"
     },
     '3315': {
-        '5700': undefined,
+        '5700': 100,
         "5701": "Pa"
     },
     '3347:1.1': [ { '5750': 'Button 0' } ],
