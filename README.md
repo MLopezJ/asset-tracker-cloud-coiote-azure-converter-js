@@ -402,3 +402,31 @@ Object with id 3 is considered as empty value and will be removed from output
 ``` json
 "1": { }
 ```
+
+#### 2- List definition
+
+``` json
+"1": {
+    "0": {
+        "8": {
+            "0": {
+                "value": 10
+            },
+            "1": {
+                "value": 14
+            },
+            "attributes": {
+                "dim": "2"
+            }
+        }
+    }
+}
+```
+
+Objects with the object ` {"attributes": { "dim": X }} ` as props are going to be interpret as lists
+
+``` json
+"1": { "8": [10, 14] }
+```
+
+
