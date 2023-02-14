@@ -383,7 +383,7 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
 ```
 
 ## Transformation process
-Here is described the steps required to went from the `expected input` to the `expected output`
+Here is described the steps required to went from the [expected input](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-input) to the [expected output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-output)
 
 ### Assumptions
 
