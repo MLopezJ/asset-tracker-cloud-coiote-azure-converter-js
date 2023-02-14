@@ -14,20 +14,11 @@ Convert the LwM2M JSON encoding written by
 ## Status: Work in progress
 Currently there is no functionality in this project. This is work in progress.
 
-There is a situation with the following values in the `Expected input` object:
+## Warning
+There is a discussion in progress right now about `Location` object. This can affect the contract between the expected input and expected output. Location is object 6 in `expected input` and object 6 in `expected output`
 
-| ID  |  Object  | Prop | Name | Received Value | Expects | LwM2M Def |
-|---|---|---|---|---|---|---|
-|  6 |  Location | 0 | Latitude | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/6.xml) | 
-|  6 |  Location | 1 | Longitude | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/6.xml) | 
-| 3304  | Temperature  | 5700  | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3303.xml)  | 
-| 3304  | Humidity  | 5700  | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |  [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3304.xml)  | 
-| 3315  | Barometer | 5700 | Sensor Value | { 'pmin': 600, 'pmax': 3600 } | **float** |   [link](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/3315.xml) |
-
-
-where received value is `{ 'pmin': 600, 'pmax': 3600 }` but it is expecting a `float` value.
-
-This make not possible to generate the `Expected output` object. Rigth now there is an [investigation about how to interpretate this](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/7)
+- [Device Location can not be shown in Coiote dashboard](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/3)
+- [Which values from Location are required in nRF Asset Tracker v2?](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/13)
 
 ## Expected input
 
@@ -62,15 +53,8 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                         },
                         "23": {
                             "value": false
-                        },
-                        "attributes": {
-                            "pmax": "600"
                         }
-                    },
-                    "attributes": {
-                        "pmax": "600"
-                    },
-                    "observed": true
+                    }
                 },
                 "3": {
                     "0": {
@@ -179,18 +163,8 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "6": {
                     "0": {
-                        "0": {
-                            "attributes": {
-                                "pmin": "600",
-                                "pmax": "3600"
-                            }
-                        },
-                        "1": {
-                            "attributes": {
-                                "pmin": "600",
-                                "pmax": "3600"
-                            }
-                        },
+                        "0": {},
+                        "1": {},
                         "2": {},
                         "3": {},
                         "5": {},
@@ -199,37 +173,30 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "3303": {
                     "0": {
-                        "5601": {},
-                        "5602": {},
+                        "5601": {
+                            "value": 27.18
+                        },
+                        "5602": {
+                            "value": 27.71
+                        },
                         "5700": {
-                            "attributes": {
-                                "pmax": "3600",
-                                "pmin": "600"
-                            }
+                            "value": 27.18
                         },
                         "5701": {
                             "value": "Cel"
-                        },
-                        "attributes": {
-                            "pmin": "300",
-                            "pmax": "600"
                         }
-                    },
-                    "attributes": {
-                        "pmax": "600",
-                        "pmin": "300"
-                    },
-                    "observed": true
+                    }
                 },
                 "3304": {
                     "0": {
-                        "5601": {},
-                        "5602": {},
+                        "5601": {
+                            "value": 23.535
+                        },
+                        "5602": {
+                            "value": 24.161
+                        },
                         "5700": {
-                            "attributes": {
-                                "pmax": "3600",
-                                "pmin": "600"
-                            }
+                            "value": 24.057
                         },
                         "5701": {
                             "value": "%RH"
@@ -241,20 +208,27 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                         "5701": {
                             "value": "m/s2"
                         },
-                        "5702": {},
-                        "5703": {},
-                        "5704": {}
+                        "5702": {
+                            "value": -0.372652
+                        },
+                        "5703": {
+                            "value": -0.117679
+                        },
+                        "5704": {
+                            "value": -9.012311
+                        }
                     }
                 },
                 "3315": {
                     "0": {
-                        "5601": {},
-                        "5602": {},
+                        "5601": {
+                            "value": 101697
+                        },
+                        "5602": {
+                            "value": 101705
+                        },
                         "5700": {
-                            "attributes": {
-                                "pmax": "3600",
-                                "pmin": "600"
-                            }
+                            "value": 101705
                         },
                         "5701": {
                             "value": "Pa"
@@ -263,8 +237,12 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "3347": {
                     "0": {
-                        "5500": {},
-                        "5501": {},
+                        "5500": {
+                            "value": false
+                        },
+                        "5501": {
+                            "value": 0
+                        },
                         "5750": {
                             "value": "Button 0"
                         }
@@ -305,7 +283,9 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                             "value": 128
                         },
                         "6": {},
-                        "7": {},
+                        "7": {
+                            "value": "403"
+                        },
                         "8": {},
                         "9": {},
                         "10": {},
@@ -354,27 +334,42 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         '10': 242,
     },
     '5:1.1@1.1': { '1': '', '3': 0, '5': 1, '8': [0, 1], '9': 2 },
-    '6': { '0': 115.6, '1': 34.7 },
+    '6': { },
     '3303:1.1': [
         {
-          '5700': 27.3,
+          '5601': 27.18,
+          '5602': 27.71,
+          '5700': 27.18,
           '5701': 'Cel',
         }
     ],
     '3304:1.1': [
         {
-          '5700': 12,
+          '5601': 23.535,
+          '5602': 24.161,
+          '5700': 24.057,
           '5701': '%RH',
         }
     ],
     '3313': {
-        "5701": "m/s2"
-    },
+          '5701': 'm/s2',
+          '5704': -9.012311,
+          '5703': -0.117679,
+          '5702': -0.372652,
+        },
     '3315': {
-        '5700': 100,
-        "5701": "Pa"
-    },
-    '3347:1.1': [ { '5750': 'Button 0' } ],
+          '5601': 101697,
+          '5602': 101705,
+          '5700': 101705,
+          '5701': 'Pa',
+        },
+    '3347:1.1': [ 
+        { 
+          '5500': false,
+          '5501': 0,
+          '5750': 'Button 0' 
+        }
+    ],
     '3420': { "1": "#000000" },
     '10256': [
         { '0': 428, '2': 6300, '3': 52, '4': 14, '5': 0 },
@@ -382,6 +377,7 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
     "50001": {
         "0": 5,
         "1": 128,
+        "7": 403
     }
 }
 ```
