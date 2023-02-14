@@ -205,13 +205,14 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "3304": {
                     "0": {
-                        "5601": {},
-                        "5602": {},
+                        "5601": {
+                            "value": 23.535
+                        },
+                        "5602": {
+                            "value": 24.161
+                        },
                         "5700": {
-                            "attributes": {
-                                "pmax": "3600",
-                                "pmin": "600"
-                            }
+                            "value": 24.057
                         },
                         "5701": {
                             "value": "%RH"
@@ -223,20 +224,27 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                         "5701": {
                             "value": "m/s2"
                         },
-                        "5702": {},
-                        "5703": {},
-                        "5704": {}
+                        "5702": {
+                            "value": -0.372652
+                        },
+                        "5703": {
+                            "value": -0.117679
+                        },
+                        "5704": {
+                            "value": -9.012311
+                        }
                     }
                 },
                 "3315": {
                     "0": {
-                        "5601": {},
-                        "5602": {},
+                        "5601": {
+                            "value": 101697
+                        },
+                        "5602": {
+                            "value": 101705
+                        },
                         "5700": {
-                            "attributes": {
-                                "pmax": "3600",
-                                "pmin": "600"
-                            }
+                            "value": 101705
                         },
                         "5701": {
                             "value": "Pa"
@@ -245,8 +253,12 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "3347": {
                     "0": {
-                        "5500": {},
-                        "5501": {},
+                        "5500": {
+                            "value": false
+                        },
+                        "5501": {
+                            "value": 0
+                        },
                         "5750": {
                             "value": "Button 0"
                         }
@@ -287,7 +299,9 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                             "value": 128
                         },
                         "6": {},
-                        "7": {},
+                        "7": {
+                            "value": "403"
+                        },
                         "8": {},
                         "9": {},
                         "10": {},
