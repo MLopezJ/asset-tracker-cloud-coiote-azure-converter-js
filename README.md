@@ -179,18 +179,8 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "6": {
                     "0": {
-                        "0": {
-                            "attributes": {
-                                "pmin": "600",
-                                "pmax": "3600"
-                            }
-                        },
-                        "1": {
-                            "attributes": {
-                                "pmin": "600",
-                                "pmax": "3600"
-                            }
-                        },
+                        "0": {},
+                        "1": {},
                         "2": {},
                         "3": {},
                         "5": {},
