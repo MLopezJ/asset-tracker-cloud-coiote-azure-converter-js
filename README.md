@@ -387,6 +387,8 @@ Here is described the steps required to went from the [expected input](https://g
 
 ### Assumptions
 
+// TODO: transform this to tests
+
 #### 1- Empty objects
 
 ``` json
