@@ -14,6 +14,12 @@ Convert the LwM2M JSON encoding written by
 ## Status: Work in progress
 Currently there is no functionality in this project. This is work in progress.
 
+## Warning
+There is a discussion in progress right now about `Location` object. This can affect the contract between the expected input and expected output. Location is object 6 in `expected input` and object 6 in `expected output`
+
+- [Device Location can not be shown in Coiote dashboard](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/3)
+- [Which values from Location are required in nRF Asset Tracker v2?](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/13)
+
 ## Expected input
 
 Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tracking_tutorial/)
