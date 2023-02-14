@@ -62,15 +62,8 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                         },
                         "23": {
                             "value": false
-                        },
-                        "attributes": {
-                            "pmax": "600"
                         }
-                    },
-                    "attributes": {
-                        "pmax": "600"
-                    },
-                    "observed": true
+                    }
                 },
                 "3": {
                     "0": {
