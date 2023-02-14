@@ -381,3 +381,24 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
     }
 }
 ```
+
+## Transformation process
+Here is described the steps required to went from the `expected input` to the `expected output`
+
+### Assumptions
+
+#### 1- Empty objects
+
+``` json
+"1": {
+    "0": {
+        "3": {}, // here
+    }
+},
+```
+
+Object with id 3 is considered as empty value and will be removed from output
+
+``` json
+"1": { }
+```
