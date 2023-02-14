@@ -189,27 +189,19 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "3303": {
                     "0": {
-                        "5601": {},
-                        "5602": {},
+                        "5601": {
+                            "value": 27.18
+                        },
+                        "5602": {
+                            "value": 27.71
+                        },
                         "5700": {
-                            "attributes": {
-                                "pmax": "3600",
-                                "pmin": "600"
-                            }
+                            "value": 27.18
                         },
                         "5701": {
                             "value": "Cel"
-                        },
-                        "attributes": {
-                            "pmin": "300",
-                            "pmax": "600"
                         }
-                    },
-                    "attributes": {
-                        "pmax": "600",
-                        "pmin": "300"
-                    },
-                    "observed": true
+                    }
                 },
                 "3304": {
                     "0": {
