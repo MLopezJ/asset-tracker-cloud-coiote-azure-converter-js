@@ -15,11 +15,15 @@ Convert the LwM2M JSON encoding written by
 Currently there is no functionality in this project. This is work in progress.
 
 ## Warning
-There is a discussion in progress right now about `Location` object. This can affect the contract between the expected input and expected output. Location is object 6 in `expected input` and object 6 in `expected output`
+Location value is mocked. It means it is expected on the input, however the value is not returned in the integration result. Values from this object are required in the `nRF Asset Tracker v2` and in order to keep veracity in the contract, those were added. 
+
+There is a discussion in progress right now about `Location` object. Refers to the following links for more information
 
 - [Device Location can not be shown in Coiote dashboard](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/3)
 - [Which values from Location are required in nRF Asset Tracker v2?](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/13)
 
+Location is object 6 in `expected input` and object 6 in `expected output`
+ 
 ## Expected input
 
 Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tracking_tutorial/)
@@ -163,12 +167,12 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                 },
                 "6": {
                     "0": {
-                        "0": {},
-                        "1": {},
-                        "2": {},
+                        "0": {"value": -43.5723},
+                        "1": {"value": 153.21760},
+                        "2": {"value": 2},
                         "3": {},
                         "5": {},
-                        "6": {}
+                        "6": {"value": 5}
                     }
                 },
                 "3303": {
@@ -334,7 +338,7 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         '10': 242,
     },
     '5:1.1@1.1': { '1': '', '3': 0, '5': 1, '8': [0, 1], '9': 2 },
-    '6': { },
+    "6": { "0": -43.5723, "1": 153.21760, "2": 2, "6": 5 },
     '3303:1.1': [
         {
           '5601': 27.18,
