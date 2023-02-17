@@ -295,6 +295,34 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
                         "10": {},
                         "11": {}
                     }
+                },
+                "50009": {
+                    "0": {
+                        "0": {
+                            "value": true
+                        },
+                        "2": {
+                            "value": 120
+                        },
+                        "3": {
+                            "value": 600
+                        },
+                        "4": {
+                            "value": 7200
+                        },
+                        "1": {
+                            "value": 120
+                        },
+                        "5": {
+                            "value": 8.5
+                        },
+                        "8": {
+                            "value": 2.5
+                        },
+                        "9": {
+                            "value": 0.5
+                        }
+                    }
                 }
             },
             "$metadata": {},
@@ -382,6 +410,16 @@ Result of this [tutorial](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tra
         "0": 5,
         "1": 128,
         "7": 403
+    },
+    "50009": {
+        "0": true,
+        "2": 120,
+        "3": 600,
+        "4": 7200,
+        "1": 120,
+        "5": 8.5,
+        "8": 2.5,
+        "9": 0.5
     }
 }
 ```
