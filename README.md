@@ -23,6 +23,14 @@ There is a discussion in progress right now about `Location` object. Refers to t
 - [Which values from Location are required in nRF Asset Tracker v2?](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/issues/13)
 
 Location is object 6 in `expected input` and object 6 in `expected output`
+
+Configuration object is mocked. Value is not returned right now from real Device Twin. And there is missing a prop `nod` from the object. 
+
+There is a discussion in progress to find the missing information rewarding it.
+
+- [Find missing firmware definition](https://github.com/MLopezJ/nRF-Asset-Tracker-through-Coiote-flow/issues/2)
+ 
+Configuration is object 50009 in `expected input` and object 50009 in `expected output`
  
 ## Expected input
 
