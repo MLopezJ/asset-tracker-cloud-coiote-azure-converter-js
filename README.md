@@ -441,24 +441,7 @@ Here is described the steps required to went from the [expected input](https://g
 
 // TODO: transform this to tests
 
-#### 1- Reduce object layer
-
-``` json
-"3": {
-    "0": {
-        "1": {
-            "value": "Nordic Semiconductor"
-        }
-    }
-},
-```
-Second layer of object should be removed 
-``` json
-"3": { "1": "Nordic Semiconductor" }
-```
-
-
-#### 2- Empty objects
+#### 1- Empty objects
 
 ``` json
 "1": {
@@ -474,7 +457,7 @@ Object with id 3 is considered as empty value and will be removed from output
 "1": { }
 ```
 
-#### 3- List definition
+#### 2- List definition
 
 ``` json
 "1": {
