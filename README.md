@@ -26,7 +26,7 @@ Location is object 6 in `expected input` and object 6 in `expected output`
 
 Configuration object is mocked. Value is not returned right now from real Device Twin. And there is missing a prop `nod` from the object. 
 
-There is a discussion in progress to find the missing information rewarding it.
+There is a discussion in progress to find the missing information rewarding it. 
 
 - [Find missing firmware definition](https://github.com/MLopezJ/nRF-Asset-Tracker-through-Coiote-flow/issues/2)
  
