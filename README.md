@@ -9,21 +9,32 @@
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
 > Split input into LwM2M objects or custom objects, using the LwM2M Type library
+
 ## Status: Work in progress
+
 Currently there is no functionality in this project. This is work in progress.
- 
+
 ## Expected input
-The input is the result of a device with Asset Tracker v2 firmware publishing to a Coite instance which has an integration with Microsoft Azure.
+
+The input is the result of a device with Asset Tracker v2 firmware publishing
+data to a Coite instance which has an integration with Microsoft Azure.
 
 [Input](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/i.ts)
 
 ## Expected output
-The output is a new data struct which contain 2 sections; the recognized LwM2M objects and no LwM2M objects. The LwM2M Types lib is been using to check the veracity of LwM2M objects.
+
+The output is a new data struct which contain 2 sections; the recognized LwM2M
+objects and no LwM2M objects. The LwM2M Types lib is been using to check the
+veracity of LwM2M objects.
 
 [Output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/o.ts)
 
 ## Transformation process
-Here is described the steps required to went from the [expected input](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-input) to the [expected output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-output)
+
+Here is described the steps required to went from the
+[expected input](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-input)
+to the
+[expected output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-output)
 
 ### Assumptions
 
@@ -31,7 +42,7 @@ Here is described the steps required to went from the [expected input](https://g
 
 #### 1- Empty objects
 
-``` json
+```json
 "1": {
     "0": {
         "3": {}, // here
@@ -41,13 +52,13 @@ Here is described the steps required to went from the [expected input](https://g
 
 Object with id 3 is considered as empty value and will be removed from output
 
-``` json
+```json
 "1": { }
 ```
 
 #### 2- List definition
 
-``` json
+```json
 "1": {
     "0": {
         "8": {
@@ -65,10 +76,9 @@ Object with id 3 is considered as empty value and will be removed from output
 }
 ```
 
-Objects with the object ` {"attributes": { "dim": X }} ` as props are going to be interpret as lists
+Objects with the object `{"attributes": { "dim": X }}` as props are going to be
+interpret as lists
 
-``` json
+```json
 "1": { "8": [10, 14] }
 ```
-
-
