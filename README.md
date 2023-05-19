@@ -8,9 +8,6 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
-Convert the LwM2M JSON encoding written by
-[AVSystem's Coiote Azure integration](https://iotdevzone.avsystem.com/docs/Demo_Projects/Tracking_tutorial/)
-
 > Split input into LwM2M objects or custom objects, using the LwM2M Type library
 ## Status: Work in progress
 Currently there is no functionality in this project. This is work in progress.
