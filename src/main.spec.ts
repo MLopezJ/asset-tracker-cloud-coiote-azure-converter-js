@@ -1,8 +1,5 @@
-/**
- * Result of check the input against LwM2M types lib
- * @see https://github.com/NordicSemiconductor/lwm2m-types-js
- */
-export const output = {
+import { validate } from '@nordicsemiconductor/lwm2m-types'
+const output = {
 	LwM2M: {
 		'1:1.2@1.2': [
 			{
@@ -96,3 +93,10 @@ export const output = {
 		},
 	},
 }
+
+describe('Output', () => {
+	it('Should pass LwM2M Types check', () => {
+		const maybeValidLwM2M = validate(output.LwM2M)
+		expect('errors' in maybeValidLwM2M).toBe(false)
+	})
+})
