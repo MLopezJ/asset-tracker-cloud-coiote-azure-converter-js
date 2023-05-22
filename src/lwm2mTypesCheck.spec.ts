@@ -38,13 +38,14 @@ describe('LwM2M Types', () => {
 				},
 			},
 		],
-	])("Object '%s' should pass the LwM2M Type check", (name, object) => {
+	])(`Object '%s' should pass the LwM2M Type check`, (name, object) => {
 		const maybeValidLwM2M = validate(object)
 		expect('errors' in maybeValidLwM2M).toBe(false)
 	})
 
 	it.each([
 		[
+			'50009',
 			{
 				'50009': {
 					'0': true,
@@ -59,6 +60,7 @@ describe('LwM2M Types', () => {
 			},
 		],
 		[
+			'50001',
 			{
 				'50001': {
 					'0': 5,
@@ -67,12 +69,15 @@ describe('LwM2M Types', () => {
 				},
 			},
 		],
-	])('Custom objects should be ignored in the LwM2M type check', (object) => {
-		/**
-		 * Because there is not a LwM2M definition found related to the object, there is
-		 * no way to validate its veracity or not. So them should be ignored.
-		 */
-		const maybeValidLwM2M = validate(object)
-		expect('errors' in maybeValidLwM2M).toBe(false)
-	})
+	])(
+		`Custom object '%s' should be ignored in the LwM2M type check`,
+		(name, object) => {
+			/**
+			 * Because there is not a LwM2M definition found related to the object, there is
+			 * no way to validate its veracity or not. So them should be ignored.
+			 */
+			const maybeValidLwM2M = validate(object)
+			expect('errors' in maybeValidLwM2M).toBe(false)
+		},
+	)
 })
