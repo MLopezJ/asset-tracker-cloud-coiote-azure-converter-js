@@ -69,7 +69,7 @@ describe('LwM2M Types', () => {
 		],
 	])('Custom objects should be ignored in the LwM2M type check', (object) => {
 		/**
-		 * Because there is not any LwM2M definition related to the object, there is
+		 * Because there is not a LwM2M definition found related to the object, there is
 		 * no way to validate its veracity or not. So them should be ignored.
 		 */
 		const maybeValidLwM2M = validate(object)
