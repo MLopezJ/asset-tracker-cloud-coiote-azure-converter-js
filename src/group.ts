@@ -1,4 +1,5 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
+import { objectIdtoUrn } from './objectIdtoUrn'
 
 export type NoValue = Record<string, never> //{}
 export type value = { value: string | number | boolean }
@@ -15,9 +16,12 @@ export type deviceTwin = {
 	}
 }
 
+export type customObjectValue = Record<string, number | string | boolean>
+export type customObject = Record<string, customObjectValue>
+
 export type objects = {
 	lwm2m: LwM2MDocument
-	customObjects: Record<string, Record<string, number | string | boolean>>
+	customObjects: customObject
 }
 
 /**
@@ -30,7 +34,18 @@ export type objects = {
  */
 export const group = (deviceTwin: deviceTwin): objects => {
 	const objects: CoioteAzure = deviceTwin.properties.reported.lwm2m
-	console.log(Object.entries(objects))
+	const customObjects: Record<string, any> = {}
+
+	for (const [objectId, value] of Object.entries(objects)) {
+		const urn = objectIdtoUrn(objectId)
+
+		// not a LwM2M object
+		if (urn === null) {
+			// custom object
+			customObjects[`${objectId}`] = value
+			console.log(value)
+		}
+	}
 
 	const lwm2m: LwM2MDocument = {
 		'1:1.2@1.2': [
