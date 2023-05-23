@@ -1,5 +1,6 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import { objectIdtoUrn } from './objectIdtoUrn'
+import { removeFormat } from './removeFormat'
 
 export type NoValue = Record<string, never> //{}
 export type value = { value: string | number | boolean }
@@ -42,9 +43,9 @@ export const group = (deviceTwin: deviceTwin): objects => {
 		// not a LwM2M object
 		if (urn === null) {
 			// custom object
-			customObjects[`${objectId}`] = value
-			console.log(value)
+			customObjects[`${objectId}`] = removeFormat(value)
 		}
+		console.log(customObjects)
 	}
 
 	const lwm2m: LwM2MDocument = {
@@ -90,23 +91,7 @@ export const group = (deviceTwin: deviceTwin): objects => {
 
 	const groupObjects = {
 		lwm2m: lwm2m,
-		customObjects: {
-			'50001': {
-				'0': 5,
-				'1': 128,
-				'7': 403,
-			},
-			'50009': {
-				'0': true,
-				'2': 120,
-				'3': 600,
-				'4': 7200,
-				'1': 120,
-				'5': 8.5,
-				'8': 2.5,
-				'9': 0.5,
-			},
-		},
+		customObjects: customObjects,
 	}
 	return groupObjects
 }
