@@ -58,8 +58,19 @@ describe('convertObjectUsingSchema', () => {
 				'7': {
 					value: 'U',
 				},
-				'16': {
-					value: true,
+				'23': {
+					value: false,
+				},
+			},
+            '1': {
+				'0': {
+					value: 1,
+				},
+				'1': {
+					value: 50,
+				},
+				'7': {
+					value: 'U',
 				},
 				'23': {
 					value: false,
@@ -71,7 +82,13 @@ describe('convertObjectUsingSchema', () => {
 				'0': 1,
 				'1': 50,
 				'7': 'U',
-				'23': false,
+				'23': 0,
+			},
+            {
+				'0': 1,
+				'1': 50,
+				'7': 'U',
+				'23': 0,
 			},
 		]
 
