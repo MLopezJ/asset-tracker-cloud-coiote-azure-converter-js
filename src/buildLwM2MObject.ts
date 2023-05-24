@@ -1,5 +1,5 @@
 import LwM2MSchema from '../node_modules/@nordicsemiconductor/lwm2m-types/LwM2MDocument.schema.json' // TODO: import from "@nordicsemiconductor/lwm2m-types"
-import type { objectInstance } from './group'
+import type { objectInstance } from './main'
 
 /**
  * Set the LwM2M format as expected in @nordicsemiconductor/lwm2m-types

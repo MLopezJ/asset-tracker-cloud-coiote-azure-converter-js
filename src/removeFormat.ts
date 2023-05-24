@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import assign from 'lodash.assign'
 
-import type { customObjectValue, objectInstance, value } from './group'
+import type { customObjectValue, objectInstance, value } from './main'
 
 /**
  * Remove the Coiote format from object
