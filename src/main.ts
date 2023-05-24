@@ -1,4 +1,5 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
+import { buildLwM2M } from './buildLwM2M'
 import { group } from './group'
 
 export type NoValue = Record<string, never> //{}
@@ -29,51 +30,51 @@ export type objects = {
  */
 export const main = (deviceTwin: deviceTwin): objects => {
 	const objects = group(deviceTwin.properties.reported.lwm2m)
+	console.log(objects.lwm2m)
 
-	//
-	const lwm2m: LwM2MDocument = {
-		'1:1.2@1.2': [
-			{
-				'0': 1,
-				'1': 50,
-				'6': false,
-				'7': 'U',
-				'16': true,
-				'23': false,
-			},
-		],
-		'3:1.2@1.1': {
-			'0': 'Nordic Semiconductor ASA',
-			'1': 'Thingy:91',
-			'2': '351358815340515',
-			'3': '22.8.1+0',
-			'11': 0,
-			'13': 1476186613,
-			'16': 'UQ',
-			'19': '3.2.1',
-		},
-		'6': { '0': -43.5723, '1': 153.2176, '2': 2, '5': 1665149633, '6': 5 },
-		'3315:1.1': [
-			{
-				'5601': 101697,
-				'5602': 101705,
-				'5700': 101705,
-				'5701': 'Pa',
-			},
-		],
-		'3347:1.1': [
-			{
-				'5500': false,
-				'5501': 0,
-				'5750': 'Button 0',
-			},
-		],
-		'3420': [{ '1': '#000000' }],
-		'10256': [{ '0': 428, '2': 6300, '3': 52, '4': 14, '5': 0 }],
-	}
+	const lwm2m = buildLwM2M(objects.lwm2m)
 
 	const result = {
-		lwm2m: lwm2m,
+		lwm2m: {
+			'1:1.2@1.2': [
+				{
+					'0': 1,
+					'1': 50,
+					'6': false,
+					'7': 'U',
+					'16': true,
+					'23': false,
+				},
+			],
+			'3:1.2@1.1': {
+				'0': 'Nordic Semiconductor ASA',
+				'1': 'Thingy:91',
+				'2': '351358815340515',
+				'3': '22.8.1+0',
+				'11': 0,
+				'13': 1476186613,
+				'16': 'UQ',
+				'19': '3.2.1',
+			},
+			'6': { '0': -43.5723, '1': 153.2176, '2': 2, '5': 1665149633, '6': 5 },
+			'3315:1.1': [
+				{
+					'5601': 101697,
+					'5602': 101705,
+					'5700': 101705,
+					'5701': 'Pa',
+				},
+			],
+			'3347:1.1': [
+				{
+					'5500': false,
+					'5501': 0,
+					'5750': 'Button 0',
+				},
+			],
+			'3420': [{ '1': '#000000' }],
+			'10256': [{ '0': 428, '2': 6300, '3': 52, '4': 14, '5': 0 }],
+		},
 		customObjects: {
 			'50001': {
 				'0': 5,
