@@ -31,33 +31,38 @@ export type objects = {
  */
 export const main = (deviceTwin: deviceTwin): objects => {
 	const objects = group(deviceTwin.properties.reported.lwm2m)
-	console.log(objects.lwm2m)
-
 	const lwm2m = buildLwM2M(objects.lwm2m)
 	const maybeValidLwM2M = validate(lwm2m)
+
 	if ('errors' in maybeValidLwM2M) {
 		console.error(maybeValidLwM2M.errors)
 	}
 
-	const result = {
+	const customObjects = buildCustomObjects()
+
+	return {
 		lwm2m,
-		customObjects: {
-			'50001': {
-				'0': 5,
-				'1': 128,
-				'7': 403,
-			},
-			'50009': {
-				'0': true,
-				'2': 120,
-				'3': 600,
-				'4': 7200,
-				'1': 120,
-				'5': 8.5,
-				'8': 2.5,
-				'9': 0.5,
-			},
+		customObjects,
+	}
+}
+
+
+const buildCustomObjects = () => {
+	return {
+		'50001': {
+			'0': 5,
+			'1': 128,
+			'7': 403,
+		},
+		'50009': {
+			'0': true,
+			'2': 120,
+			'3': 600,
+			'4': 7200,
+			'1': 120,
+			'5': 8.5,
+			'8': 2.5,
+			'9': 0.5,
 		},
 	}
-	return result
 }
