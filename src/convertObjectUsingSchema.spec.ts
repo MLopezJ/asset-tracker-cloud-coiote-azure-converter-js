@@ -62,7 +62,7 @@ describe('convertObjectUsingSchema', () => {
 					value: false,
 				},
 			},
-            '1': {
+			'1': {
 				'0': {
 					value: 1,
 				},
@@ -84,7 +84,7 @@ describe('convertObjectUsingSchema', () => {
 				'7': 'U',
 				'23': 0,
 			},
-            {
+			{
 				'0': 1,
 				'1': 50,
 				'7': 'U',
@@ -93,6 +93,114 @@ describe('convertObjectUsingSchema', () => {
 		]
 
 		expect(convertObjectUsingSchema(object, schema)).toMatchObject(result)
+	})
+
+	it(`should remove empty values when they are not required in schema definition (array)`, () => {
+		const schema = {
+			type: 'array',
+			minItems: 1,
+			title: 'LwM2M Server',
+			description:
+				'This LwM2M Objects provides the data related to a LwM2M Server.',
+			items: {
+				type: 'object',
+				$id: 'https://github.com/OpenMobileAlliance/lwm2m-registry/raw/prod/1.xml',
+				title: 'LwM2M Server',
+				description:
+					'This LwM2M Objects provides the data related to a LwM2M Server',
+				additionalProperties: false,
+				properties: {
+					'0': {
+						type: 'integer',
+						minimum: 1,
+						maximum: 65534,
+						title: 'Short Server ID',
+						description: 'Used as link to associate server Object Instance.',
+					},
+					'1': {
+						type: 'integer',
+						title: 'Lifetime',
+						description:
+							'Specify the lifetime of the registration in seconds (see Client Registration Interface). If the value is set to 0, the lifetime is infinite. Units: s.',
+					},
+				},
+				required: ['0'],
+			},
+		}
+		const object = {
+			'0': {
+				'0': {
+					value: 1,
+				},
+				'1': {},
+			},
+		}
+		const result = [
+			{
+				'0': 1,
+			},
+		]
+
+		expect(convertObjectUsingSchema(object, schema)).toMatchObject(result)
+	})
+
+	it(`should return undefined when a required value is not defined (array)`, () => {
+		const schema = {
+			type: 'array',
+			minItems: 1,
+			title: 'LwM2M Server',
+			description:
+				'This LwM2M Objects provides the data related to a LwM2M Server.',
+			items: {
+				type: 'object',
+				$id: 'https://github.com/OpenMobileAlliance/lwm2m-registry/raw/prod/1.xml',
+				title: 'LwM2M Server',
+				description:
+					'This LwM2M Objects provides the data related to a LwM2M Server',
+				additionalProperties: false,
+				properties: {
+					'0': {
+						type: 'integer',
+						minimum: 1,
+						maximum: 65534,
+						title: 'Short Server ID',
+						description: 'Used as link to associate server Object Instance.',
+					},
+					'1': {
+						type: 'integer',
+						title: 'Lifetime',
+						description:
+							'Specify the lifetime of the registration in seconds (see Client Registration Interface). If the value is set to 0, the lifetime is infinite. Units: s.',
+					},
+				},
+				required: ['0', '1'],
+			},
+		}
+		const object = {
+			'0': {
+				'0': {
+					value: 1,
+				},
+				'1': {},
+			},
+			'1': {
+				'0': {
+					value: 1,
+				},
+				'1': {
+					value: 50,
+				},
+			},
+		}
+		const result = [
+			undefined,
+			{
+				'0': 1,
+				'1': 50,
+			},
+		]
+
+		expect(convertObjectUsingSchema(object, schema)).toStrictEqual(result)
 	})
 
 	it('should convert object using object type definition schema', () => {

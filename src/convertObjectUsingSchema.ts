@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import assign from 'lodash.assign'
 import type LwM2MSchema from '../node_modules/@nordicsemiconductor/lwm2m-types/LwM2MDocument.schema.json' // TODO: import from "@nordicsemiconductor/lwm2m-types"
+import { setValue, validValue } from './checkCoioteValue'
 import type { objectInstance } from './main'
 
 /**
@@ -13,14 +14,31 @@ export const convertObjectUsingSchema = (
 	const elements = Object.entries(object)
 	if (schema.type === 'array') {
 		return elements.map(([instanceId, resources]) => {
-			const instance = Object.entries(resources).map(([resourceId, value]) => {
-				const isRequired = schema.items.required.includes(resourceId) // TODO: fix it
-				const dataType = schema.items.properties[`${resourceId}`].type // TODO: fix it
-				const newValue = setValue(value as any, isRequired, dataType)
-				return {
-					[`${resourceId}`]: newValue,
-				}
-			})
+			const instance = Object.entries(resources)
+				.map(([resourceId, value]) => {
+					const isRequired = schema.items.required.includes(resourceId) // TODO: fix it
+
+					const isValid = validValue(value as any, isRequired) // TODO: remove any
+					if (isValid === false) {
+						console.log(
+							`id ${resourceId} is required in object in order with schema definition but missing in instance ${instanceId}`,
+							schema,
+						)
+						return false
+					}
+
+					// empty value
+					if (Object.keys(value).length === 0) return undefined
+
+					const dataType = schema.items.properties[`${resourceId}`].type // TODO: fix it
+					const newValueFormat = setValue(value as any, dataType)
+					return {
+						[`${resourceId}`]: newValueFormat,
+					}
+				})
+				.filter((result) => result !== undefined) // remove empty values
+
+			if (instance.includes(false)) return undefined
 
 			return assign.apply(_, instance as any)
 		})
@@ -33,34 +51,5 @@ export const convertObjectUsingSchema = (
 			'11': [0],
 			'16': 'UQ',
 		},
-	}
-}
-
-/**
- * Remove the 'value' key from element
- * Remove empty values
- * Set data type
- * TODO: add test
- */
-const setValue = (
-	oldValue: Record<'value', string | number | boolean> | Record<string, never>,
-	isRequired: boolean,
-	dataType?: string,
-) => {
-	const value = oldValue.value
-
-	if (value === undefined) {
-		if (isRequired === true) return 'error'
-		return undefined
-	}
-
-	switch (dataType) {
-		case 'number':
-		case 'integer':
-			return Number(value)
-		case 'boolean':
-			return Boolean(value)
-		default:
-			return String(value)
 	}
 }
