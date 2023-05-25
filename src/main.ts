@@ -1,5 +1,6 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import { validate } from '@nordicsemiconductor/lwm2m-types'
+import { buildCustomObjects } from './buildCustomObjects'
 import { buildLwM2M } from './buildLwM2M'
 import { group } from './group'
 
@@ -38,31 +39,10 @@ export const main = (deviceTwin: deviceTwin): objects => {
 		console.error(maybeValidLwM2M.errors)
 	}
 
-	const customObjects = buildCustomObjects()
+	const customObjects = buildCustomObjects(objects.customObjects)
 
 	return {
 		lwm2m,
 		customObjects,
-	}
-}
-
-
-const buildCustomObjects = () => {
-	return {
-		'50001': {
-			'0': 5,
-			'1': 128,
-			'7': 403,
-		},
-		'50009': {
-			'0': true,
-			'2': 120,
-			'3': 600,
-			'4': 7200,
-			'1': 120,
-			'5': 8.5,
-			'8': 2.5,
-			'9': 0.5,
-		},
 	}
 }
