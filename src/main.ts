@@ -1,4 +1,5 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
+import { validate } from '@nordicsemiconductor/lwm2m-types'
 import { buildLwM2M } from './buildLwM2M'
 import { group } from './group'
 
@@ -33,6 +34,10 @@ export const main = (deviceTwin: deviceTwin): objects => {
 	console.log(objects.lwm2m)
 
 	const lwm2m = buildLwM2M(objects.lwm2m)
+	const maybeValidLwM2M = validate(lwm2m)
+	if ('errors' in maybeValidLwM2M) {
+		console.error(maybeValidLwM2M.errors)
+	}
 
 	const result = {
 		lwm2m,
