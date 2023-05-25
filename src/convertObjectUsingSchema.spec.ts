@@ -40,7 +40,7 @@ describe('convertObjectUsingSchema', () => {
 		const object = {
 			'0': {
 				'0': {
-					value: 'Nordic Semiconductor',
+					value: 'Nordic Semiconductor ASA',
 				},
 				'1': {
 					value: 'Thingy:91',
@@ -59,12 +59,10 @@ describe('convertObjectUsingSchema', () => {
 			},
 		}
 		const result = {
-			'3:1.2@1.1': {
-				'0': 'Nordic Semiconductor ASA',
-				'1': 'Thingy:91',
-				'11': [0],
-				'16': 'UQ',
-			},
+			'0': 'Nordic Semiconductor ASA',
+			'1': 'Thingy:91',
+			'11': [0],
+			'16': 'UQ',
 		}
 
 		expect(convertObjectUsingSchema(object, schema)).toMatchObject(result)
