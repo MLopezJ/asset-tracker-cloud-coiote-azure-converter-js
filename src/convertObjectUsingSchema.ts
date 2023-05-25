@@ -10,46 +10,37 @@ import type { objectInstance } from './main'
 export const convertObjectUsingSchema = (
 	object: objectInstance,
 	schema: (typeof LwM2MSchema.properties)[keyof (typeof LwM2MSchema)['properties']],
-): Record<string, unknown> | Record<string, unknown>[] | undefined => {
-	const elements = Object.entries(object)
-	if (schema.type === 'array') {
-		return elements.map(([instanceId, resources]) => {
-			const instance = Object.entries(resources)
-				.map(([resourceId, value]) => {
-					const isRequired = schema.items.required.includes(resourceId) // TODO: fix it
+): Record<string, unknown> | undefined => {
 
-					const isValid = validValue(value as any, isRequired) // TODO: remove any
-					if (isValid === false) {
-						console.log(
-							`id ${resourceId} is required in object in order with schema definition but missing in instance ${instanceId}`,
-							schema,
-						)
-						return false
-					}
+	const resources = object['0'] ?? []
+	const instance = Object.entries(resources)
+            .map(([resourceId, value]) => {
+                const isRequired = schema.required.includes(resourceId) // TODO: fix it
 
-					// empty value
-					if (Object.keys(value).length === 0) return undefined
+                const isValid = validValue(value as any, isRequired) // TODO: remove any
+                if (isValid === false) {
+                    /*
+                    console.log(
+                        `id ${resourceId} is required in object in order with schema definition but it is missing`,
+                        schema,
+                    )*/
+                    return false
+                }
 
-					const dataType = schema.items.properties[`${resourceId}`].type // TODO: fix it
-					const newValueFormat = setValue(value as any, dataType)
-					return {
-						[`${resourceId}`]: newValueFormat,
-					}
-				})
-				.filter((result) => result !== undefined) // remove empty values
+                // empty value
+                if (Object.keys(value).length === 0) return undefined
 
-			if (instance.includes(false)) return undefined
+                const dataType = schema.properties[`${resourceId}`].type // TODO: fix it
+                const newValueFormat = setValue(value as any, dataType)
+                return {
+                    [`${resourceId}`]: newValueFormat,
+                }
+            })
+            .filter((result) => result !== undefined) // remove empty values
 
-			return assign.apply(_, instance as any)
-		})
-	}
+        if (instance.includes(false)) return undefined
 
-	return {
-		'3:1.2@1.1': {
-			'0': 'Nordic Semiconductor ASA',
-			'1': 'Thingy:91',
-			'11': [0],
-			'16': 'UQ',
-		},
-	}
+        return assign.apply(_, instance as any)
+
+	
 }
