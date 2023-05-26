@@ -3,18 +3,11 @@ import assign from 'lodash.assign'
 import type { CoioteAzure } from "./main"
 import customObjectsSchema from '../customObjects.schema.json'
 import { removeFormat } from "./removeFormat"
+import { convertObjectUsingSchema } from './convertObjectUsingSchema'
 /**
  * Build custom objects
  */
 export const buildCustomObjects = (objects: CoioteAzure[]): any | undefined => {
-  
-    // [x] iterate list
-	// [x] check if correct format
-    // [x] check if exist a schema definition of object
-    // [] if exist, check if is a list or object and uses already existing methods
-    // [x] if not, uses remove format method
-    // return object
-
 	const list = objects.map(element => {
 		const urn = Object.keys(element)[0]
 		const value = Object.values(element)[0]
@@ -38,7 +31,7 @@ export const buildCustomObjects = (objects: CoioteAzure[]): any | undefined => {
 			return {[`${urn}`]: removeFormat(value)}
 		}
 
-		return element
+		return { [urn]: convertObjectUsingSchema(value, schema) }
 	})
 
 	const wrongFormatObjects = list.filter(element => element === null)
