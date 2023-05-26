@@ -14,6 +14,54 @@
 
 Currently there is no functionality in this project. This is work in progress.
 
+## About
+
+Build expected input of Asset Tracker from the result of the integration between
+Coiote and Azure.
+
+## Installation
+
+```
+npm install
+```
+
+## Test
+
+```
+npm test
+```
+
+## Specifications
+
+To accomplish the expected result there is executed 4 different process:
+
+1. Group
+2. Build
+3. Check
+4. Transform
+
+### 1- Group
+
+Split the input data in 2 groups: LwM2M objects and custom objects. The (LwM2M
+Types lib)[https://github.com/NordicSemiconductor/lwm2m-types-js] is used to
+determinated if the object is LwM2M type.
+
+### 2- Build
+
+The Coiote format is removed from the objects and new object is built using the
+json schema of it as reference
+
+### 3- Check
+
+Using the (LwM2M Types
+lib)[https://github.com/NordicSemiconductor/lwm2m-types-js] the LwM2M objects
+are checked to validate if they have the expected data format.
+
+### 4- Transform
+
+Convert the result of the process in the format of the expected input in Asset
+Tracker
+
 ## Expected input
 
 The input is the result of a device with Asset Tracker v2 firmware publishing
@@ -28,57 +76,3 @@ objects and no LwM2M objects. The LwM2M Types lib is been using to check the
 veracity of LwM2M objects.
 
 [Output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/o.ts)
-
-## Transformation process
-
-Here is described the steps required to went from the
-[expected input](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-input)
-to the
-[expected output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/transformation-process#expected-output)
-
-### Assumptions
-
-// TODO: transform this to tests
-
-#### 1- Empty objects
-
-```json
-"1": {
-    "0": {
-        "3": {}, // here
-    }
-},
-```
-
-Object with id 3 is considered as empty value and will be removed from output
-
-```json
-"1": { }
-```
-
-#### 2- List definition
-
-```json
-"1": {
-    "0": {
-        "8": {
-            "0": {
-                "value": 10
-            },
-            "1": {
-                "value": 14
-            },
-            "attributes": {
-                "dim": "2"
-            }
-        }
-    }
-}
-```
-
-Objects with the object `{"attributes": { "dim": X }}` as props are going to be
-interpret as lists
-
-```json
-"1": { "8": [10, 14] }
-```
