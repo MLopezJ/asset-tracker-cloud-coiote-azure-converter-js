@@ -1,3 +1,6 @@
+import { buildCustomObjects } from "./buildCustomObjects"
+import type { CoioteAzure, objectInstance } from "./main"
+
 describe("buildCustomObjects", () => {
     it('should build custom objects', () => {
         const input = [
@@ -70,6 +73,24 @@ describe("buildCustomObjects", () => {
             },
         }
 
-        expect(input).toMatchObject(expected)
+        expect(buildCustomObjects(input)).toMatchObject(expected)
+    })
+
+    it('should return undefined when value of object is not found', () => {
+        const input = [
+            {
+                '50001': undefined as unknown as objectInstance,
+            }
+        ]
+        expect(buildCustomObjects(input)).toBe(undefined)
+    })
+
+    it('should return undefined when object is not found', () => {
+        const input = [
+            {
+                undefined
+            } as unknown as CoioteAzure
+        ]
+        expect(buildCustomObjects(input)).toBe(undefined)
     })
 })
