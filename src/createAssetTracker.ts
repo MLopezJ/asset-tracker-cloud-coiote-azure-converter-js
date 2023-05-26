@@ -1,5 +1,7 @@
+import { Barometer_3315_urn, Device_3_urn, Humidity_3304_urn, Temperature_3303_urn } from '@nordicsemiconductor/lwm2m-types'
 import type { assetTracker } from './assetTracker/AssetTracker'
 import { createBatery } from './createBatery'
+import { createEnviromental } from './createEnviromental'
 import type { objects } from './main'
 
 /**
@@ -8,8 +10,17 @@ import type { objects } from './main'
 export const createAssetTracker = (
 	input: objects,
 ): assetTracker | undefined => {
-	const deviceObject = input.lwm2m['3:1.2@1.1']
+	const deviceObject = input.lwm2m[Device_3_urn]
 	if (deviceObject === undefined) return undefined
+
+	const temperature = input.lwm2m[Temperature_3303_urn]
+	if (temperature === undefined) return undefined
+
+	const humidity = input.lwm2m[Humidity_3304_urn]
+	if (humidity === undefined) return undefined
+
+	const barometer = input.lwm2m[Barometer_3315_urn]
+	if (barometer === undefined) return undefined
 
 	const config = createConfig()
 
@@ -20,7 +31,8 @@ export const createAssetTracker = (
 	const batery = createBatery(deviceObject)
 	if (batery === undefined) return undefined
 
-	const enviromental = createEnviromental()
+	const enviromental = createEnviromental(temperature, humidity, barometer)
+	if (enviromental === undefined) return undefined
 
 	const gnss = createGnss()
 
@@ -71,17 +83,6 @@ const createRoamingInfo = () => {
 			cell: 33703719,
 			ip: '2001:db8:85a3::8a2e:370:7334',
 			eest: 7,
-		},
-		ts: 123456,
-	}
-}
-
-const createEnviromental = () => {
-	return {
-		v: {
-			temp: 15,
-			hum: 30,
-			atmp: 10,
 		},
 		ts: 123456,
 	}

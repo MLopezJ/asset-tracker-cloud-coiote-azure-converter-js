@@ -1,5 +1,5 @@
 import { Timestamp } from './Timestamp.js'
-import { Type } from '@sinclair/typebox'
+import { Type, Static } from '@sinclair/typebox'
 import { $id } from './$id.js'
 
 export const Environment = Type.Object(
@@ -31,3 +31,5 @@ export const Environment = Type.Object(
 		description: 'Environment sensor readings',
 	},
 )
+
+export type enviromental = Static<typeof Environment>
