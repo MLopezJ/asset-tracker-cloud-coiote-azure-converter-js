@@ -50,6 +50,14 @@ describe('main', () => {
 								'3': {
 									value: '22.8.1+0',
 								},
+								'7': {
+									'0': {
+										value: 80,
+									},
+									attributes: {
+										dim: '1',
+									},
+								},
 								'11': {
 									'0': {
 										value: 0,
@@ -206,9 +214,8 @@ describe('main', () => {
 				modV: 'mfw_nrf9160_1.0.0',
 				brdV: 'thingy91_nrf9160',
 			},
-			"ts": 123456
+			ts: 123456,
 		}
-
 
 		const roamingInfo = {
 			v: {
@@ -221,8 +228,7 @@ describe('main', () => {
 				ip: '2001:db8:85a3::8a2e:370:7334',
 				eest: 7,
 			},
-			"ts": 123456,
-
+			ts: 123456,
 		}
 
 		const batery = {

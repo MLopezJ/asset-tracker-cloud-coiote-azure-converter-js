@@ -1,6 +1,6 @@
-import { Timestamp } from './Timestamp.js'
-import { Type } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
+import { Timestamp } from './Timestamp.js'
 
 export const Battery = Type.Object(
 	{
@@ -15,3 +15,5 @@ export const Battery = Type.Object(
 		description: 'Battery reading in millivolt',
 	},
 )
+
+export type batery = Static<typeof Battery>

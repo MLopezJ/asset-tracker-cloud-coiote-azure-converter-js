@@ -1,6 +1,6 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
-import type { assetTracker } from "./assetTracker/AssetTracker"
 import { validate } from '@nordicsemiconductor/lwm2m-types'
+import type { assetTracker } from './assetTracker/AssetTracker'
 import { buildCustomObjects } from './buildCustomObjects'
 import { buildLwM2M } from './buildLwM2M'
 import { createAssetTracker } from './createAssetTracker'
@@ -32,7 +32,7 @@ export type objects = {
 /**
  *
  */
-export const main = (deviceTwin: deviceTwin): assetTracker => {
+export const main = (deviceTwin: deviceTwin): assetTracker | undefined => {
 	const input = deviceTwin.properties.reported.lwm2m
 	const objects = group(input)
 	const lwm2m = buildLwM2M(objects.lwm2m)
@@ -44,7 +44,9 @@ export const main = (deviceTwin: deviceTwin): assetTracker => {
 
 	const customObjects = buildCustomObjects(objects.customObjects)
 
-	const assetTracker = createAssetTracker({lwm2m,customObjects}) 
+	const assetTracker = createAssetTracker({ lwm2m, customObjects })
+
+	if (assetTracker === undefined) return undefined
 
 	return assetTracker
 }

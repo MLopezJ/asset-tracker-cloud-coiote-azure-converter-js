@@ -1,11 +1,15 @@
 import type { assetTracker } from './assetTracker/AssetTracker'
+import { createBatery } from './createBatery'
 import type { objects } from './main'
 
 /**
  * Create Asset Tracker input
  */
-export const createAssetTracker = (input: objects): assetTracker => {
-	console.log(input)
+export const createAssetTracker = (
+	input: objects,
+): assetTracker | undefined => {
+	const deviceObject = input.lwm2m['3:1.2@1.1']
+	if (deviceObject === undefined) return undefined
 
 	const config = createConfig()
 
@@ -13,7 +17,8 @@ export const createAssetTracker = (input: objects): assetTracker => {
 
 	const roamingInfo = createRoamingInfo()
 
-	const batery = createBatery()
+	const batery = createBatery(deviceObject)
+	if (batery === undefined) return undefined
 
 	const enviromental = createEnviromental()
 
@@ -67,13 +72,6 @@ const createRoamingInfo = () => {
 			ip: '2001:db8:85a3::8a2e:370:7334',
 			eest: 7,
 		},
-		ts: 123456,
-	}
-}
-
-const createBatery = () => {
-	return {
-		v: 80,
 		ts: 123456,
 	}
 }
