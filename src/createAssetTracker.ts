@@ -2,7 +2,31 @@
  * Create Asset Tracker input
  */
 export const createAssetTracker = (): any => {
-	const config = {
+	const config = createConfig()
+
+	const device = createDevice()
+
+	const roamingInfo = createRoamingInfo()
+
+	const batery = createBatery()
+
+	const enviromental = createEnviromental()
+
+	const gnss = createGnss()
+
+	return {
+		cfg: config,
+		dev: device,
+		roam: roamingInfo,
+		bat: batery,
+		env: enviromental,
+		gnss: gnss,
+	}
+}
+
+
+const createConfig =  () => {
+    return {
 		act: false,
 		actwt: 60,
 		mvres: 300,
@@ -13,15 +37,19 @@ export const createAssetTracker = (): any => {
 		accito: 1.7,
 		nod: ['gnss'],
 	}
+}
 
-	const device = {
+const createDevice = () => {
+    return {
 		imei: '352656106111232',
 		iccid: '89450421180216216095',
 		modV: 'mfw_nrf9160_1.0.0',
 		brdV: 'thingy91_nrf9160',
 	}
+}
 
-	const roamingInfo = {
+const createRoamingInfo = () => {
+    return {
 		v: {
 			band: 262143,
 			nw: 'LTE-M',
@@ -31,15 +59,19 @@ export const createAssetTracker = (): any => {
 			cell: 33703719,
 			ip: '2001:db8:85a3::8a2e:370:7334',
 			eest: 7,
-		},
+		}
 	}
+}
 
-	const batery = {
+const createBatery = () => {
+    return {
 		v: 80,
 		ts: 123456,
 	}
+}
 
-	const enviromental = {
+const createEnviromental = () => {
+    return {
 		v: {
 			temp: 15,
 			hum: 30,
@@ -47,8 +79,10 @@ export const createAssetTracker = (): any => {
 		},
 		ts: 123456,
 	}
+}
 
-	const gnss = {
+const createGnss = () => {
+    return {
 		v: {
 			lng: 100,
 			lat: 50,
@@ -58,14 +92,5 @@ export const createAssetTracker = (): any => {
 			hdg: 180,
 		},
 		ts: 123456,
-	}
-
-	return {
-		cfg: config,
-		dev: device,
-		roam: roamingInfo,
-		bat: batery,
-		env: enviromental,
-		gnss: gnss,
 	}
 }
