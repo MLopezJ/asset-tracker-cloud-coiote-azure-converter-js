@@ -1,15 +1,18 @@
+import type { objects } from "./main"
+import { createAssetTracker } from "./createAssetTracker"
+
 describe('createAssetTracker', () => {
 	it('should create Asset Tracker input data', () => {
-		const input = {
+		const input: objects = {
 			lwm2m: {
 				'1:1.2@1.2': [
 					{
 						'0': 1,
 						'1': 50,
-						'6': 0,
+						'6': false,
 						'7': 'U',
-						'16': 1,
-						'23': 0,
+						'16': true,
+						'23': false,
 					},
 				],
 				'3:1.2@1.1': {
@@ -17,7 +20,7 @@ describe('createAssetTracker', () => {
 					'1': 'Thingy:91',
 					'2': '351358815340515',
 					'3': '22.8.1+0',
-					'11': [0],
+					'11': 0,
 					'13': 1476186613,
 					'16': 'UQ',
 					'19': '3.2.1',
@@ -33,7 +36,7 @@ describe('createAssetTracker', () => {
 				],
 				'3347:1.1': [
 					{
-						'5500': 0,
+						'5500': false,
 						'5501': 0,
 						'5750': 'Button 0',
 					},
@@ -73,10 +76,13 @@ describe('createAssetTracker', () => {
 		}
 
 		const device = {
-			imei: '352656106111232',
-			iccid: '89450421180216216095',
-			modV: 'mfw_nrf9160_1.0.0',
-			brdV: 'thingy91_nrf9160',
+			v: {
+				imei: '352656106111232',
+				iccid: '89450421180216216095',
+				modV: 'mfw_nrf9160_1.0.0',
+				brdV: 'thingy91_nrf9160',
+			},
+			"ts": 123456,
 		}
 
 		const roamingInfo = {
@@ -90,6 +96,7 @@ describe('createAssetTracker', () => {
 				ip: '2001:db8:85a3::8a2e:370:7334',
 				eest: 7,
 			},
+			"ts": 123456,
 		}
 
 		const batery = {
@@ -126,6 +133,6 @@ describe('createAssetTracker', () => {
 			env: enviromental,
 			gnss: gnss,
 		}
-		expect(input).toMatchObject(output)
+		expect(createAssetTracker(input)).toMatchObject(output)
 	})
 })

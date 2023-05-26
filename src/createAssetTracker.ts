@@ -1,7 +1,12 @@
+import type { assetTracker } from "./assetTracker/AssetTracker"
+import type { objects } from "./main"
+
 /**
  * Create Asset Tracker input
  */
-export const createAssetTracker = (): any => {
+export const createAssetTracker = (input: objects): assetTracker => {
+	console.log(input)
+	
 	const config = createConfig()
 
 	const device = createDevice()
@@ -40,10 +45,13 @@ const createConfig = () => {
 
 const createDevice = () => {
 	return {
-		imei: '352656106111232',
-		iccid: '89450421180216216095',
-		modV: 'mfw_nrf9160_1.0.0',
-		brdV: 'thingy91_nrf9160',
+		v: {
+			imei: '352656106111232',
+			iccid: '89450421180216216095',
+			modV: 'mfw_nrf9160_1.0.0',
+			brdV: 'thingy91_nrf9160',
+		},
+		ts: 123456,
 	}
 }
 
@@ -59,6 +67,7 @@ const createRoamingInfo = () => {
 			ip: '2001:db8:85a3::8a2e:370:7334',
 			eest: 7,
 		},
+		ts: 123456,
 	}
 }
 
