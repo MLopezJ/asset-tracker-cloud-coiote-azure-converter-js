@@ -31,37 +31,6 @@ npm install
 npm test
 ```
 
-## Specifications
-
-To accomplish the expected result there is executed 4 different process:
-
-1. Group
-2. Build
-3. Check
-4. Transform
-
-### 1- Group
-
-Split the input data in 2 groups: LwM2M objects and custom objects. The (LwM2M
-Types lib)[https://github.com/NordicSemiconductor/lwm2m-types-js] is used to
-determinated if the object is LwM2M type.
-
-### 2- Build
-
-The Coiote format is removed from the objects and new object is built using the
-json schema of it as reference
-
-### 3- Check
-
-Using the (LwM2M Types
-lib)[https://github.com/NordicSemiconductor/lwm2m-types-js] the LwM2M objects
-are checked to validate if they have the expected data format.
-
-### 4- Transform
-
-Convert the result of the process in the format of the expected input in Asset
-Tracker
-
 ## Expected input
 
 The input is the result of a device with Asset Tracker v2 firmware publishing
@@ -76,3 +45,34 @@ objects and no LwM2M objects. The LwM2M Types lib is been using to check the
 veracity of LwM2M objects.
 
 [Output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/o.ts)
+
+## Specifications
+
+To accomplish the expected result, the program execute 4 different process in consecutively:
+
+1. Group
+2. Build
+3. Check
+4. Transform
+
+### 1- Group
+
+Split the input data in 2 groups: LwM2M objects and custom objects. The [LwM2M
+Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used to
+determinated if the object is LwM2M type.
+
+### 2- Build
+
+The Coiote format is removed from the objects and new object is built using the
+json schema of it as reference
+
+### 3- Check
+
+Using [LwM2M
+Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) the LwM2M objects
+are checked to validate if they have the expected data format.
+
+### 4- Transform
+
+Convert the result of the process in the format of the expected input in Asset
+Tracker
