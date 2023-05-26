@@ -1,5 +1,5 @@
-import type { objects } from "./main"
-import { createAssetTracker } from "./createAssetTracker"
+import { createAssetTracker } from './createAssetTracker'
+import type { objects } from './main'
 
 describe('createAssetTracker', () => {
 	it('should create Asset Tracker input data', () => {
@@ -82,7 +82,7 @@ describe('createAssetTracker', () => {
 				modV: 'mfw_nrf9160_1.0.0',
 				brdV: 'thingy91_nrf9160',
 			},
-			"ts": 123456,
+			ts: 123456,
 		}
 
 		const roamingInfo = {
@@ -96,7 +96,7 @@ describe('createAssetTracker', () => {
 				ip: '2001:db8:85a3::8a2e:370:7334',
 				eest: 7,
 			},
-			"ts": 123456,
+			ts: 123456,
 		}
 
 		const batery = {

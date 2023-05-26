@@ -1,12 +1,12 @@
-import type { assetTracker } from "./assetTracker/AssetTracker"
-import type { objects } from "./main"
+import type { assetTracker } from './assetTracker/AssetTracker'
+import type { objects } from './main'
 
 /**
  * Create Asset Tracker input
  */
 export const createAssetTracker = (input: objects): assetTracker => {
 	console.log(input)
-	
+
 	const config = createConfig()
 
 	const device = createDevice()
