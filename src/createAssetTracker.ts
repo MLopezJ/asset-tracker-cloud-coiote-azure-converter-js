@@ -24,9 +24,8 @@ export const createAssetTracker = (): any => {
 	}
 }
 
-
-const createConfig =  () => {
-    return {
+const createConfig = () => {
+	return {
 		act: false,
 		actwt: 60,
 		mvres: 300,
@@ -40,7 +39,7 @@ const createConfig =  () => {
 }
 
 const createDevice = () => {
-    return {
+	return {
 		imei: '352656106111232',
 		iccid: '89450421180216216095',
 		modV: 'mfw_nrf9160_1.0.0',
@@ -49,7 +48,7 @@ const createDevice = () => {
 }
 
 const createRoamingInfo = () => {
-    return {
+	return {
 		v: {
 			band: 262143,
 			nw: 'LTE-M',
@@ -59,19 +58,19 @@ const createRoamingInfo = () => {
 			cell: 33703719,
 			ip: '2001:db8:85a3::8a2e:370:7334',
 			eest: 7,
-		}
+		},
 	}
 }
 
 const createBatery = () => {
-    return {
+	return {
 		v: 80,
 		ts: 123456,
 	}
 }
 
 const createEnviromental = () => {
-    return {
+	return {
 		v: {
 			temp: 15,
 			hum: 30,
@@ -82,7 +81,7 @@ const createEnviromental = () => {
 }
 
 const createGnss = () => {
-    return {
+	return {
 		v: {
 			lng: 100,
 			lat: 50,
