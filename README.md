@@ -457,8 +457,10 @@ json schema of it as reference.
 
 ### 3- Check
 
-Using [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js)
-the LwM2M objects are checked to validate if they have the expected data format.
+Uses [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) to
+check if objects have the expected data format. This step is only applied to
+verified LwM2M objects.
+[example](src/transformationSteps/3-checkLwM2MObjects.spec.ts)
 
 ### 4- Transform
 
