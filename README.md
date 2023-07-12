@@ -438,7 +438,7 @@ To accomplish the expected result, the program execute 4 different changes on
 the data:
 
 1. Group
-2. Build
+2. Remove Coiote format
 3. Check
 4. Transform
 
@@ -449,10 +449,10 @@ Split the input data in 2 groups: LwM2M objects and custom objects. The
 to determinated if the object is LwM2M type.
 [example](src/transformationSteps/1-group.spec.ts)
 
-### 2- Build
+### 2- Remove Coiote format
 
-The Coiote format is removed from the objects and new object is built using the
-json schema of it as reference
+This step is executed only to verified LwM2M objects. The Coiote format is removed from the objects and new object is built using the
+json schema of it as reference. [example](src/transformationSteps/2-removeCoioteFormat.spec.ts)
 
 ### 3- Check
 
