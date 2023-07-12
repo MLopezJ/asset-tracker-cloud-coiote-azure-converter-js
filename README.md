@@ -8,12 +8,15 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
-> Build [expected input](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json) of Asset Tracker web application from the result of the [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection) between Coiote and Azure.
+> Build
+> [expected input](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
+> of Asset Tracker web application from the result of the
+> [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection)
+> between Coiote and Azure.
 
 ## Status: Work in progress
 
 Currently there is no functionality in this project. This is work in progress.
-
 
 ## Installation
 
@@ -29,9 +32,11 @@ npm test
 
 ## Expected input
 
-Result of the [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection) between Coiote and Azure.
+Result of the
+[integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection)
+between Coiote and Azure.
 
-``` json
+```json
 {
   "deviceId": "urn:imei:000000000000008",
   "etag": "AAAAAAAAAAE=",
@@ -358,9 +363,10 @@ Result of the [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-con
 
 ## Expected output
 
-The output is an object with the struct described in the [expected input of Asset Tracker web application](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
+The output is an object with the struct described in the
+[expected input of Asset Tracker web application](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 
-``` json
+```json
 {
   "bat": {
     "v": 2754, // /3/0/7
@@ -414,7 +420,7 @@ The output is an object with the struct described in the [expected input of Asse
       "mccmnc": 24202, // /4/0/10 & /4/0/9
       "cell": 33703719, // /4/0/8
       "ip": "10.81.183.99", // /4/0/4
-      "eest": 7  // ***** origin missing *****
+      "eest": 7 // ***** origin missing *****
     },
     "ts": 1563968743666 // server timestmap
   },
@@ -428,7 +434,8 @@ The output is an object with the struct described in the [expected input of Asse
 
 ## Transformation steps
 
-To accomplish the expected result, the program execute 4 different changes on the data:
+To accomplish the expected result, the program execute 4 different changes on
+the data:
 
 1. Group
 2. Build
@@ -437,9 +444,10 @@ To accomplish the expected result, the program execute 4 different changes on th
 
 ### 1- Group
 
-Split the input data in 2 groups: LwM2M objects and custom objects. The [LwM2M
-Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used to
-determinated if the object is LwM2M type.
+Split the input data in 2 groups: LwM2M objects and custom objects. The
+[LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used
+to determinated if the object is LwM2M type.
+[example](src/transformationSteps/1-group.spec.ts)
 
 ### 2- Build
 
@@ -448,9 +456,8 @@ json schema of it as reference
 
 ### 3- Check
 
-Using [LwM2M
-Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) the LwM2M objects
-are checked to validate if they have the expected data format.
+Using [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js)
+the LwM2M objects are checked to validate if they have the expected data format.
 
 ### 4- Transform
 

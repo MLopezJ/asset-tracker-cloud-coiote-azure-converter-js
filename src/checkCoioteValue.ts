@@ -13,7 +13,8 @@ export const setValue = (
 ): undefined | number | boolean | string | unknown[] => {
 	const value = input.value
 
-	if ((input as coioteListFormat).dim !== undefined) { // TODO: solve this
+	if (input['attributes']?.dim !== undefined) {
+		// TODO: solve this
 		// is a list
 		return Object.values(input)
 			.filter((element) => {
@@ -48,7 +49,7 @@ export const validValue = (
 
 	if (value === undefined) {
 		// input could be a list. check it format
-		const list =(input as coioteListFormat) 
+		const list = input['attributes'] // TODO: solve this
 		if (list?.dim !== undefined) {
 			// is a list with valid format, return true
 			return true
