@@ -8,7 +8,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier/)
 [![ESLint: TypeScript](https://img.shields.io/badge/ESLint-TypeScript-blue.svg)](https://github.com/typescript-eslint/typescript-eslint)
 
-> Build expected input of Asset Tracker from the result of the integration between Coiote and Azure.
+> Build [expected input](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json) of Asset Tracker web application from the result of the [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection) between Coiote and Azure.
 
 ## Status: Work in progress
 
