@@ -29,10 +29,7 @@ npm test
 
 ## Expected input
 
-The input is the result of a device with Asset Tracker v2 firmware publishing
-data to a Coite instance which has an integration with Microsoft Azure.
-
-[Input](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/i.ts)
+Result of the [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection) between Coiote and Azure.
 
 ``` json
 {
@@ -361,11 +358,7 @@ data to a Coite instance which has an integration with Microsoft Azure.
 
 ## Expected output
 
-The output is a new data struct which contain 2 sections; the recognized LwM2M
-objects and no LwM2M objects. The LwM2M Types lib is been using to check the
-veracity of LwM2M objects.
-
-[Output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/o.ts)
+The output is an object with the struct described in the [expected input of Asset Tracker web application](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 
 ``` json
 {
@@ -433,9 +426,9 @@ veracity of LwM2M objects.
 }
 ```
 
-## Specifications
+## Transformation steps
 
-To accomplish the expected result, the program execute 4 different process consecutively:
+To accomplish the expected result, the program execute 4 different changes on the data:
 
 1. Group
 2. Build
@@ -462,4 +455,4 @@ are checked to validate if they have the expected data format.
 ### 4- Transform
 
 Convert the result of the process in the format of the expected input in Asset
-Tracker
+Tracker web application
