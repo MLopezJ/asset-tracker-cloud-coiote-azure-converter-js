@@ -367,6 +367,72 @@ veracity of LwM2M objects.
 
 [Output](https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/tree/saga/documents/o.ts)
 
+``` json
+{
+  "bat": {
+    "v": 2754, // /3/0/7
+    "ts": 1563968747123 // /3/0/13 || server timestmap
+  },
+  "env": {
+    "v": {
+      "temp": 23.6, // /3303/0/5700
+      "hum": 50.5, // 3304/0/5700
+      "atmp": 100.36 // 3323/0/5700
+    },
+    "ts": 1563968743666 // /3303/0/5518 || 3304/0/5518 || 3323/0/5518 || server timestmap
+  },
+  "gnss": {
+    "v": {
+      "lng": 10.436642, // /6/0/1
+      "lat": 63.421133, // /6/0/0
+      "acc": 24.798573, // /6/0/3
+      "alt": 170.528305, // /6/0/2
+      "spd": 0.579327, // /6/0/6
+      "hdg": 176.12 // ***** origin missing *****
+    },
+    "ts": 1563968752991 // /6/0/5 || server timestmap
+  },
+  "cfg": {
+    "loct": 60, // /5009/0/1
+    "act": false, // /5009/0/0
+    "actwt": 60, // /5009/0/2
+    "mvres": 60, // /5009/0/3
+    "mvt": 3600, // /5009/0/4
+    "accath": 10.5, // /5009/0/5
+    "accith": 5.2, // /5009/0/8
+    "accito": 1.7, // /5009/0/9
+    "nod": []
+  },
+  "dev": {
+    "v": {
+      "imei": "352656106111232", // /3/0/2
+      "iccid": "89450421180216216095", // ***** origin missing *****
+      "modV": "mfw_nrf9160_1.0.0", // /3/0/3
+      "brdV": "thingy91_nrf9160" // /3/0/0
+    },
+    "ts": 1563968743666 // /3/0/13 || server timestmap
+  },
+  "roam": {
+    "v": {
+      "band": 3, // ***** origin missing *****
+      "nw": "NB-IoT", // /4/0/0
+      "rsrp": -97, // 4/0/2
+      "area": 12, // /4/0/12
+      "mccmnc": 24202, // /4/0/10 & /4/0/9
+      "cell": 33703719, // /4/0/8
+      "ip": "10.81.183.99", // /4/0/4
+      "eest": 7  // ***** origin missing *****
+    },
+    "ts": 1563968743666 // server timestmap
+  },
+  "firmware": {
+    "fwUpdateStatus": "current",
+    "currentFwVersion": "0.0.0-development",
+    "pendingFwVersion": ""
+  }
+}
+```
+
 ## Specifications
 
 To accomplish the expected result, the program execute 4 different process consecutively:
