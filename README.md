@@ -451,8 +451,9 @@ to determinated if the object is LwM2M type.
 
 ### 2- Remove Coiote format
 
-This step is executed only to verified LwM2M objects. The Coiote format is removed from the objects and new object is built using the
-json schema of it as reference. [example](src/transformationSteps/2-removeCoioteFormat.spec.ts)
+The Coiote format is removed from the objects and new object is built using the
+json schema of it as reference.
+[example](src/transformationSteps/2-removeCoioteFormat.spec.ts)
 
 ### 3- Check
 
