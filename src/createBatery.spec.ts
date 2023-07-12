@@ -1,6 +1,12 @@
 import { createBatery } from './createBatery'
 
 describe('createBatery', () => {
+	let serverTime: number
+	
+	beforeEach(() => {
+		serverTime = 45612456
+	})
+
 	it('should create Batery with Device values', () => {
 		const device = {
 			'0': 'Nordic Semiconductor ASA',
@@ -14,9 +20,9 @@ describe('createBatery', () => {
 			'19': '3.2.1',
 		}
 
-		expect(createBatery(device)).toMatchObject({
+		expect(createBatery(device, serverTime)).toMatchObject({
 			v: 80,
-			ts: 123456,
+			ts: 1675874731000,
 		})
 	})
 
@@ -32,6 +38,6 @@ describe('createBatery', () => {
 			'19': '3.2.1',
 		}
 
-		expect(createBatery(device)).toBe(undefined)
+		expect(createBatery(device, serverTime)).toBe(undefined)
 	})
 })

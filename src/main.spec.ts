@@ -247,7 +247,7 @@ describe('main', () => {
 
 		const batery = {
 			v: 80,
-			ts: 123456,
+			ts: 1476186613,
 		}
 
 		const enviromental = {
@@ -256,7 +256,7 @@ describe('main', () => {
 				hum: 30,
 				atmp: 10,
 			},
-			ts: 123456,
+			ts: 1,
 		}
 
 		const gnss = {

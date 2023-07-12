@@ -39,6 +39,7 @@ describe('createAssetTracker', () => {
 						'5602': 101705,
 						'5700': 101705,
 						'5701': 'Pa',
+						'5518': 87514562
 					},
 				],
 				'3347:1.1': [
@@ -108,7 +109,7 @@ describe('createAssetTracker', () => {
 
 		const batery = {
 			v: 80,
-			ts: 123456,
+			ts: 1476186613,
 		}
 
 		const enviromental = {
@@ -117,7 +118,7 @@ describe('createAssetTracker', () => {
 				hum: 30,
 				atmp: 101705,
 			},
-			ts: 123456,
+			ts: 87514562,
 		}
 
 		const gnss = {

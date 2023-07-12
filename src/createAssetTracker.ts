@@ -28,10 +28,10 @@ export const createAssetTracker = (
 
 	const roamingInfo = createRoamingInfo()
 
-	const batery = createBatery(deviceObject)
+	const batery = createBatery(deviceObject,1)
 	if (batery === undefined) return undefined
 
-	const enviromental = createEnviromental(temperature, humidity, barometer)
+	const enviromental = createEnviromental(temperature, humidity, barometer, 1)
 	if (enviromental === undefined) return undefined
 
 	const gnss = createGnss()

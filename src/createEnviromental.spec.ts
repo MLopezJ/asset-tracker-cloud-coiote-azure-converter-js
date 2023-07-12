@@ -1,6 +1,12 @@
 import { createEnviromental } from "./createEnviromental"
 
 describe("createEnviromental", () => {
+    let serverTime: number
+	
+	beforeEach(() => {
+		serverTime = 45612456
+	})
+
     it("should create Env with LwM2M objects", () => {
 
         const temperature = [
@@ -24,10 +30,10 @@ describe("createEnviromental", () => {
                 hum: 30,
                 atmp: 101705,
             },
-            ts: 123456,
+            ts: 45612456,
         }
 
-        expect(createEnviromental(temperature, humidity, barometer)).toMatchObject(result)
+        expect(createEnviromental(temperature, humidity, barometer, serverTime)).toMatchObject(result)
     })
 
     it('should return undefined if Enviromental values are not found in LwM2M objects', () => {
@@ -46,6 +52,6 @@ describe("createEnviromental", () => {
             },
         ]
 
-        expect(createEnviromental(temperature, humidity as any, barometer)).toBe(undefined)
+        expect(createEnviromental(temperature, humidity as any, barometer, serverTime)).toBe(undefined)
 	})
 })
