@@ -2,10 +2,11 @@ import {
 	Barometer_3315_urn,
 	Device_3_urn,
 	Humidity_3304_urn,
+	Location_6_urn,
 	Temperature_3303_urn,
-	Location_6_urn
 } from '@nordicsemiconductor/lwm2m-types'
 import { createBatery } from 'src/createBatery'
+import { createConfig, type Config_50009 } from 'src/createConfig'
 import { createEnviromental } from 'src/createEnviromental'
 import { createGnss } from 'src/createGnss'
 import type { objects } from '../main'
@@ -26,30 +27,30 @@ export const transformation = (input: objects, serverTime: number): any => {
 	const location = input.lwm2m[Location_6_urn]
 	if (location === undefined) return undefined
 
-    const batery = createBatery(deviceObject, serverTime)
+	const config = input.customObjects['5009']
+	if (config === undefined) return undefined
+
+	const batery = createBatery(deviceObject, serverTime)
 	if (batery === undefined) return undefined
 
-    const enviromental = createEnviromental(temperature, humidity, barometer, serverTime)
+	const enviromental = createEnviromental(
+		temperature,
+		humidity,
+		barometer,
+		serverTime,
+	)
 	if (enviromental === undefined) return undefined
 
 	const gnss = createGnss(location, serverTime)
 	if (gnss === undefined) return undefined
 
+	const cfg = createConfig(config as Config_50009)
+
 	return {
 		bat: batery,
 		env: enviromental,
 		gnss: gnss,
-		cfg: {
-			loct: 60, // /5009/0/1
-			act: false, // /5009/0/0
-			actwt: 60, // /5009/0/2
-			mvres: 60, // /5009/0/3
-			mvt: 3600, // /5009/0/4
-			accath: 10.5, // /5009/0/5
-			accith: 5.2, // /5009/0/8
-			accito: 1.7, // /5009/0/9
-			nod: [],
-		},
+		cfg,
 		dev: {
 			v: {
 				imei: '352656106111232', // /3/0/2
