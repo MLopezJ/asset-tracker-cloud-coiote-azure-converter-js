@@ -1,5 +1,6 @@
 import {
 	Barometer_3315_urn,
+	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
 	Humidity_3304_urn,
 	Location_6_urn,
@@ -10,6 +11,7 @@ import { createConfig, type Config_50009 } from 'src/createConfig'
 import { createDevice } from 'src/createDevice'
 import { createEnviromental } from 'src/createEnviromental'
 import { createGnss } from 'src/createGnss'
+import { createRoam } from 'src/createRoam'
 import type { objects } from '../main'
 
 export const transformation = (input: objects, serverTime: number): any => {
@@ -28,19 +30,17 @@ export const transformation = (input: objects, serverTime: number): any => {
 	const location = input.lwm2m[Location_6_urn]
 	if (location === undefined) return undefined
 
+	const connectivityMonitoring = input.lwm2m[ConnectivityMonitoring_4_urn]
+	if (connectivityMonitoring === undefined) return undefined
+
 	const config = input.customObjects['5009']
 	if (config === undefined) return undefined
 
-	const batery = createBatery(deviceObject, serverTime)
-	if (batery === undefined) return undefined
+	const bat = createBatery(deviceObject, serverTime)
+	if (bat === undefined) return undefined
 
-	const enviromental = createEnviromental(
-		temperature,
-		humidity,
-		barometer,
-		serverTime,
-	)
-	if (enviromental === undefined) return undefined
+	const env = createEnviromental(temperature, humidity, barometer, serverTime)
+	if (env === undefined) return undefined
 
 	const gnss = createGnss(location, serverTime)
 	if (gnss === undefined) return undefined
@@ -49,25 +49,15 @@ export const transformation = (input: objects, serverTime: number): any => {
 
 	const dev = createDevice(deviceObject, serverTime)
 
+	const roam = createRoam(connectivityMonitoring, serverTime)
+
 	return {
-		bat: batery,
-		env: enviromental,
-		gnss: gnss,
+		bat,
+		env,
+		gnss,
 		cfg,
 		dev,
-		roam: {
-			v: {
-				band: 3, // ***** origin missing *****
-				nw: 'NB-IoT', // /4/0/0
-				rsrp: -97, // 4/0/2
-				area: 12, // /4/0/12
-				mccmnc: 24202, // /4/0/10 & /4/0/9
-				cell: 33703719, // /4/0/8
-				ip: '10.81.183.99', // /4/0/4
-				eest: 7, // ***** origin missing *****
-			},
-			ts: 1563968743666, // server timestmap
-		},
+		roam,
 		firmware: {
 			fwUpdateStatus: 'current',
 			currentFwVersion: '0.0.0-development',
