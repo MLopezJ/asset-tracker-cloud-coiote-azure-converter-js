@@ -1,5 +1,4 @@
 import {
-	Barometer_3315_urn,
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
 	Humidity_3304_urn,
