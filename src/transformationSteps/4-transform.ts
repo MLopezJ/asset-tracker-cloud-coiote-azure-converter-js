@@ -7,6 +7,7 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import { createBatery } from 'src/createBatery'
 import { createConfig, type Config_50009 } from 'src/createConfig'
+import { createDevice } from 'src/createDevice'
 import { createEnviromental } from 'src/createEnviromental'
 import { createGnss } from 'src/createGnss'
 import type { objects } from '../main'
@@ -46,20 +47,14 @@ export const transformation = (input: objects, serverTime: number): any => {
 
 	const cfg = createConfig(config as Config_50009)
 
+	const dev = createDevice(deviceObject, serverTime)
+
 	return {
 		bat: batery,
 		env: enviromental,
 		gnss: gnss,
 		cfg,
-		dev: {
-			v: {
-				imei: '352656106111232', // /3/0/2
-				iccid: '89450421180216216095', // ***** origin missing *****
-				modV: 'mfw_nrf9160_1.0.0', // /3/0/3
-				brdV: 'thingy91_nrf9160', // /3/0/0
-			},
-			ts: 1563968743666, // /3/0/13 || server timestmap
-		},
+		dev,
 		roam: {
 			v: {
 				band: 3, // ***** origin missing *****
