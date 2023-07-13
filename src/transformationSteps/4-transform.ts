@@ -4,14 +4,15 @@ import {
 	Device_3_urn,
 	Humidity_3304_urn,
 	Location_6_urn,
+	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { createBatery } from 'src/createBatery'
-import { createConfig, type Config_50009 } from 'src/createConfig'
-import { createDevice } from 'src/createDevice'
-import { createEnviromental } from 'src/createEnviromental'
-import { createGnss } from 'src/createGnss'
-import { createRoam } from 'src/createRoam'
+import { createBatery } from '../createBatery'
+import { createConfig, type Config_50009 } from '../createConfig'
+import { createDevice } from '../createDevice'
+import { createEnviromental } from '../createEnviromental'
+import { createGnss } from '../createGnss'
+import { createRoam } from '../createRoam'
 import type { objects } from '../main'
 
 export const transformation = (input: objects, serverTime: number): any => {
@@ -23,10 +24,10 @@ export const transformation = (input: objects, serverTime: number): any => {
 
 	const humidity = input.lwm2m[Humidity_3304_urn]
 	if (humidity === undefined) return undefined
-
-	const barometer = input.lwm2m[Barometer_3315_urn]
-	if (barometer === undefined) return undefined
-
+	
+	const presure = input.lwm2m[Pressure_3323_urn]
+	if (presure === undefined) return undefined
+	
 	const location = input.lwm2m[Location_6_urn]
 	if (location === undefined) return undefined
 
@@ -39,7 +40,7 @@ export const transformation = (input: objects, serverTime: number): any => {
 	const bat = createBatery(deviceObject, serverTime)
 	if (bat === undefined) return undefined
 
-	const env = createEnviromental(temperature, humidity, barometer, serverTime)
+	const env = createEnviromental(temperature, humidity, presure, serverTime)
 	if (env === undefined) return undefined
 
 	const gnss = createGnss(location, serverTime)
