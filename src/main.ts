@@ -13,7 +13,7 @@ export type valueOptions = value | NoValue | listValue // list or value
 export type attribute = Record<string, valueOptions> // attribute id: value options
 export type objectInstance = Record<string, attribute> // instance id: attribute id
 
-type resource = valueOptions
+type resource = {[key: string] : NoValue | value | listValue }
 type instanceId = string
 export type instance = Record<instanceId, resource>
 type objectId = string
