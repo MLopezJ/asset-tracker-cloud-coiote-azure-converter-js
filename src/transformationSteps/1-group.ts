@@ -4,6 +4,11 @@ import type { instance, lwm2mCoiote } from '../main'
 
 type objectWithUrn = Record<keyof LwM2MDocument, instance>
 
+/**
+ * an object with 2 keys,
+ * 	LwM2M is an array of recognized LwM2M objects
+ * 	customObjects is an array of not LwM2M recognized objects
+ */
 export type orderObjects = {
 	lwm2m: objectWithUrn[]
 	customObjects: lwm2mCoiote[]
