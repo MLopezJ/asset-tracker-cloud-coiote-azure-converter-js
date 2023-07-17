@@ -12,12 +12,17 @@ export type listValue = { '0': value | NoValue; attributes: { dim: string } } //
 export type valueOptions = value | NoValue | listValue // list or value
 export type attribute = Record<string, valueOptions> // attribute id: value options
 export type objectInstance = Record<string, attribute> // instance id: attribute id
-export type CoioteAzure = Record<string, objectInstance> // object id: instance id
+
+type resource = valueOptions
+type instanceId = string
+export type instance = Record<instanceId, resource>
+type objectId = string
+export type lwm2mCoiote = Record<objectId, instance> // coiote format of LwM2M objects
 
 export type deviceTwin = {
 	properties: {
 		desired: unknown
-		reported: { lwm2m: CoioteAzure; $metadata: unknown; $version: number }
+		reported: { lwm2m: lwm2mCoiote; $metadata: unknown; $version: number }
 	}
 }
 
