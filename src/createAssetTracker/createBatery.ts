@@ -1,5 +1,5 @@
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import type { batery } from './assetTracker/Battery'
+import type { batery } from '../assetTracker/Battery'
 
 /**
  *

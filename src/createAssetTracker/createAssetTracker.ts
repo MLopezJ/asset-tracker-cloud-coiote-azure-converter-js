@@ -1,8 +1,8 @@
 import { Barometer_3315_urn, Device_3_urn, Humidity_3304_urn, Temperature_3303_urn } from '@nordicsemiconductor/lwm2m-types'
-import type { assetTracker } from './assetTracker/AssetTracker'
+import type { assetTracker } from '../assetTracker/AssetTracker'
 import { createBatery } from './createBatery'
 import { createEnviromental } from './createEnviromental'
-import type { objects } from './main'
+import type { objects } from '../transformationSteps/4-transform'
 
 /**
  * Create Asset Tracker input

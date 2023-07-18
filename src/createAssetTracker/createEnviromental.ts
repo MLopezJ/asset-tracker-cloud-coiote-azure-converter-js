@@ -3,7 +3,7 @@ import type {
 	Humidity_3304,
 	Temperature_3303,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { enviromental } from './assetTracker/Environment'
+import type { enviromental } from '../assetTracker/Environment'
 
 /**
  *
