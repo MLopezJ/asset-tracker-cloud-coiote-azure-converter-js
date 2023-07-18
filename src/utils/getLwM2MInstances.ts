@@ -1,9 +1,9 @@
 import type { LwM2MDocumentSchema } from "@nordicsemiconductor/lwm2m-types"
-import { setValue } from "../checkCoioteValue"
 import type { instance } from "../main"
 import { checkResource } from "./checkResource"
 import assign from 'lodash.assign'
 import _ from 'lodash'
+import { setDataType } from "./setDataType"
 
 /**
  * Remove coiote format from instances of a LwM2M object and convert to list using the given schema
@@ -32,7 +32,7 @@ export const getLwM2MInstances = (
                if (Object.keys(value).length === 0) return undefined
 
                const dataType = schema.items.properties[`${resourceId}`].type // TODO: fix it
-               const newValueFormat = setValue(value , dataType)
+               const newValueFormat = setDataType(value , dataType)
                return {
                    [`${resourceId}`]: newValueFormat,
                }
