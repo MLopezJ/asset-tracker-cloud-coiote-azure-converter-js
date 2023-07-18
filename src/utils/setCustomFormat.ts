@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import assign from 'lodash.assign'
 import customObjectsSchema from '../../customObjects.schema.json'
-import type { lwm2mCoiote } from '../main'
-import { removeFormat } from '../removeFormat'
+import type { lwm2mCoiote } from '../index'
 import { convertObjectUsingSchema } from './convertObjectUsingSchema'
+import { removeFormat } from './removeFormat'
 
 /**
  * Remove coiote format from custom objects and set format taking custom object schema if it exist

@@ -1,4 +1,4 @@
-import type { list, value } from '../main'
+import type { list, value } from '../index'
 import { checkResource } from '../utils/checkResource'
 import { setDataType } from '../utils/setDataType'
 

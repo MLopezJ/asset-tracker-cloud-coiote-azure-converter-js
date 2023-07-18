@@ -1,14 +1,13 @@
-import type { list, value } from '../main'
+import type { list, value } from '../index'
 
 /**
  * Remove the key 'value' from input and set expected data type
  */
- export const setDataType = (
-	input:  value | list ,
+export const setDataType = (
+	input: value | list,
 	dataType?: string,
 ): undefined | number | boolean | string | unknown[] => {
-
-    // if input is a list
+	// if input is a list
 	if ((input as list).attributes !== undefined) {
 		return Object.values(input)
 			.filter((element) => {
@@ -18,8 +17,8 @@ import type { list, value } from '../main'
 			})
 			.map((element) => element.value)
 	}
-    
-    const value = input.value
+
+	const value = input.value
 
 	if (value === undefined) return undefined
 

@@ -1,4 +1,4 @@
-import type { list } from 'src/main'
+import type { list } from 'src/index'
 import { checkResource } from './checkResource'
 
 describe('checkResource', () => {
@@ -77,6 +77,4 @@ describe('checkResource', () => {
 		}
 		expect(checkResource(input, isRequired)).toBe(true)
 	})
-
-	
 })

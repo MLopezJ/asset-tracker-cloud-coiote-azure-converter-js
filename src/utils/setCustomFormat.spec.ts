@@ -1,4 +1,4 @@
-import type { instance, lwm2mCoiote } from '../main'
+import type { instance, lwm2mCoiote } from '../index'
 import { setCustomFormat } from './setCustomFormat'
 
 describe('setCustomFormat', () => {

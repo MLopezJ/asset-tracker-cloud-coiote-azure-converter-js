@@ -1,7 +1,7 @@
 import type { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
 import _ from 'lodash'
 import assign from 'lodash.assign'
-import type { instance } from '../main'
+import type { instance } from '../index'
 import { convertResourceUsingSchema } from './convertResourceUsingSchema'
 
 /**
