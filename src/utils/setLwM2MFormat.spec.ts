@@ -1,6 +1,6 @@
-import { buildLwM2M } from './buildLwM2M'
+import { setLwM2MFormat } from './setLwM2MFormat'
 
-describe('buildLwM2M', () => {
+describe('setLwM2MFormat', () => {
 	it('should build lwm2m format', () => {
 		const input = [
 			{
@@ -99,6 +99,6 @@ describe('buildLwM2M', () => {
 			'6': { '0': -43.5723, '1': 153.2176, '2': 2, '5': 1665149633, '6': 5 },
 		}
 
-		expect(buildLwM2M(input)).toMatchObject(output)
+		expect(setLwM2MFormat(input)).toMatchObject(output)
 	})
 })
