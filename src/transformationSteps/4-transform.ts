@@ -3,16 +3,27 @@ import {
 	Device_3_urn,
 	Humidity_3304_urn,
 	Location_6_urn,
+	LwM2MDocument,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { createBatery } from '../createBatery'
-import { createConfig, type Config_50009 } from '../createConfig'
-import { createDevice } from '../createDevice'
-import { createEnviromental } from '../createEnviromental'
-import { createGnss } from '../createGnss'
-import { createRoam } from '../createRoam'
-import type { objects } from '../main'
+import { createBatery } from '../createAssetTracker/createBatery'
+import {
+	createConfig,
+	type Config_50009,
+} from '../createAssetTracker/createConfig'
+import { createDevice } from '../createAssetTracker/createDevice'
+import { createEnviromental } from '../createAssetTracker/createEnviromental'
+import { createGnss } from '../createAssetTracker/createGnss'
+import { createRoam } from '../createAssetTracker/createRoam'
+
+export type customObjectValue = Record<string, number | string | boolean>
+export type customObject = Record<string, customObjectValue>
+
+export type objects = {
+	lwm2m: LwM2MDocument
+	customObjects: customObject
+}
 
 export const transformation = (input: objects, serverTime: number): any => {
 	const deviceObject = input.lwm2m[Device_3_urn]
@@ -23,10 +34,10 @@ export const transformation = (input: objects, serverTime: number): any => {
 
 	const humidity = input.lwm2m[Humidity_3304_urn]
 	if (humidity === undefined) return undefined
-	
+
 	const presure = input.lwm2m[Pressure_3323_urn]
 	if (presure === undefined) return undefined
-	
+
 	const location = input.lwm2m[Location_6_urn]
 	if (location === undefined) return undefined
 

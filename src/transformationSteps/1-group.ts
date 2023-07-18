@@ -1,8 +1,13 @@
 import { getURN, type LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 
-import type { instance, lwm2mCoiote } from '../main'
+import type { instance, lwm2mCoiote } from '../index'
 
-type objectWithUrn = Record<keyof LwM2MDocument, instance>
+/**
+ * Object which id is an URN from '@nordicsemiconductor/lwm2m-types' lib
+ */
+export type objectWithUrn = {
+	[key in keyof LwM2MDocument]: instance
+}
 
 /**
  * an object with 2 keys,
@@ -32,7 +37,7 @@ export const group = async (objects: lwm2mCoiote): Promise<orderObjects> => {
 		if (urn === undefined) {
 			customObjects.push({ [`${objectId}`]: value })
 		} else {
-			const recognizedObject = { [`${urn}`]: value } as objectWithUrn
+			const recognizedObject = { [`${urn}`]: value }
 			lwm2m.push(recognizedObject)
 		}
 	}
