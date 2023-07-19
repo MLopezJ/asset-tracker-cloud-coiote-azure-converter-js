@@ -26,7 +26,7 @@ describe('createRoam', () => {
 		const expected = {
 			v: {
 				band: 3, // ***** origin missing *****
-				nw: 6, //'NB-IoT', // /4/0/0 TODO: solve this
+				nw: '6', //'NB-IoT', // /4/0/0
 				rsrp: -97, // 4/0/2
 				area: 12, // /4/0/12
 				mccmnc: 24202, // /4/0/10 & /4/0/9

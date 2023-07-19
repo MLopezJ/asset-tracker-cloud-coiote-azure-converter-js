@@ -279,7 +279,7 @@ describe('index', () => {
 		const roamingInfo = {
 			v: {
 				band: 3,
-				nw: 6,
+				nw: '6',
 				rsrp: -85,
 				area: 12,
 				mccmnc: 2422,

@@ -1,4 +1,4 @@
-import { Type } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
 import { Area, Cell, EARFCN, RSRP } from './NeighboringCellMeasurements.js'
 import { Timestamp } from './Timestamp.js'
@@ -51,3 +51,5 @@ export const RoamingInfo = Type.Object(
 			'Roaming information. This information shall be updated by the device every time it publishes primary application data. It is considered low-priority information so it should always be sent after the primary application data has been published.',
 	},
 )
+
+export type roam = Static<typeof RoamingInfo>
