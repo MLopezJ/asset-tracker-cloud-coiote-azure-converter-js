@@ -12,10 +12,6 @@
 > [integration](https://github.com/MLopezJ/thingy91-coiote-cloud-connection)
 > between Coiote and Azure.
 
-## Status: Work in progress
-
-Currently there is no functionality in this project. This is work in progress.
-
 ## Installation
 
 ```
@@ -362,7 +358,7 @@ between Coiote and Azure.
 ## Expected output
 
 The output is an object with the struct described in the
-[expected input of Asset Tracker web application](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
+[Asset Tracker web application](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 
 ```json
 {
@@ -432,8 +428,7 @@ The output is an object with the struct described in the
 
 ## Transformation steps
 
-To accomplish the expected result, the program execute 4 different changes on
-the data:
+To achieve the expected result, the program executes 4 different processes on the data and its structure:
 
 1. Group
 2. Remove Coiote format
@@ -442,9 +437,11 @@ the data:
 
 ### 1- Group
 
-Split the input data in 2 groups: LwM2M objects and custom objects. The
-[LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used
-to determinated if the object is LwM2M type.
+Split the input data in 2 groups: 
+* LwM2M objects
+* custom objects.
+
+The [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used to determinated if the object is LwM2M type.
 [example](src/transformationSteps/1-group.spec.ts)
 
 ### 2- Remove Coiote format
@@ -462,5 +459,4 @@ verified LwM2M objects.
 
 ### 4- Transform
 
-Convert the result of the process in the format of the expected input in Asset
-Tracker web application
+Convert the result of the process in Asset Tracker web application format
