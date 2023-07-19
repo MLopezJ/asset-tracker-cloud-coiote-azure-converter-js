@@ -439,7 +439,7 @@ To achieve the expected result, the program executes 4 different processes on th
 
 Split the input data in 2 groups: 
 * LwM2M objects
-* custom objects.
+* Custom objects.
 
 The [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used to determinated if the object is LwM2M type.
 ``` ts
