@@ -7,14 +7,14 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { createBatery } from './createAssetTracker/createBatery'
-import { createConfig } from './createAssetTracker/createConfig'
-import { createDevice } from './createAssetTracker/createDevice'
-import { createEnviromental } from './createAssetTracker/createEnviromental'
-import { createGnss } from './createAssetTracker/createGnss'
-import { createRoam } from './createAssetTracker/createRoam'
 import type { assetTracker } from './schemas/AssetTracker'
 import type { Config_50009 } from './schemas/Config_50009'
+import { createBatery } from './transformToAssetTracker/createBatery'
+import { createConfig } from './transformToAssetTracker/createConfig'
+import { createDevice } from './transformToAssetTracker/createDevice'
+import { createEnviromental } from './transformToAssetTracker/createEnviromental'
+import { createGnss } from './transformToAssetTracker/createGnss'
+import { createRoam } from './transformToAssetTracker/createRoam'
 
 export type customObjectValue = Record<string, number | string | boolean>
 export type customObject = Record<string, customObjectValue>

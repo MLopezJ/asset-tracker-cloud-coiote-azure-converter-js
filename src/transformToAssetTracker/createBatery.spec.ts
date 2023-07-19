@@ -2,7 +2,7 @@ import { createBatery } from './createBatery'
 
 describe('createBatery', () => {
 	let serverTime: number
-	
+
 	beforeEach(() => {
 		serverTime = 45612456
 	})
