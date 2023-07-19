@@ -24,6 +24,12 @@ npm install
 npm test
 ```
 
+## Coverage
+
+```
+npm test --coverage
+```
+
 ## Expected input
 
 Result of the
@@ -364,7 +370,7 @@ The output is an object with the struct described in the
 {
   "bat": {
     "v": 2754, // /3/0/7
-    "ts": 1563968747123 // /3/0/13 || server timestmap
+    "ts": 1563968747123 // /3/0/13 || server timestamp
   },
   "env": {
     "v": {
@@ -372,7 +378,7 @@ The output is an object with the struct described in the
       "hum": 50.5, // 3304/0/5700
       "atmp": 100.36 // 3323/0/5700
     },
-    "ts": 1563968743666 // /3303/0/5518 || 3304/0/5518 || 3323/0/5518 || server timestmap
+    "ts": 1563968743666 // /3303/0/5518 || 3304/0/5518 || 3323/0/5518 || server timestamp
   },
   "gnss": {
     "v": {
@@ -383,7 +389,7 @@ The output is an object with the struct described in the
       "spd": 0.579327, // /6/0/6
       "hdg": 176.12 // ***** origin missing *****
     },
-    "ts": 1563968752991 // /6/0/5 || server timestmap
+    "ts": 1563968752991 // /6/0/5 || server timestamp
   },
   "cfg": {
     "loct": 60, // /5009/0/1
@@ -403,7 +409,7 @@ The output is an object with the struct described in the
       "modV": "mfw_nrf9160_1.0.0", // /3/0/3
       "brdV": "thingy91_nrf9160" // /3/0/0
     },
-    "ts": 1563968743666 // /3/0/13 || server timestmap
+    "ts": 1563968743666 // /3/0/13 || server timestamp
   },
   "roam": {
     "v": {
@@ -416,7 +422,7 @@ The output is an object with the struct described in the
       "ip": "10.81.183.99", // /4/0/4
       "eest": 7 // ***** origin missing *****
     },
-    "ts": 1563968743666 // server timestmap
+    "ts": 1563968743666 // server timestamp
   },
   "firmware": {
     "fwUpdateStatus": "current",
@@ -448,7 +454,7 @@ Split the input data in 2 groups:
 - Custom objects.
 
 The [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is
-used to determinated if the object is LwM2M type.
+used to determinate if the object is LwM2M type.
 
 ```ts
 const input = {
