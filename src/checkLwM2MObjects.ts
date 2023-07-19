@@ -2,7 +2,7 @@ import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import { validate } from '@nordicsemiconductor/lwm2m-types'
 
 /**
- * Check if input follows the expected data format
+ * Check if input follows the expected data format described by @nordicsemiconductor/lwm2m-types lib
  */
 export const checkLwM2MObjects = (input: Partial<LwM2MDocument>): boolean => {
 	const maybeValidLwM2M = validate(input)
