@@ -442,13 +442,109 @@ Split the input data in 2 groups:
 * custom objects.
 
 The [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used to determinated if the object is LwM2M type.
-[example](src/transformationSteps/1-group.spec.ts)
+``` ts
+
+const input = {
+	'6': {
+		'0': {
+			'0': { value: -43.5723 },
+			'1': { value: 153.2176 },
+			'2': { value: 2 },
+			'3': {},
+		},
+	},
+	'50009': {
+		'0': {
+			'0': { value: true },
+			'2': { value: 120 },
+			'3': { value: 600 },
+		},
+	},
+}
+
+const output = {
+	lwm2m: [
+		{
+			[Location_6_urn]: {
+				'0': {
+					'0': { value: -43.5723 },
+					'1': { value: 153.2176 },
+					'2': { value: 2 },
+					'3': {},
+				},
+			},
+		},
+	],
+	customObjects: [
+		{
+			'50009': {
+				'0': {
+					'0': { value: true },
+					'2': { value: 120 },
+					'3': { value: 600 },
+				},
+			},
+		},
+	],
+}
+
+
+
+```
+
+More examples: [tests](src/transformationSteps/1-group.spec.ts)
 
 ### 2- Remove Coiote format
 
 The Coiote format is removed from the objects and new object is built using the
 json schema of it as reference.
-[example](src/transformationSteps/2-removeCoioteFormat.spec.ts)
+
+``` ts
+const input = {
+	lwm2m: [
+		{
+			[Location_6_urn]: {
+				'0': {
+					'0': { value: -43.5723 },
+					'1': { value: 153.2176 },
+					'2': { value: 2 },
+					'3': {},
+				},
+			},
+		},
+	],
+	customObjects: [
+		{
+			'50009': {
+				'0': {
+					'0': { value: true },
+					'2': { value: 120 },
+					'3': { value: 600 },
+				},
+			},
+		},
+	],
+}
+
+const output = {
+    lwm2m: {
+        [Location_6_urn]: {
+            '0': -43.5723,
+            '1': 153.2176,
+            '2': 2,
+        },
+    },
+    customObjects: {
+        '50009': {
+            '0': true,
+            '2': 120,
+            '3': 600,
+        },
+    }
+}
+```
+
+More examples: [tests](src/transformationSteps/2-removeCoioteFormat.spec.ts)
 
 ### 3- Check
 
@@ -459,4 +555,4 @@ verified LwM2M objects.
 
 ### 4- Transform
 
-Convert the result of the process in Asset Tracker web application format
+Convert the result of the process in Asset Tracker web application format (final expected format)
