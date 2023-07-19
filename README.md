@@ -496,8 +496,7 @@ More examples: [tests](src/transformationSteps/1-group.spec.ts)
 
 ### 2- Remove Coiote format
 
-The Coiote format is removed from the objects and new object is built using the
-json schema of it as reference.
+The input for this step is the output from last one. Here, the Coiote format is removed from the objects and a new object is built using the json schema of it as reference.
 
 ``` ts
 const input = {
@@ -548,11 +547,17 @@ More examples: [tests](src/transformationSteps/2-removeCoioteFormat.spec.ts)
 
 ### 3- Check
 
-Uses [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) to
-check if objects have the expected data format. This step is only applied to
-verified LwM2M objects.
-[example](src/transformationSteps/3-checkLwM2MObjects.spec.ts)
+Same as before, the input for this step is the output from previous one. In this check step, the [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used to determine if the LwM2M objects follows the expected data format.  [example](src/transformationSteps/3-checkLwM2MObjects.spec.ts)
 
 ### 4- Transform
+If the check is successful, the result of step # 2 is used to transform into Asset Tracker web application format (final expected format).  [example](src/transformationSteps/4-transform.spec.ts)
 
-Convert the result of the process in Asset Tracker web application format (final expected format)
+
+## Notes:
+
+There are some values from [Asset Tracker web app](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json) whose origin is still missing.
+* `hdg` from `gnss`
+* `iccid` from `dev`
+* `band` from `roam`
+
+more info: [data transicion](https://github.com/MLopezJ/nRF-Asset-Tracker-through-Coiote-flow#data-transicion)
