@@ -26,7 +26,7 @@ describe('transformToBattery', () => {
 		})
 	})
 
-	it('should return undefined if Batery values are not found in Device object', () => {
+	it('should return undefined if Battery values are not found in Device object', () => {
 		const device = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',
