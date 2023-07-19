@@ -1,8 +1,13 @@
-import { Barometer_3315_urn, Device_3_urn, Humidity_3304_urn, Temperature_3303_urn } from '@nordicsemiconductor/lwm2m-types'
+import {
+	Barometer_3315_urn,
+	Device_3_urn,
+	Humidity_3304_urn,
+	Temperature_3303_urn,
+} from '@nordicsemiconductor/lwm2m-types'
 import type { assetTracker } from '../assetTracker/AssetTracker'
+import type { objects } from '../transform'
 import { createBatery } from './createBatery'
 import { createEnviromental } from './createEnviromental'
-import type { objects } from '../transformationSteps/4-transform'
 
 /**
  * Create Asset Tracker input
@@ -28,7 +33,7 @@ export const createAssetTracker = (
 
 	const roamingInfo = createRoamingInfo()
 
-	const batery = createBatery(deviceObject,1)
+	const batery = createBatery(deviceObject, 1)
 	if (batery === undefined) return undefined
 
 	const enviromental = createEnviromental(temperature, humidity, barometer, 1)

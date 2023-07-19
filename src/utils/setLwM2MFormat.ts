@@ -2,7 +2,7 @@ import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
 import _ from 'lodash'
 import assign from 'lodash.assign'
-import type { objectWithUrn } from '../transformationSteps/1-group'
+import type { objectWithUrn } from '../group'
 import { getLwM2MInstance } from './getLwM2MInstance'
 import { getLwM2MInstances } from './getLwM2MInstances'
 

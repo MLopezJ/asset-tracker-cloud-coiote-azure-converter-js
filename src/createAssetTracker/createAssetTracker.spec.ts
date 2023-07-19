@@ -1,5 +1,5 @@
+import type { objects } from '../transform'
 import { createAssetTracker } from './createAssetTracker'
-import type { objects } from '../transformationSteps/4-transform'
 
 describe('createAssetTracker', () => {
 	it('should create Asset Tracker input data', () => {
@@ -27,19 +27,15 @@ describe('createAssetTracker', () => {
 					'19': '3.2.1',
 				},
 				'6': { '0': -43.5723, '1': 153.2176, '2': 2, '5': 1665149633, '6': 5 },
-				'3303:1.1' : [
-					{'5700': 15}
-				],
-				'3304:1.1': [
-					{'5700': 30,}
-				],
+				'3303:1.1': [{ '5700': 15 }],
+				'3304:1.1': [{ '5700': 30 }],
 				'3315:1.1': [
 					{
 						'5601': 101697,
 						'5602': 101705,
 						'5700': 101705,
 						'5701': 'Pa',
-						'5518': 87514562
+						'5518': 87514562,
 					},
 				],
 				'3347:1.1': [

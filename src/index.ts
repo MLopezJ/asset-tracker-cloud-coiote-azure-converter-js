@@ -1,8 +1,8 @@
 import type { assetTracker } from './assetTracker/AssetTracker'
-import { group } from './transformationSteps/1-group'
-import { removeCoioteFormat } from './transformationSteps/2-removeCoioteFormat'
-import { checkLwM2MObjects } from './transformationSteps/3-checkLwM2MObjects'
-import { transformation } from './transformationSteps/4-transform'
+import { checkLwM2MObjects } from './checkLwM2MObjects'
+import { group } from './group'
+import { removeCoioteFormat } from './removeCoioteFormat'
+import { transformation } from './transform'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value> //NoValue

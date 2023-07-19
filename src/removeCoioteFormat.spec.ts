@@ -3,7 +3,7 @@ import {
 	Location_6_urn,
 	LwM2MServer_1_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { removeCoioteFormat } from './2-removeCoioteFormat'
+import { removeCoioteFormat } from './removeCoioteFormat'
 
 describe('removeCoioteFormat', () => {
 	it('should build lwm2m format', () => {

@@ -1,6 +1,6 @@
 import { getURN, type LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 
-import type { instance, lwm2mCoiote } from '../index'
+import type { instance, lwm2mCoiote } from './index'
 
 /**
  * Object which id is an URN from '@nordicsemiconductor/lwm2m-types' lib

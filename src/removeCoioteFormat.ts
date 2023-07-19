@@ -1,7 +1,7 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
-import { setCustomFormat } from '../utils/setCustomFormat'
-import { setLwM2MFormat } from '../utils/setLwM2MFormat'
-import type { orderObjects } from './1-group'
+import type { orderObjects } from './group'
+import { setCustomFormat } from './utils/setCustomFormat'
+import { setLwM2MFormat } from './utils/setLwM2MFormat'
 
 /**
  * Remove coiote format from instances and set the LwM2M format as described in @nordicsemiconductor/lwm2m-types

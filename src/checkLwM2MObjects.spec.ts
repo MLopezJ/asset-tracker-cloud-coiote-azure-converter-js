@@ -3,7 +3,7 @@ import {
 	Location_6_urn,
 	LwM2MDocument,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkLwM2MObjects } from './3-checkLwM2MObjects'
+import { checkLwM2MObjects } from './checkLwM2MObjects'
 
 describe('checkLwM2MObjects', () => {
 	it('should return true if object has the LwM2M struct', () => {
