@@ -553,11 +553,12 @@ Same as before, the input for this step is the output from previous one. In this
 If the check is successful, the result of step # 2 is used to transform into Asset Tracker web application format (final expected format).  [example](src/transformationSteps/4-transform.spec.ts)
 
 
-## Notes:
+## Notes
 
 There are some values from [Asset Tracker web app](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json) whose origin is still missing.
 * `hdg` from `gnss`
 * `iccid` from `dev`
 * `band` from `roam`
+* `eest` from `roam`
 
 more info: [data transicion](https://github.com/MLopezJ/nRF-Asset-Tracker-through-Coiote-flow#data-transicion)
