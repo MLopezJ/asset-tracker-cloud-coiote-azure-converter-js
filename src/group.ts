@@ -25,7 +25,7 @@ export type orderObjects = {
  * 1- Recognized LwM2M type objects
  * 2- Not recognized LwM2M type objects (custom objects)
  *
- * The @nordicsemiconductor/lwm2m-types is used to determinated if an object is recognized as LwM2M type or not.
+ * The @nordicsemiconductor/lwm2m-types is used to determinate if an object is recognized as LwM2M type or not.
  * The group of the recognized objects change its key for the URN used in lwm2m-type lib
  */
 export const group = async (objects: lwm2mCoiote): Promise<orderObjects> => {

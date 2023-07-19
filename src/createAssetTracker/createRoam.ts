@@ -29,6 +29,6 @@ export const createRoam = (
 			ip: connectivityMonitoring[4], // /4/0/4
 			eest: 7, // ***** origin missing *****
 		},
-		ts: serverTime, // server timestmap
+		ts: serverTime, // server timestamp
 	}
 }

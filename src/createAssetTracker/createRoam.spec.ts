@@ -34,7 +34,7 @@ describe('createRoam', () => {
 				ip: '10.160.225.39', // /4/0/4
 				eest: 7, // ***** origin missing *****
 			},
-			ts: 1563968743666, // server timestmap
+			ts: 1563968743666, // server timestamp
 		}
 
 		expect(createRoam(connectMonitoring, serverTime)).toMatchObject(expected)

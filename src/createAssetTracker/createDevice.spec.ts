@@ -27,7 +27,7 @@ describe('createDevice', () => {
 				modV: '22.8.1+0', // /3/0/3
 				brdV: 'Nordic Semiconductor ASA', // /3/0/0
 			},
-			ts: 1675874731000, // /3/0/13 || server timestmap
+			ts: 1675874731000, // /3/0/13 || server timestamp
 		}
 
 		expect(createDevice(input, serverTime)).toMatchObject(expected)
@@ -51,7 +51,7 @@ describe('createDevice', () => {
 				modV: '22.8.1+0', // /3/0/3
 				brdV: 'Nordic Semiconductor ASA', // /3/0/0
 			},
-			ts: 12345677, // /3/0/13 || server timestmap
+			ts: 12345677, // /3/0/13 || server timestamp
 		}
 
 		expect(createDevice(input, serverTime)).toMatchObject(expected)

@@ -46,8 +46,8 @@ const dataCleaning = (rawData: instance): customObjectValue[][] => {
  * Build expected struct
  */
 const buildStruct = (input: customObjectValue[][]) =>
-	input.reduce((previus, current) => {
+	input.reduce((previous, current) => {
 		const result = assign.apply(_, current as any)
-		previus.push(result)
-		return previus
+		previous.push(result)
+		return previous
 	}, [])

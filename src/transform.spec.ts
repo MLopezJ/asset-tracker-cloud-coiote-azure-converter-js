@@ -137,7 +137,7 @@ describe('transform', () => {
 					modV: '22.8.1+0', // /3/0/3
 					brdV: 'Nordic Semiconductor ASA', // /3/0/0
 				},
-				ts: 1675874731000, // /3/0/13 || server timestmap
+				ts: 1675874731000, // /3/0/13 || server timestamp
 			},
 			roam: {
 				v: {
@@ -150,7 +150,7 @@ describe('transform', () => {
 					ip: '10.160.225.39', // /4/0/4
 					eest: 7, // ***** origin missing *****
 				},
-				ts: 1563968743666, // server timestmap
+				ts: 1563968743666, // server timestamp
 			},
 			firmware: {
 				fwUpdateStatus: 'current',

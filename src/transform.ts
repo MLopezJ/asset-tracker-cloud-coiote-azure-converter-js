@@ -31,7 +31,7 @@ export const transformation = (
 	const deviceObject = input.lwm2m[Device_3_urn]
 	const temperature = input.lwm2m[Temperature_3303_urn]
 	const humidity = input.lwm2m[Humidity_3304_urn]
-	const presure = input.lwm2m[Pressure_3323_urn]
+	const pressure = input.lwm2m[Pressure_3323_urn]
 	const location = input.lwm2m[Location_6_urn]
 	const connectivityMonitoring = input.lwm2m[ConnectivityMonitoring_4_urn]
 	const config = input.customObjects['5009']
@@ -40,7 +40,7 @@ export const transformation = (
 		deviceObject === undefined ||
 		temperature === undefined ||
 		humidity === undefined ||
-		presure === undefined ||
+		pressure === undefined ||
 		location === undefined ||
 		connectivityMonitoring === undefined ||
 		config === undefined
@@ -49,7 +49,7 @@ export const transformation = (
 			deviceObject,
 			temperature,
 			humidity,
-			presure,
+			pressure: pressure,
 			location,
 			connectivityMonitoring,
 			config,
@@ -58,7 +58,7 @@ export const transformation = (
 	}
 
 	const bat = createBatery(deviceObject, serverTime)
-	const env = createEnviromental(temperature, humidity, presure, serverTime)
+	const env = createEnviromental(temperature, humidity, pressure, serverTime)
 	const gnss = createGnss(location, serverTime)
 	const cfg = createConfig(config as Config_50009)
 	const dev = createDevice(deviceObject, serverTime)
