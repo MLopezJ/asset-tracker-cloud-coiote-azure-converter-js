@@ -6,7 +6,7 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import type { assetTracker } from '../schemas/AssetTracker'
 import type { objects } from '../transform'
-import { createBatery } from './battery'
+import { transformToBattery } from './battery'
 import { createEnviromental } from './environmental'
 
 /**
@@ -33,7 +33,7 @@ export const createAssetTracker = (
 
 	const roamingInfo = createRoamingInfo()
 
-	const batery = createBatery(deviceObject, 1)
+	const batery = transformToBattery(deviceObject, 1)
 	if (batery === undefined) return undefined
 
 	const enviromental = createEnviromental(temperature, humidity, barometer, 1)

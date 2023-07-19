@@ -4,7 +4,7 @@ import type { batery } from '../schemas/Battery'
 /**
  *
  */
-export const createBatery = (
+export const transformToBattery = (
 	device: Device_3,
 	serverTime: number,
 ): batery | undefined => {

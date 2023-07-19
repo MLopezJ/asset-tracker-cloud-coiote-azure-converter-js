@@ -1,6 +1,6 @@
-import { createBatery } from './battery'
+import { transformToBattery } from './battery'
 
-describe('createBatery', () => {
+describe('transformToBattery', () => {
 	let serverTime: number
 
 	beforeEach(() => {
@@ -20,7 +20,7 @@ describe('createBatery', () => {
 			'19': '3.2.1',
 		}
 
-		expect(createBatery(device, serverTime)).toMatchObject({
+		expect(transformToBattery(device, serverTime)).toMatchObject({
 			v: 80,
 			ts: 1675874731000,
 		})
@@ -38,6 +38,6 @@ describe('createBatery', () => {
 			'19': '3.2.1',
 		}
 
-		expect(createBatery(device, serverTime)).toBe(undefined)
+		expect(transformToBattery(device, serverTime)).toBe(undefined)
 	})
 })
