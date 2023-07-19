@@ -4,7 +4,7 @@ import type { config } from '../schemas/Config'
 /**
  * Create config
  */
-export const createConfig = (config: Config_50009): config => {
+export const transformToConfig = (config: Config_50009): config => {
 	const act = config[0]
 	const loct = config[1]
 	const actwt = config[2]

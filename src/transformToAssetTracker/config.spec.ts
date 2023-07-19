@@ -1,7 +1,7 @@
 import type { Config_50009 } from 'src/schemas/Config_50009'
-import { createConfig } from './config'
+import { transformToConfig } from './config'
 
-describe('createConfig', () => {
+describe('transformToConfig', () => {
 	it('should create config', () => {
 		const object: Config_50009 = {
 			'0': true,
@@ -28,6 +28,6 @@ describe('createConfig', () => {
 			nod: [],
 		}
 
-		expect(createConfig(object)).toMatchObject(expected)
+		expect(transformToConfig(object)).toMatchObject(expected)
 	})
 })

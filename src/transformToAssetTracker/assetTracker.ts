@@ -27,7 +27,7 @@ export const createAssetTracker = (
 	const barometer = input.lwm2m[Barometer_3315_urn]
 	if (barometer === undefined) return undefined
 
-	const config = createConfig()
+	const config = transformToConfig()
 
 	const device = createDevice()
 
@@ -51,7 +51,7 @@ export const createAssetTracker = (
 	}
 }
 
-const createConfig = () => {
+const transformToConfig = () => {
 	return {
 		act: false,
 		actwt: 60,
