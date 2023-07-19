@@ -10,7 +10,7 @@ import { RoamingInfo } from './RoamingInfo.js'
 /**
  * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/AzureReported.ts
  */
-export const assetTracker = Type.Intersect(
+export const AssetTracker = Type.Intersect(
 	[
 		Type.Object({
 			cfg: Type.Optional(Config),
@@ -61,4 +61,4 @@ export const assetTracker = Type.Intersect(
 	},
 )
 
-export type assetTracker = Static<typeof assetTracker>
+export type assetTracker = Static<typeof AssetTracker>
