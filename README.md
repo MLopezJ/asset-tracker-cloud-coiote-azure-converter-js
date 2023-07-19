@@ -426,6 +426,10 @@ The output is an object with the struct described in the
 }
 ```
 
+## Usage
+
+See [example.ts](src/example.ts)
+
 ## Transformation steps
 
 To achieve the expected result, the program executes 4 different processes on
