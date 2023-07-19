@@ -1,5 +1,8 @@
 import { Type } from '@sinclair/typebox'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/eccbdb603d9c51030ada01a8ea56f27ff45762b9/docs/cloud-protocol/NeighboringCellMeasurements.ts
+ */
 export const Cell = Type.Integer({
 	description:
 		'The cell ID the User Equipment (UE) is camped on. 4-byte Evolved Terrestrial Radio Access Network (E-UTRAN) cell ID.',

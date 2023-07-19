@@ -1,4 +1,4 @@
-import { Type, Static } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
 import { Battery } from './Battery.js'
 import { Config } from './Config.js'
@@ -7,6 +7,9 @@ import { Environment } from './Environment.js'
 import { GNSS } from './GNSS.js'
 import { RoamingInfo } from './RoamingInfo.js'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/AzureReported.ts
+ */
 export const assetTracker = Type.Intersect(
 	[
 		Type.Object({

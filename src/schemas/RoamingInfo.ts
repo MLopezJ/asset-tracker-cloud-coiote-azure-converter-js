@@ -1,8 +1,11 @@
 import { Type } from '@sinclair/typebox'
-import { Area, Cell, EARFCN, RSRP } from './NeighboringCellMeasurements.js'
 import { $id } from './$id.js'
+import { Area, Cell, EARFCN, RSRP } from './NeighboringCellMeasurements.js'
 import { Timestamp } from './Timestamp.js'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Reported.ts
+ */
 export const RoamingInfo = Type.Object(
 	{
 		v: Type.Object({

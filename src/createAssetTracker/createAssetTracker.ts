@@ -4,7 +4,7 @@ import {
 	Humidity_3304_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { assetTracker } from '../assetTracker/AssetTracker'
+import type { assetTracker } from '../schemas/AssetTracker'
 import type { objects } from '../transform'
 import { createBatery } from './createBatery'
 import { createEnviromental } from './createEnviromental'

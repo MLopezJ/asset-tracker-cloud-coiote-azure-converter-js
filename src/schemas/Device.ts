@@ -1,7 +1,10 @@
 import { Type } from '@sinclair/typebox'
-import { Timestamp } from './Timestamp.js'
 import { $id } from './$id.js'
+import { Timestamp } from './Timestamp.js'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Reported.ts
+ */
 export const DeviceValue = Type.Object({
 	imei: Type.String({
 		description: 'Board IMEI',

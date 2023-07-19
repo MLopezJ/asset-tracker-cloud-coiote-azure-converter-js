@@ -1,6 +1,9 @@
 import { Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Config.ts
+ */
 export const Config = Type.Object(
 	{
 		act: Type.Boolean({

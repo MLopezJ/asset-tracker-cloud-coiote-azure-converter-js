@@ -1,7 +1,10 @@
-import { Timestamp } from './Timestamp.js'
-import { Type, Static } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
+import { Timestamp } from './Timestamp.js'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Reported.ts
+ */
 export const Environment = Type.Object(
 	{
 		v: Type.Object(

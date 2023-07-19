@@ -1,9 +1,9 @@
 import type {
-	Pressure_3323,
 	Humidity_3304,
+	Pressure_3323,
 	Temperature_3303,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { enviromental } from '../assetTracker/Environment'
+import type { enviromental } from '../schemas/Environment'
 
 /**
  *
@@ -28,10 +28,10 @@ export const createEnviromental = (
 	if (time === undefined && humidity[0] && humidity[0]['5518'] != undefined)
 		time = humidity[0]['5518']
 
-    if (time === undefined && pressure[0] && pressure[0]['5518'] != undefined)
+	if (time === undefined && pressure[0] && pressure[0]['5518'] != undefined)
 		time = pressure[0]['5518']
-    
-    if (time === undefined) time = serverTime
+
+	if (time === undefined) time = serverTime
 
 	return {
 		v: {

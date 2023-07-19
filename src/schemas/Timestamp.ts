@@ -1,5 +1,8 @@
 import { Type, type TInteger } from '@sinclair/typebox'
 
+/**
+ * @see https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Timestamp.ts
+ */
 export const Timestamp = (qualifier?: string): TInteger =>
 	Type.Integer({
 		description: `Timestamp as Unix epoch with millisecond precision (UTC)${
