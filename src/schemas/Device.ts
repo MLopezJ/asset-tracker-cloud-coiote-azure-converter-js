@@ -1,4 +1,4 @@
-import { Type } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
 import { Timestamp } from './Timestamp.js'
 
@@ -40,3 +40,5 @@ export const Device = Type.Object(
 			'Static device information. This information shall be updated by the device once after reboot.',
 	},
 )
+
+export type dev = Static<typeof Device>

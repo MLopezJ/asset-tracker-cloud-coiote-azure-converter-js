@@ -1,4 +1,4 @@
-import { Type } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
 import { Timestamp } from './Timestamp.js'
 
@@ -42,3 +42,5 @@ export const GNSS = Type.Object(
 		description: 'The GNSS reading',
 	},
 )
+
+export type gnss = Static<typeof GNSS>
