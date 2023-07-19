@@ -6,8 +6,8 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import type { assetTracker } from '../schemas/AssetTracker'
 import type { objects } from '../transform'
-import { createBatery } from './createBatery'
-import { createEnviromental } from './createEnviromental'
+import { createBatery } from './battery'
+import { createEnviromental } from './environmental'
 
 /**
  * Create Asset Tracker input

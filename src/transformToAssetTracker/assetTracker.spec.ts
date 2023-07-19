@@ -1,5 +1,5 @@
 import type { objects } from '../transform'
-import { createAssetTracker } from './createAssetTracker'
+import { createAssetTracker } from './assetTracker'
 
 describe('createAssetTracker', () => {
 	it('should create Asset Tracker input data', () => {

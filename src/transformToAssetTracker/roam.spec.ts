@@ -1,5 +1,5 @@
 import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
-import { createRoam } from './createRoam'
+import { createRoam } from './roam'
 
 describe('createRoam', () => {
 	let serverTime: number

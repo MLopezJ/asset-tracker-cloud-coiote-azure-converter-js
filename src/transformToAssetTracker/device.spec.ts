@@ -1,5 +1,5 @@
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import { createDevice } from './createDevice'
+import { createDevice } from './device'
 
 describe('createDevice', () => {
 	let serverTime: number

@@ -1,5 +1,5 @@
 import type { Config_50009 } from 'src/schemas/Config_50009'
-import { createConfig } from './createConfig'
+import { createConfig } from './config'
 
 describe('createConfig', () => {
 	it('should create config', () => {

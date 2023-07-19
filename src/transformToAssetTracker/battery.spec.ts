@@ -1,4 +1,4 @@
-import { createBatery } from './createBatery'
+import { createBatery } from './battery'
 
 describe('createBatery', () => {
 	let serverTime: number

@@ -1,4 +1,4 @@
-import { createEnviromental } from './createEnviromental'
+import { createEnviromental } from './environmental'
 
 describe('createEnviromental', () => {
 	let serverTime: number

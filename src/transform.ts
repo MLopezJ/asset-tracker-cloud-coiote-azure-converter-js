@@ -9,12 +9,12 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import type { assetTracker } from './schemas/AssetTracker'
 import type { Config_50009 } from './schemas/Config_50009'
-import { createBatery } from './transformToAssetTracker/createBatery'
-import { createConfig } from './transformToAssetTracker/createConfig'
-import { createDevice } from './transformToAssetTracker/createDevice'
-import { createEnviromental } from './transformToAssetTracker/createEnviromental'
-import { createGnss } from './transformToAssetTracker/createGnss'
-import { createRoam } from './transformToAssetTracker/createRoam'
+import { createBatery } from './transformToAssetTracker/battery'
+import { createConfig } from './transformToAssetTracker/config'
+import { createDevice } from './transformToAssetTracker/device'
+import { createEnviromental } from './transformToAssetTracker/environmental'
+import { createGnss } from './transformToAssetTracker/gnss'
+import { createRoam } from './transformToAssetTracker/roam'
 
 export type customObjectValue = Record<string, number | string | boolean>
 export type customObject = Record<string, customObjectValue>
