@@ -8,14 +8,12 @@ import {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { createBatery } from './createAssetTracker/createBatery'
-import {
-	createConfig,
-	type Config_50009,
-} from './createAssetTracker/createConfig'
+import { createConfig } from './createAssetTracker/createConfig'
 import { createDevice } from './createAssetTracker/createDevice'
 import { createEnviromental } from './createAssetTracker/createEnviromental'
 import { createGnss } from './createAssetTracker/createGnss'
 import { createRoam } from './createAssetTracker/createRoam'
+import type { Config_50009 } from './schemas/Config_50009'
 
 export type customObjectValue = Record<string, number | string | boolean>
 export type customObject = Record<string, customObjectValue>

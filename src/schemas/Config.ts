@@ -1,4 +1,4 @@
-import { Type } from '@sinclair/typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { $id } from './$id.js'
 
 /**
@@ -73,3 +73,5 @@ export const Config = Type.Object(
 		description: 'Configures the device',
 	},
 )
+
+export type config = Static<typeof Config>
