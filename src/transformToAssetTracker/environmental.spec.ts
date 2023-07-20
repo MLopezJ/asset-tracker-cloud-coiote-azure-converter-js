@@ -1,6 +1,6 @@
 import { transformToEnvironmental } from './environmental'
 
-describe('createEnviromental', () => {
+describe('transformToEnvironmental', () => {
 	let serverTime: number
 
 	beforeEach(() => {
