@@ -19,4 +19,4 @@ export const Battery = Type.Object(
 	},
 )
 
-export type batery = Static<typeof Battery>
+export type battery = Static<typeof Battery>
