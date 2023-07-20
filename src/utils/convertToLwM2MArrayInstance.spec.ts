@@ -1,6 +1,6 @@
-import { getLwM2MInstances } from "./getLwM2MInstances"
+import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance'
 
-describe('getLwM2MInstances', () => {
+describe('convertToLwM2MArrayInstance', () => {
 	it(`should convert list using array type definition schema`, () => {
 		const schema = {
 			type: 'array',
@@ -92,7 +92,7 @@ describe('getLwM2MInstances', () => {
 			},
 		]
 
-		expect(getLwM2MInstances(object, schema)).toMatchObject(result)
+		expect(convertToLwM2MArrayInstance(object, schema)).toMatchObject(result)
 	})
 
 	it(`should remove empty values when they are not required in schema definition`, () => {
@@ -141,7 +141,7 @@ describe('getLwM2MInstances', () => {
 			},
 		]
 
-		expect(getLwM2MInstances(object, schema)).toMatchObject(result)
+		expect(convertToLwM2MArrayInstance(object, schema)).toMatchObject(result)
 	})
 
 	it(`should return undefined when a required value is not defined`, () => {
@@ -200,7 +200,6 @@ describe('getLwM2MInstances', () => {
 			},
 		]
 
-		expect(getLwM2MInstances(object, schema)).toStrictEqual(result)
+		expect(convertToLwM2MArrayInstance(object, schema)).toStrictEqual(result)
 	})
 })
-

@@ -1,18 +1,18 @@
 import type { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
-import _ from 'lodash'
-import assign from 'lodash.assign'
 import type { instance } from '../index'
 import { convertResourceUsingSchema } from './convertResourceUsingSchema'
+
+type LwM2MArrayInstance = (Record<string, unknown> | undefined)[]
 
 /**
  * Remove coiote format from instances of a LwM2M object and convert to list using the given schema
  */
-export const getLwM2MInstances = (
+export const convertToLwM2MArrayInstance = (
 	input: instance,
 	schema: (typeof LwM2MDocumentSchema.properties)[keyof (typeof LwM2MDocumentSchema)['properties']],
-): Record<string, unknown>[] | undefined => {
+): LwM2MArrayInstance => {
 	const instances = Object.entries(input)
-	const requiredResources: string[] = schema.items.required // required resources in the LwM2M shcema definition of that object
+	const requiredResources: string[] = schema.items.required // required resources in the LwM2M schema definition of that object
 	return instances.map(([instanceId, resources]) => {
 		const instance = Object.entries(resources)
 			.map(([resourceId, value]) => {
@@ -25,6 +25,10 @@ export const getLwM2MInstances = (
 					dataType,
 				)
 
+				/**
+				 * if resource value is false, means that it is required by schema definition but is not present in the given params.
+				 * this case will be represent in the final result as undefined value, but in the mean time it is represent as false value
+				 */
 				if (resource === false) {
 					console.log(
 						`id ${resourceId} is required in object in order with schema definition but missing in instance ${instanceId}`,
@@ -35,9 +39,12 @@ export const getLwM2MInstances = (
 				return resource
 			})
 			.filter((result) => result !== undefined) // remove empty values
-
-		if (instance.includes(false)) return undefined
-
-		return assign.apply(_, instance as any)
-	})
+			.reduce(
+				(previous, current) =>
+					current === false ? undefined : { ...current, ...previous },
+				// false means a required resource that is not present in the given params, for that reason in changed to undefined
+				{},
+			)
+		return instance
+	}) as LwM2MArrayInstance
 }
