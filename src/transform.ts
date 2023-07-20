@@ -13,7 +13,7 @@ import { transformToBattery } from './transformToAssetTracker/battery'
 import { transformToConfig } from './transformToAssetTracker/config'
 import { transformToDevice } from './transformToAssetTracker/device'
 import { createEnviromental } from './transformToAssetTracker/environmental'
-import { createGnss } from './transformToAssetTracker/gnss'
+import { transformToGnss } from './transformToAssetTracker/gnss'
 import { createRoam } from './transformToAssetTracker/roam'
 
 export type customObjectValue = Record<string, number | string | boolean>
@@ -59,7 +59,7 @@ export const transformation = (
 
 	const bat = transformToBattery(deviceObject, serverTime)
 	const env = createEnviromental(temperature, humidity, pressure, serverTime)
-	const gnss = createGnss(location, serverTime)
+	const gnss = transformToGnss(location, serverTime)
 	const cfg = transformToConfig(config as Config_50009)
 	const dev = transformToDevice(deviceObject, serverTime)
 	const roam = createRoam(connectivityMonitoring, serverTime)

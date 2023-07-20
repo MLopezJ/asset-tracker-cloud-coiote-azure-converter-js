@@ -39,7 +39,7 @@ export const TransformToAssetTracker = (
 	const enviromental = createEnviromental(temperature, humidity, barometer, 1)
 	if (enviromental === undefined) return undefined
 
-	const gnss = createGnss()
+	const gnss = transformToGnss()
 
 	return {
 		cfg: config,
@@ -93,7 +93,7 @@ const createRoamingInfo = () => {
 	}
 }
 
-const createGnss = () => {
+const transformToGnss = () => {
 	return {
 		v: {
 			lng: 100,

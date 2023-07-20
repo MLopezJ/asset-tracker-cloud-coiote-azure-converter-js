@@ -1,6 +1,7 @@
 import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
+import { transformToGnss } from './gnss'
 
-describe('createGnss', () => {
+describe('transformToGnss', () => {
 	let serverTime: number
 
 	beforeEach(() => {
@@ -27,7 +28,7 @@ describe('createGnss', () => {
 			},
 			ts: 1665149633,
 		}
-		expect(createGnss(input, serverTime)).toMatchObject(expected)
+		expect(transformToGnss(input, serverTime)).toMatchObject(expected)
 	})
 
 	it('should create gnss using server time', () => {
@@ -50,23 +51,6 @@ describe('createGnss', () => {
 			},
 			ts: serverTime,
 		}
-		expect(createGnss(input, serverTime)).toMatchObject(expected)
+		expect(transformToGnss(input, serverTime)).toMatchObject(expected)
 	})
 })
-
-/**
- * Create GNSS
- */
-const createGnss = (location: Location_6, serverTime: number) => {
-	return {
-		v: {
-			lng: location[1],
-			lat: location[0],
-			acc: location[3],
-			alt: location[2],
-			spd: location[6],
-			hdg: 176.12, // ***** origin missing *****
-		},
-		ts: location[5] === undefined ? serverTime : location[5],
-	}
-}

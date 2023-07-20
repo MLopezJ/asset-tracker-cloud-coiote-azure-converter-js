@@ -2,9 +2,9 @@ import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
 import type { gnss } from 'src/schemas/GNSS'
 
 /**
- * Create GNSS
+ * Transform input into GNSS format
  */
-export const createGnss = (
+export const transformToGnss = (
 	location: Location_6,
 	serverTime: number,
 ): gnss | undefined => {
