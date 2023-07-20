@@ -2,7 +2,7 @@ import _ from 'lodash'
 import assign from 'lodash.assign'
 
 import type { instance, value } from '../index'
-import type { customObjectValue } from '../transform'
+import type { customObjectValue } from './setCustomFormat'
 
 /**
  * Remove the Coiote format from custom object

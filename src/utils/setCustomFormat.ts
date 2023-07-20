@@ -1,26 +1,22 @@
-import _ from 'lodash'
-import assign from 'lodash.assign'
 import customObjectsSchema from '../../customObjects.schema.json'
 import type { lwm2mCoiote } from '../index'
 import { convertObjectUsingSchema } from './convertObjectUsingSchema'
 import { removeFormat } from './removeFormat'
 
+export type customObjectValue = Record<string, number | string | boolean>
+export type customObject = Record<string, customObjectValue>
+
 /**
  * Remove coiote format from custom objects and set format taking custom object schema if it exist
  */
-export const setCustomFormat = (objects: lwm2mCoiote[]): any | undefined => {
-	const list = objects.map((obj) => {
-		const urn = Object.keys(obj)[0]
-		const instances = Object.values(obj)[0]
+export const setCustomFormat = (objects: lwm2mCoiote[]): customObject =>
+	objects.reduce((previousObjects: customObject, current) => {
+		const urn = Object.keys(current)[0] as string
+		const instances = Object.values(current)[0]
 
-		if (urn === undefined) {
-			console.log('URN of object not found:', obj)
-			return null
-		}
-
-		if (instances === undefined) {
-			console.log('instance/s of object not found:', instances)
-			return null
+		if (urn === undefined || instances === undefined) {
+			console.error('missing values ', { urn, instances })
+			return {}
 		}
 
 		const schema =
@@ -29,14 +25,14 @@ export const setCustomFormat = (objects: lwm2mCoiote[]): any | undefined => {
 			]
 
 		if (schema === undefined) {
-			return { [`${urn}`]: removeFormat(instances) }
+			return {
+				[`${urn}`]: removeFormat(instances),
+				...previousObjects,
+			} as customObject
 		}
 
-		return { [urn]: convertObjectUsingSchema(instances, schema) }
-	})
-
-	const wrongFormatObjects = list.filter((element) => element === null)
-	if (wrongFormatObjects.length > 0) return undefined
-
-	return assign.apply(_, list as any)
-}
+		return {
+			[urn]: convertObjectUsingSchema(instances, schema),
+			...previousObjects,
+		} as customObject
+	}, {})

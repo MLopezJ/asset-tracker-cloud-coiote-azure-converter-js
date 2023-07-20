@@ -15,9 +15,7 @@ import { transformToDevice } from './transformToAssetTracker/device'
 import { transformToEnvironmental } from './transformToAssetTracker/environmental'
 import { transformToGnss } from './transformToAssetTracker/gnss'
 import { transformToRoam } from './transformToAssetTracker/roam'
-
-export type customObjectValue = Record<string, number | string | boolean>
-export type customObject = Record<string, customObjectValue>
+import type { customObject } from './utils/setCustomFormat'
 
 export type objects = {
 	lwm2m: LwM2MDocument

@@ -76,21 +76,21 @@ describe('setCustomFormat', () => {
 		expect(setCustomFormat(input)).toMatchObject(expected)
 	})
 
-	it('should return undefined when instances of object is not found', () => {
+	it('should return empty object when instances of object is not found', () => {
 		const input = [
 			{
 				'50001': undefined as unknown as instance,
 			},
 		]
-		expect(setCustomFormat(input)).toBe(undefined)
+		expect(setCustomFormat(input)).toStrictEqual({})
 	})
 
-	it('should return undefined when object is not found', () => {
+	it('should return empty object when object is not found', () => {
 		const input = [
 			{
 				undefined,
 			} as unknown as lwm2mCoiote,
 		]
-		expect(setCustomFormat(input)).toBe(undefined)
+		expect(setCustomFormat(input)).toStrictEqual({})
 	})
 })
