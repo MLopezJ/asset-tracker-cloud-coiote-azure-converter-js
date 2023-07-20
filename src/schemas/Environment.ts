@@ -35,4 +35,4 @@ export const Environment = Type.Object(
 	},
 )
 
-export type enviromental = Static<typeof Environment>
+export type environmental = Static<typeof Environment>

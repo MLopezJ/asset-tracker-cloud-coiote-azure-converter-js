@@ -1,4 +1,4 @@
-import { createEnviromental } from './environmental'
+import { transformToEnvironmental } from './environmental'
 
 describe('createEnviromental', () => {
 	let serverTime: number
@@ -29,7 +29,7 @@ describe('createEnviromental', () => {
 		}
 
 		expect(
-			createEnviromental(temperature, humidity, barometer, serverTime),
+			transformToEnvironmental(temperature, humidity, barometer, serverTime),
 		).toMatchObject(result)
 	})
 
@@ -46,7 +46,12 @@ describe('createEnviromental', () => {
 		]
 
 		expect(
-			createEnviromental(temperature, humidity as any, barometer, serverTime),
+			transformToEnvironmental(
+				temperature,
+				humidity as any,
+				barometer,
+				serverTime,
+			),
 		).toBe(undefined)
 	})
 })

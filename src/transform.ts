@@ -12,7 +12,7 @@ import type { Config_50009 } from './schemas/Config_50009'
 import { transformToBattery } from './transformToAssetTracker/battery'
 import { transformToConfig } from './transformToAssetTracker/config'
 import { transformToDevice } from './transformToAssetTracker/device'
-import { createEnviromental } from './transformToAssetTracker/environmental'
+import { transformToEnvironmental } from './transformToAssetTracker/environmental'
 import { transformToGnss } from './transformToAssetTracker/gnss'
 import { transformToRoam } from './transformToAssetTracker/roam'
 
@@ -58,7 +58,12 @@ export const transformation = (
 	}
 
 	const bat = transformToBattery(deviceObject, serverTime)
-	const env = createEnviromental(temperature, humidity, pressure, serverTime)
+	const env = transformToEnvironmental(
+		temperature,
+		humidity,
+		pressure,
+		serverTime,
+	)
 	const gnss = transformToGnss(location, serverTime)
 	const cfg = transformToConfig(config as Config_50009)
 	const dev = transformToDevice(deviceObject, serverTime)

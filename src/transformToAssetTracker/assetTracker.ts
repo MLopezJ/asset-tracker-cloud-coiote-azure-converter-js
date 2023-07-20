@@ -7,7 +7,7 @@ import {
 import type { assetTracker } from '../schemas/AssetTracker'
 import type { objects } from '../transform'
 import { transformToBattery } from './battery'
-import { createEnviromental } from './environmental'
+import { transformToEnvironmental } from './environmental'
 
 /**
  * Transform input into Asset Tracker format
@@ -36,7 +36,12 @@ export const TransformToAssetTracker = (
 	const batery = transformToBattery(deviceObject, 1)
 	if (batery === undefined) return undefined
 
-	const enviromental = createEnviromental(temperature, humidity, barometer, 1)
+	const enviromental = transformToEnvironmental(
+		temperature,
+		humidity,
+		barometer,
+		1,
+	)
 	if (enviromental === undefined) return undefined
 
 	const gnss = transformToGnss()
