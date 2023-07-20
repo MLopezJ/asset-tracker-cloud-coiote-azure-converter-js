@@ -29,7 +29,7 @@ export const TransformToAssetTracker = (
 
 	const config = transformToConfig()
 
-	const device = createDevice()
+	const device = transformToDevice()
 
 	const roamingInfo = createRoamingInfo()
 
@@ -65,7 +65,7 @@ const transformToConfig = () => {
 	}
 }
 
-const createDevice = () => {
+const transformToDevice = () => {
 	return {
 		v: {
 			imei: '352656106111232',

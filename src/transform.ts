@@ -11,7 +11,7 @@ import type { assetTracker } from './schemas/AssetTracker'
 import type { Config_50009 } from './schemas/Config_50009'
 import { transformToBattery } from './transformToAssetTracker/battery'
 import { transformToConfig } from './transformToAssetTracker/config'
-import { createDevice } from './transformToAssetTracker/device'
+import { transformToDevice } from './transformToAssetTracker/device'
 import { createEnviromental } from './transformToAssetTracker/environmental'
 import { createGnss } from './transformToAssetTracker/gnss'
 import { createRoam } from './transformToAssetTracker/roam'
@@ -61,7 +61,7 @@ export const transformation = (
 	const env = createEnviromental(temperature, humidity, pressure, serverTime)
 	const gnss = createGnss(location, serverTime)
 	const cfg = transformToConfig(config as Config_50009)
-	const dev = createDevice(deviceObject, serverTime)
+	const dev = transformToDevice(deviceObject, serverTime)
 	const roam = createRoam(connectivityMonitoring, serverTime)
 
 	if (

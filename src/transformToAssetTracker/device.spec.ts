@@ -1,7 +1,7 @@
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import { createDevice } from './device'
+import { transformToDevice } from './device'
 
-describe('createDevice', () => {
+describe('transformToDevice', () => {
 	let serverTime: number
 
 	beforeEach(() => {
@@ -30,7 +30,7 @@ describe('createDevice', () => {
 			ts: 1675874731000, // /3/0/13 || server timestamp
 		}
 
-		expect(createDevice(input, serverTime)).toMatchObject(expected)
+		expect(transformToDevice(input, serverTime)).toMatchObject(expected)
 	})
 
 	it('should create device with server timestamp', () => {
@@ -54,6 +54,6 @@ describe('createDevice', () => {
 			ts: 12345677, // /3/0/13 || server timestamp
 		}
 
-		expect(createDevice(input, serverTime)).toMatchObject(expected)
+		expect(transformToDevice(input, serverTime)).toMatchObject(expected)
 	})
 })

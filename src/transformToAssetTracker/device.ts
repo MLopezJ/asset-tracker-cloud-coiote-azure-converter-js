@@ -4,7 +4,7 @@ import type { dev } from '../schemas/Device'
 /**
  *  create the dev object expected by the Asset Tracker web app
  */
-export const createDevice = (
+export const transformToDevice = (
 	device: Device_3,
 	serverTime: number,
 ): dev | undefined => {
