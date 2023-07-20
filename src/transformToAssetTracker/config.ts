@@ -2,17 +2,17 @@ import type { Config_50009 } from 'src/schemas/Config_50009'
 import type { config } from '../schemas/Config'
 
 /**
- * Create config
+ * Transform input into config format
  */
-export const transformToConfig = (config: Config_50009): config => {
-	const act = config[0]
-	const loct = config[1]
-	const actwt = config[2]
-	const mvres = config[3]
-	const mvt = config[4]
-	const accath = config[5]
-	const accith = config[8]
-	const accito = config[9]
+export const transformToConfig = (input: Config_50009): config => {
+	const act = input[0]
+	const loct = input[1]
+	const actwt = input[2]
+	const mvres = input[3]
+	const mvt = input[4]
+	const accath = input[5]
+	const accith = input[8]
+	const accito = input[9]
 
 	return {
 		loct,
