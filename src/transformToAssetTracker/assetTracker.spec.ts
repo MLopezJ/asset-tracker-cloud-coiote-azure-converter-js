@@ -1,7 +1,7 @@
 import type { objects } from '../transform'
-import { createAssetTracker } from './assetTracker'
+import { TransformToAssetTracker } from './assetTracker'
 
-describe('createAssetTracker', () => {
+describe('TransformToAssetTracker', () => {
 	it('should create Asset Tracker input data', () => {
 		const input: objects = {
 			lwm2m: {
@@ -137,6 +137,6 @@ describe('createAssetTracker', () => {
 			env: enviromental,
 			gnss: gnss,
 		}
-		expect(createAssetTracker(input)).toMatchObject(output)
+		expect(TransformToAssetTracker(input)).toMatchObject(output)
 	})
 })

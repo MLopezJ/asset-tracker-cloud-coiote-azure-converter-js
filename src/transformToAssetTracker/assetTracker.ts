@@ -10,9 +10,9 @@ import { transformToBattery } from './battery'
 import { createEnviromental } from './environmental'
 
 /**
- * Create Asset Tracker input
+ * Transform input into Asset Tracker format
  */
-export const createAssetTracker = (
+export const TransformToAssetTracker = (
 	input: objects,
 ): assetTracker | undefined => {
 	const deviceObject = input.lwm2m[Device_3_urn]
