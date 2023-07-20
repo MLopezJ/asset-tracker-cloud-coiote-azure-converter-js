@@ -1,16 +1,16 @@
 import type { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
-import _ from 'lodash'
-import assign from 'lodash.assign'
 import type { instance } from '../index'
-import { convertResourceUsingSchema } from '../utils/convertResourceUsingSchema'
+import { convertResourceUsingSchema } from './convertResourceUsingSchema'
+
+type LwM2Instance = Record<string, unknown> | undefined
 
 /**
  *  Remove coiote format from instance of a LwM2M object and convert using the given schema
  */
-export const getLwM2MInstance = (
+export const convertToLwM2MInstance = (
 	input: instance,
 	schema: (typeof LwM2MDocumentSchema.properties)[keyof (typeof LwM2MDocumentSchema)['properties']],
-): Record<string, unknown> | undefined => {
+): LwM2Instance => {
 	const resources = input['0'] ?? []
 	const instance = Object.entries(resources)
 		.map(([resourceId, value]) => {
@@ -31,8 +31,12 @@ export const getLwM2MInstance = (
 			return resource
 		})
 		.filter((result) => result !== undefined) // remove empty values
+		.reduce(
+			(previous, current) =>
+				current === false ? undefined : { ...current, ...previous },
+			// false means a required resource that is not present in the given params, for that reason in changed to undefined
+			{},
+		)
 
-	if (instance.includes(false)) return undefined
-
-	return assign.apply(_, instance as any)
+	return instance as LwM2Instance
 }

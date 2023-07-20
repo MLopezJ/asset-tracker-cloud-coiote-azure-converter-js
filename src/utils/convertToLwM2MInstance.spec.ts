@@ -1,6 +1,6 @@
-import { getLwM2MInstance } from './getLwM2MInstance'
+import { convertToLwM2MInstance } from './convertToLwM2MInstance'
 
-describe('getLwM2MInstance', () => {
+describe('convertToLwM2MInstance', () => {
 	it('should convert object using object type definition schema', () => {
 		const schema = {
 			type: 'object',
@@ -65,6 +65,6 @@ describe('getLwM2MInstance', () => {
 			'16': 'UQ',
 		}
 
-		expect(getLwM2MInstance(object, schema)).toMatchObject(result)
+		expect(convertToLwM2MInstance(object, schema)).toMatchObject(result)
 	})
 })
