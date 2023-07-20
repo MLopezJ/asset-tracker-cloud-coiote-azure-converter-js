@@ -31,7 +31,7 @@ export const TransformToAssetTracker = (
 
 	const device = transformToDevice()
 
-	const roamingInfo = createRoamingInfo()
+	const roamingInfo = transformToRoamingInfo()
 
 	const batery = transformToBattery(deviceObject, 1)
 	if (batery === undefined) return undefined
@@ -77,7 +77,7 @@ const transformToDevice = () => {
 	}
 }
 
-const createRoamingInfo = () => {
+const transformToRoamingInfo = () => {
 	return {
 		v: {
 			band: 262143,

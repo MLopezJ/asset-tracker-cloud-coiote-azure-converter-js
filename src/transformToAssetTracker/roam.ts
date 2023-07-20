@@ -4,7 +4,7 @@ import type { roam } from 'src/schemas/RoamingInfo'
 /**
  * Create roam object expected in Asset Tracker web app
  */
-export const createRoam = (
+export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
 	serverTime: number,
 ): roam | undefined => {

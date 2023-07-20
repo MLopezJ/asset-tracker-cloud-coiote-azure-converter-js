@@ -14,7 +14,7 @@ import { transformToConfig } from './transformToAssetTracker/config'
 import { transformToDevice } from './transformToAssetTracker/device'
 import { createEnviromental } from './transformToAssetTracker/environmental'
 import { transformToGnss } from './transformToAssetTracker/gnss'
-import { createRoam } from './transformToAssetTracker/roam'
+import { transformToRoam } from './transformToAssetTracker/roam'
 
 export type customObjectValue = Record<string, number | string | boolean>
 export type customObject = Record<string, customObjectValue>
@@ -62,7 +62,7 @@ export const transformation = (
 	const gnss = transformToGnss(location, serverTime)
 	const cfg = transformToConfig(config as Config_50009)
 	const dev = transformToDevice(deviceObject, serverTime)
-	const roam = createRoam(connectivityMonitoring, serverTime)
+	const roam = transformToRoam(connectivityMonitoring, serverTime)
 
 	if (
 		bat === undefined ||

@@ -1,7 +1,7 @@
 import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
-import { createRoam } from './roam'
+import { transformToRoam } from './roam'
 
-describe('createRoam', () => {
+describe('transformToRoam', () => {
 	let serverTime: number
 
 	beforeEach(() => {
@@ -37,6 +37,8 @@ describe('createRoam', () => {
 			ts: 1563968743666, // server timestamp
 		}
 
-		expect(createRoam(connectMonitoring, serverTime)).toMatchObject(expected)
+		expect(transformToRoam(connectMonitoring, serverTime)).toMatchObject(
+			expected,
+		)
 	})
 })
