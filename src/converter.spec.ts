@@ -312,12 +312,12 @@ describe('converter', () => {
 			ts: 1563968743666,
 		}
 
-		const batery = {
+		const battery = {
 			v: 80,
 			ts: 1476186613,
 		}
 
-		const enviromental = {
+		const environmental = {
 			v: {
 				temp: 15,
 				hum: 30,
@@ -342,8 +342,8 @@ describe('converter', () => {
 			cfg: config,
 			dev: device,
 			roam: roamingInfo,
-			bat: batery,
-			env: enviromental,
+			bat: battery,
+			env: environmental,
 			gnss: gnss,
 		}
 
