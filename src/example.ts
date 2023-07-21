@@ -245,7 +245,29 @@ const deviceTwin: deviceTwin = {
 					},
 				},
 			},
-			$metadata: {},
+			$metadata: {
+				lwm2m: {
+					'3347': {
+						'0': {
+							'5501': {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+								value: {
+									$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+								},
+							},
+							'5750': {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+								value: {
+									$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+								},
+							},
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						},
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+			},
 			$version: 31,
 		},
 	},
