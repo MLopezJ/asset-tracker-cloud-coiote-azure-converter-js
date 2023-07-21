@@ -8,16 +8,15 @@ export const checkResource = (
 	isRequired: boolean,
 ): boolean => {
 	// if input is a list
-	if ((input as list).attributes !== undefined) {
-		const list: attribute = input as any
-
-		if (Number(list.attributes.dim) <= 0 && isRequired === true) return false
+	if ((input as attribute).attributes !== undefined) {
+		if (Number((input as attribute).attributes.dim) <= 0 && isRequired === true)
+			return false
 
 		return true
 	}
 
 	// if input is not a list
-	if (input.value === undefined && isRequired === true) return false
+	if ((input as value).value === undefined && isRequired === true) return false
 
 	return true
 }

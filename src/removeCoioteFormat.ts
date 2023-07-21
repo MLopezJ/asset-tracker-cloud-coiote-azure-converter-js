@@ -1,6 +1,6 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import type { orderObjects } from './group'
-import { setCustomFormat } from './utils/setCustomFormat'
+import { customObject, setCustomFormat } from './utils/setCustomFormat'
 import { setLwM2MFormat } from './utils/setLwM2MFormat'
 
 /**
@@ -8,7 +8,7 @@ import { setLwM2MFormat } from './utils/setLwM2MFormat'
  */
 export const removeCoioteFormat = (
 	input: orderObjects,
-): { lwm2m: LwM2MDocument; customObjects: any } => {
+): { lwm2m: LwM2MDocument; customObjects: customObject } => {
 	const lwm2m = setLwM2MFormat(input.lwm2m)
 	const customObjects = setCustomFormat(input.customObjects)
 
