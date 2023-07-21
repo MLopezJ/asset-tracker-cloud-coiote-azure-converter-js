@@ -1,6 +1,3 @@
-import _ from 'lodash'
-import assign from 'lodash.assign'
-
 import type { instance, value } from '../index'
 import type { customObjectValue } from './setCustomFormat'
 
@@ -46,8 +43,10 @@ const dataCleaning = (rawData: instance): customObjectValue[][] => {
  * Build expected struct
  */
 const buildStruct = (input: customObjectValue[][]) =>
-	input.reduce((previous, current) => {
-		const result = assign.apply(_, current as any)
-		previous.push(result)
-		return previous
+	input.reduce((array, current) => {
+		const obj = current.reduce((p, c) => {
+			return { ...p, ...c }
+		}, {})
+		array.push(obj)
+		return array
 	}, [])
