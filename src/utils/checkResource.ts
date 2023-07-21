@@ -1,4 +1,4 @@
-import type { attribute, list, value } from '../index'
+import type { attribute, list, value } from '../converter'
 
 /**
  * If the resource is required it should not be undefined

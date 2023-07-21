@@ -1,4 +1,4 @@
-import type { list, value } from '../index'
+import type { list, value } from '../converter'
 import { checkResource } from '../utils/checkResource'
 import { setDataType } from '../utils/setDataType'
 

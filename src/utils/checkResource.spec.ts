@@ -1,4 +1,4 @@
-import type { value } from 'src/index'
+import type { value } from 'src/converter'
 import { checkResource } from './checkResource'
 
 describe('checkResource', () => {

@@ -1,5 +1,5 @@
 import customObjectsSchema from '../../customObjects.schema.json'
-import type { lwm2mCoiote } from '../index'
+import type { lwm2mCoiote } from '../converter'
 import { convertObjectUsingSchema } from './convertObjectUsingSchema'
 import { removeFormat } from './removeFormat'
 

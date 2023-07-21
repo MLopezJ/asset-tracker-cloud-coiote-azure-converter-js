@@ -1,5 +1,5 @@
 import type { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
-import type { instance } from '../index'
+import type { instance } from '../converter'
 import { convertResourceUsingSchema } from './convertResourceUsingSchema'
 
 type LwM2MArrayInstance = (Record<string, unknown> | undefined)[]

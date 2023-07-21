@@ -1,4 +1,4 @@
-import type { instance, value } from '../index'
+import type { instance, value } from '../converter'
 import type { customObjectValue } from './setCustomFormat'
 
 /**

@@ -20,7 +20,7 @@ export type deviceTwin = {
 	}
 }
 
-export const index = async (
+export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<assetTracker | undefined> => {
 	const input = deviceTwin.properties.reported.lwm2m

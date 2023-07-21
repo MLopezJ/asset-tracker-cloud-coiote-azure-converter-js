@@ -1,5 +1,5 @@
-import type { deviceTwin } from './index'
-import { index } from './index'
+import type { deviceTwin } from './converter'
+import { converter } from './converter'
 
 const deviceTwin: deviceTwin = {
 	properties: {
@@ -251,7 +251,7 @@ const deviceTwin: deviceTwin = {
 	},
 }
 
-const assetTrackerWebAppInput = await index(deviceTwin)
+const assetTrackerWebAppInput = await converter(deviceTwin)
 
 console.log(assetTrackerWebAppInput)
 

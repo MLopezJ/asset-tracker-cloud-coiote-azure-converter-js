@@ -1,4 +1,4 @@
-import type { list, value } from '../index'
+import type { list, value } from '../converter'
 
 /**
  * Remove the key 'value' from input and set expected data type

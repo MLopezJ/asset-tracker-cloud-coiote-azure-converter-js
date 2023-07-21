@@ -1,7 +1,7 @@
-import type { deviceTwin } from './index'
-import { index } from './index'
+import type { deviceTwin } from './converter'
+import { converter } from './converter'
 
-describe('index', () => {
+describe('converter', () => {
 	it(`should transform device twin to expected format`, async () => {
 		// Device Twin object. Main input of process.
 		const coioteAzureLwM2M: deviceTwin = {
@@ -325,6 +325,6 @@ describe('index', () => {
 			gnss: gnss,
 		}
 
-		expect(await index(coioteAzureLwM2M)).toMatchObject(result)
+		expect(await converter(coioteAzureLwM2M)).toMatchObject(result)
 	})
 })
