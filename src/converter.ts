@@ -1,7 +1,7 @@
+import type { AzureReportedData as assetTracker } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { checkLwM2MObjects } from './checkLwM2MObjects'
 import { group } from './group'
 import { removeCoioteFormat } from './removeCoioteFormat'
-import type { assetTracker } from './schemas/AssetTracker'
 import { transformation } from './transform'
 
 export type value = { value: string | number | boolean }

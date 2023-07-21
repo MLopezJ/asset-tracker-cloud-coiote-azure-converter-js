@@ -1,5 +1,5 @@
+import type { RoamingInfoData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
-import type { roam } from 'src/schemas/RoamingInfo'
 
 /**
  * Create roam object expected in Asset Tracker web app
@@ -7,7 +7,7 @@ import type { roam } from 'src/schemas/RoamingInfo'
 export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
 	serverTime: number,
-): roam | undefined => {
+): RoamingInfoData | undefined => {
 	if (
 		connectivityMonitoring[12] === undefined ||
 		connectivityMonitoring[8] === undefined ||

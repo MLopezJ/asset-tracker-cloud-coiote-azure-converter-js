@@ -1,10 +1,10 @@
+import type { ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import type { Config_50009 } from 'src/schemas/Config_50009'
-import type { config } from '../schemas/Config'
 
 /**
  * Transform input into config format
  */
-export const transformToConfig = (input: Config_50009): config => {
+export const transformToConfig = (input: Config_50009): ConfigData => {
 	const act = input[0]
 	const loct = input[1]
 	const actwt = input[2]

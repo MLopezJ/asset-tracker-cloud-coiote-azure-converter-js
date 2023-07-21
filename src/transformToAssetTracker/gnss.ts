@@ -1,5 +1,5 @@
+import type { GNSSData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
-import type { gnss } from 'src/schemas/GNSS'
 
 /**
  * Transform input into GNSS format
@@ -7,7 +7,7 @@ import type { gnss } from 'src/schemas/GNSS'
 export const transformToGnss = (
 	location: Location_6,
 	serverTime: number,
-): gnss | undefined => {
+): GNSSData | undefined => {
 	if (
 		location[3] === undefined ||
 		location[2] === undefined ||

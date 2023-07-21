@@ -1,10 +1,10 @@
+import type { AzureReportedData as assetTracker } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	Barometer_3315_urn,
 	Device_3_urn,
 	Humidity_3304_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { assetTracker } from '../schemas/AssetTracker'
 import type { objects } from '../transform'
 import { transformToBattery } from './battery'
 import { transformToEnvironmental } from './environmental'

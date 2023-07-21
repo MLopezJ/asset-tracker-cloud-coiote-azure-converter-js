@@ -29,6 +29,7 @@
     "azure"
   ],
   "dependencies": {
+    "@nordicsemiconductor/asset-tracker-cloud-docs": "28.5.4",
     "@nordicsemiconductor/lwm2m-types": "2.4.1",
     "ajv": "8.12.0"
   },

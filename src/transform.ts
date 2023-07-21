@@ -1,3 +1,4 @@
+import type { AzureReportedData as assetTracker } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
@@ -7,7 +8,6 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { assetTracker } from './schemas/AssetTracker'
 import type { Config_50009 } from './schemas/Config_50009'
 import { transformToBattery } from './transformToAssetTracker/battery'
 import { transformToConfig } from './transformToAssetTracker/config'

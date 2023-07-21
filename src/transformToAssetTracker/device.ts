@@ -1,5 +1,5 @@
+import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import type { dev } from '../schemas/Device'
 
 /**
  *  create the dev object expected by the Asset Tracker web app
@@ -7,7 +7,7 @@ import type { dev } from '../schemas/Device'
 export const transformToDevice = (
 	device: Device_3,
 	serverTime: number,
-): dev | undefined => {
+): DeviceData | undefined => {
 	const time = device[13] !== undefined ? device[13] : serverTime
 
 	if (
