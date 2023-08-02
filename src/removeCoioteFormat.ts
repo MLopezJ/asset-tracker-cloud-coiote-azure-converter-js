@@ -1,16 +1,52 @@
-import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
-import type { orderObjects } from './group'
-import { customObject, setCustomFormat } from './utils/setCustomFormat'
+import type {
+	ConnectivityMonitoring_4,
+	ConnectivityMonitoring_4_urn,
+	Device_3,
+	Device_3_urn,
+	Humidity_3304,
+	Humidity_3304_urn,
+	Location_6,
+	Location_6_urn,
+	Pressure_3323,
+	Pressure_3323_urn,
+	Temperature_3303,
+	Temperature_3303_urn,
+} from '@nordicsemiconductor/lwm2m-types'
+
+import { assetTrackerObjects, Config_50009_urn } from './getAssetTrackerObjects'
+import type { Config_50009 } from './schemas/Config_50009'
+import { setCustomFormat } from './utils/setCustomFormat'
 import { setLwM2MFormat } from './utils/setLwM2MFormat'
 
+export type AssetTrackerLwM2MFormat = {
+	[ConnectivityMonitoring_4_urn]: ConnectivityMonitoring_4
+	[Device_3_urn]: Device_3
+	[Humidity_3304_urn]: Humidity_3304
+	[Location_6_urn]: Location_6
+	[Pressure_3323_urn]: Pressure_3323
+	[Temperature_3303_urn]: Temperature_3303
+	[Config_50009_urn]: Config_50009
+}
+
 /**
- * Remove coiote format from instances and set the LwM2M format as described in @nordicsemiconductor/lwm2m-types
+ * Remove coiote format from instances and set the LwM2M format as described in each object schema
  */
 export const removeCoioteFormat = (
-	input: orderObjects,
-): { lwm2m: LwM2MDocument; customObjects: customObject } => {
-	const lwm2m = setLwM2MFormat(input.lwm2m)
-	const customObjects = setCustomFormat(input.customObjects)
+	input: assetTrackerObjects,
+): AssetTrackerLwM2MFormat => {
+	const result = Object.entries(input)
+		.map((element) => {
+			const [objectId, value] = element
+			if (objectId === Config_50009_urn) {
+				return setCustomFormat({ [`${objectId}`]: value })
+			}
 
-	return { lwm2m, customObjects }
+			return setLwM2MFormat({ [`${objectId}`]: value })
+		})
+		.reduce((previous, current) => {
+			// make it an object
+			return { ...current, ...previous }
+		}, {})
+
+	return result as AssetTrackerLwM2MFormat
 }
