@@ -6,13 +6,14 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import { Config_50009_urn } from './getAssetTrackerObjects'
 import { transformation } from './transform'
 
 describe('transform', () => {
 	it('should build the expected input of the Asset tracker web app', () => {
 		const serverTime = 1563968743666
-		const input = {
-			lwm2m: {
+		const input = 
+			{
 				[Device_3_urn]: {
 					'0': 'Nordic Semiconductor ASA',
 					'1': 'Thingy:91',
@@ -78,9 +79,7 @@ describe('transform', () => {
 					'11': 0,
 					'12': 12, // LAC = Location Area Code
 				},
-			},
-			customObjects: {
-				'5009': {
+				[Config_50009_urn]: {
 					'0': true,
 					'1': 120,
 					'2': 120,
@@ -92,7 +91,6 @@ describe('transform', () => {
 					'8': 2.5,
 					'9': 0.5,
 				},
-			},
 		}
 
 		const output = {

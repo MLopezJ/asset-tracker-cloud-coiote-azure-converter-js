@@ -8,6 +8,8 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import { Config_50009_urn } from './getAssetTrackerObjects'
+import type { AssetTrackerLwM2MFormat } from './removeCoioteFormat'
 import type { Config_50009 } from './schemas/Config_50009'
 import { transformToBattery } from './transformToAssetTracker/battery'
 import { transformToConfig } from './transformToAssetTracker/config'
@@ -23,16 +25,16 @@ export type objects = {
 }
 
 export const transformation = (
-	input: objects,
+	input: AssetTrackerLwM2MFormat,
 	serverTime: number,
 ): assetTracker | undefined => {
-	const deviceObject = input.lwm2m[Device_3_urn]
-	const temperature = input.lwm2m[Temperature_3303_urn]
-	const humidity = input.lwm2m[Humidity_3304_urn]
-	const pressure = input.lwm2m[Pressure_3323_urn]
-	const location = input.lwm2m[Location_6_urn]
-	const connectivityMonitoring = input.lwm2m[ConnectivityMonitoring_4_urn]
-	const config = input.customObjects['5009']
+	const deviceObject = input[Device_3_urn]
+	const temperature = input[Temperature_3303_urn]
+	const humidity = input[Humidity_3304_urn]
+	const pressure = input[Pressure_3323_urn]
+	const location = input[Location_6_urn]
+	const connectivityMonitoring = input[ConnectivityMonitoring_4_urn]
+	const config = input[Config_50009_urn]
 
 	if (
 		deviceObject === undefined ||
