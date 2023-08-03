@@ -7,32 +7,30 @@ export type customObjectValue = Record<string, number | string | boolean>
 export type customObject = Record<string, customObjectValue>
 
 /**
- * Remove coiote format from custom objects and set format taking custom object schema if it exist
+ * Remove coiote format from custom object and set format taking custom object schema if it exist
  */
-export const setCustomFormat = (objects: lwm2mCoiote[]): customObject =>
-	objects.reduce((previousObjects: customObject, current) => {
-		const urn = Object.keys(current)[0] as string
-		const instances = Object.values(current)[0]
+export const setCustomFormat = (object: lwm2mCoiote): customObject => {
 
-		if (urn === undefined || instances === undefined) {
-			console.error('missing values ', { urn, instances })
-			return {}
-		}
+	const urn = Object.keys(object)[0] as string
+	const instances = Object.values(object)[0]
 
-		const schema =
-			customObjectsSchema.properties[
-				urn as unknown as keyof (typeof customObjectsSchema)['properties']
-			]
+	if (urn === undefined || instances === undefined) {
+		console.error('missing values ', { urn, instances })
+		return {}
+	}
 
-		if (schema === undefined) {
-			return {
-				[`${urn}`]: removeFormat(instances),
-				...previousObjects,
-			} as customObject
-		}
+	const schema =
+		customObjectsSchema.properties[
+			urn as unknown as keyof (typeof customObjectsSchema)['properties']
+		]
 
+	if (schema === undefined) {
 		return {
-			[urn]: convertObjectUsingSchema(instances, schema),
-			...previousObjects,
+			[`${urn}`]: removeFormat(instances),
 		} as customObject
-	}, {})
+	}
+
+	return {
+		[urn]: convertObjectUsingSchema(instances, schema),
+	} as customObject
+}
