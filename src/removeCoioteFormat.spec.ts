@@ -45,7 +45,51 @@ describe('removeCoioteFormat', () => {
 					},
 				},
 			},
-			[ConnectivityMonitoring_4_urn]: {},
+			[ConnectivityMonitoring_4_urn]: {
+				'0': {
+					'0': {
+						value: 6,
+					},
+					'1': {
+						'0': {
+							value: 6,
+						},
+						'1': {
+							value: 7,
+						},
+						attributes: {
+							dim: '2',
+						},
+					},
+					'2': {
+						value: -85,
+					},
+					'3': {
+						value: 23,
+					},
+					'4': {
+						'0': {
+							value: '10.160.120.155',
+						},
+						attributes: {
+							dim: '1',
+						},
+					},
+					'8': {
+						value: 34237196,
+					},
+					'9': {
+						value: 2,
+					},
+					'10': {
+						value: 242,
+					},
+					'12': {
+						value: 12,
+					},
+				},
+				attributes: {},
+			},
 			[Location_6_urn]: {
 				'0': {
 					'0': { value: -43.5723 },
@@ -56,9 +100,54 @@ describe('removeCoioteFormat', () => {
 					'6': { value: 5 },
 				},
 			},
-			[Temperature_3303_urn]: {},
-			[Humidity_3304_urn]: {},
-			[Pressure_3323_urn]: {},
+			[Temperature_3303_urn]: {
+				'0': {
+					'5601': {
+						value: 27.18,
+					},
+					'5602': {
+						value: 27.71,
+					},
+					'5700': {
+						value: 27.18,
+					},
+					'5701': {
+						value: 'Cel',
+					},
+				},
+			},
+			[Humidity_3304_urn]: {
+				'0': {
+					'5601': {
+						value: 23.535,
+					},
+					'5602': {
+						value: 24.161,
+					},
+					'5700': {
+						value: 24.057,
+					},
+					'5701': {
+						value: '%RH',
+					},
+				},
+			},
+			[Pressure_3323_urn]: {
+				'0': {
+					'5601': {
+						value: 101697,
+					},
+					'5602': {
+						value: 101705,
+					},
+					'5700': {
+						value: 10,
+					},
+					'5701': {
+						value: 'Pa',
+					},
+				},
+			},
 			[Config_50009_urn]: {
 				'0': {
 					'0': {
@@ -89,7 +178,7 @@ describe('removeCoioteFormat', () => {
 			},
 		}
 
-		const output = {
+		const expected = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
 				'1': 'Thingy:91',
@@ -100,6 +189,17 @@ describe('removeCoioteFormat', () => {
 				'16': 'UQ',
 				'19': '3.2.1',
 			},
+			[ConnectivityMonitoring_4_urn]: {
+				'0': 6,
+				'1': [6, 7],
+				'2': -85,
+				'3': 23,
+				'4': ['10.160.120.155'],
+				'8': 34237196,
+				'9': 2,
+				'10': 242,
+				'12': 12,
+			},
 			[Location_6_urn]: {
 				'0': -43.5723,
 				'1': 153.2176,
@@ -107,6 +207,30 @@ describe('removeCoioteFormat', () => {
 				'5': 1665149633,
 				'6': 5,
 			},
+			[Temperature_3303_urn]: [
+				{
+					'5601': 27.18,
+					'5602': 27.71,
+					'5700': 27.18,
+					'5701': 'Cel',
+				},
+			],
+			[Humidity_3304_urn]: [
+				{
+					'5601': 23.535,
+					'5602': 24.161,
+					'5700': 24.057,
+					'5701': '%RH',
+				},
+			],
+			[Pressure_3323_urn]: [
+				{
+					'5601': 101697,
+					'5602': 101705,
+					'5700': 10,
+					'5701': 'Pa',
+				},
+			],
 			[Config_50009_urn]: {
 				'0': true,
 				'2': 120,
@@ -119,6 +243,18 @@ describe('removeCoioteFormat', () => {
 			},
 		}
 
-		expect(removeCoioteFormat(input)).toMatchObject(output)
+		const result = removeCoioteFormat(input)
+
+		expect(result[Device_3_urn]).toMatchObject(expected[Device_3_urn])
+		expect(result[ConnectivityMonitoring_4_urn]).toMatchObject(
+			expected[ConnectivityMonitoring_4_urn],
+		)
+		expect(result[Location_6_urn]).toMatchObject(expected[Location_6_urn])
+		expect(result[Temperature_3303_urn]).toMatchObject(
+			expected[Temperature_3303_urn],
+		)
+		expect(result[Humidity_3304_urn]).toMatchObject(expected[Humidity_3304_urn])
+		expect(result[Pressure_3323_urn]).toMatchObject(expected[Pressure_3323_urn])
+		expect(result[Config_50009_urn]).toMatchObject(expected[Config_50009_urn])
 	})
 })
