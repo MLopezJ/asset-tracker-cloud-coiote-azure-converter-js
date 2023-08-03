@@ -1,6 +1,6 @@
 import type { AzureReportedData as assetTracker } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { checkLwM2MObjects } from './checkLwM2MObjects'
-import { group } from './group'
+import { checkLwM2MFormat } from './checkLwM2MFormat'
+import { getAssetTrackerObjects } from './getAssetTrackerObjects'
 import { removeCoioteFormat } from './removeCoioteFormat'
 import { transformation } from './transform'
 
@@ -20,23 +20,33 @@ export type deviceTwin = {
 	}
 }
 
+/**
+ * Main object of the process.
+ * Transform the device twin coming from Azure to the expected input in Asset Tracker web app
+ */
 export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<assetTracker | undefined> => {
 	const input = deviceTwin.properties.reported.lwm2m
 
 	// step # 1
-	const objects = await group(input)
+	const objects = await getAssetTrackerObjects(input)
+
+	if (objects instanceof Error) {
+		throw objects
+	}
 
 	// step # 2
-	const { lwm2m, customObjects } = removeCoioteFormat(objects)
+	const assetTrackerLwM2MFormat = removeCoioteFormat(objects)
 
 	// step # 3
-	const check = checkLwM2MObjects(lwm2m)
-	if (check === false) return undefined
+	const check = checkLwM2MFormat(assetTrackerLwM2MFormat)
+	if (check instanceof Error) {
+		throw check
+	}
 
 	// step # 4
-	const result = transformation({ lwm2m, customObjects }, 1563968743666) //buildAssetTrackerFormat
+	const result = transformation(assetTrackerLwM2MFormat, 1563968743666) //buildAssetTrackerFormat
 
 	return result
 }
