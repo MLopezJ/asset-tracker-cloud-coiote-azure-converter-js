@@ -3,9 +3,9 @@ import {
 	Location_6_urn,
 	LwM2MDocument,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkLwM2MObjects } from './checkLwM2MObjects'
+import { checkLwM2MFormat } from './checkLwM2MFormat'
 
-describe('checkLwM2MObjects', () => {
+describe('checkLwM2MFormat', () => {
 	it('should return true if object has the LwM2M struct', () => {
 		const input = {
 			[Location_6_urn]: {
@@ -16,7 +16,7 @@ describe('checkLwM2MObjects', () => {
 				'6': 5,
 			},
 		}
-		expect(checkLwM2MObjects(input)).toBe(true)
+		expect(checkLwM2MFormat(input)).toBe(true)
 	})
 	it('should return false when the LwM2M object has wrong data type on its resources', () => {
 		const input = {
@@ -32,7 +32,7 @@ describe('checkLwM2MObjects', () => {
 			},
 		}
 		expect(
-			checkLwM2MObjects(input as unknown as Partial<LwM2MDocument>),
+			checkLwM2MFormat(input as unknown as Partial<LwM2MDocument>),
 		).toBeInstanceOf(Error)
 	})
 })

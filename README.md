@@ -583,7 +583,7 @@ Same as before, the input for this step is the output from previous one. In this
 check step, the
 [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used
 to determine if the LwM2M objects follows the expected data format.
-[example](src/checkLwM2MObjects.spec.ts)
+[example](src/checkLwM2MFormat.spec.ts)
 
 ### 4- Transform
 
