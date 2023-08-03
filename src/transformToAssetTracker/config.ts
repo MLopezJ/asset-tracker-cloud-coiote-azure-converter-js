@@ -2,7 +2,9 @@ import type { ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs/p
 import type { Config_50009 } from 'src/schemas/Config_50009'
 
 /**
- * Transform input into config format
+ * Transform Config object into the config object expected by Asset Tracker web app
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/config.md
  */
 export const transformToConfig = (input: Config_50009): ConfigData => {
 	const act = input[0]

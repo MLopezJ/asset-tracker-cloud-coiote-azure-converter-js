@@ -2,7 +2,9 @@ import type { GNSSData } from '@nordicsemiconductor/asset-tracker-cloud-docs/pro
 import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
 
 /**
- * Transform input into GNSS format
+ * Transform Location LwM2M object into the environment object expected by Asset Tracker web app
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/gnss.md
  */
 export const transformToGnss = (
 	location: Location_6,

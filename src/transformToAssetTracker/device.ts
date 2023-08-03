@@ -2,7 +2,9 @@ import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs/p
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
 
 /**
- *  create the dev object expected by the Asset Tracker web app
+ * Transform Device LwM2M object into the device object expected by Asset Tracker web app
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/device.md
  */
 export const transformToDevice = (
 	device: Device_3,

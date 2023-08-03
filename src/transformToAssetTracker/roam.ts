@@ -2,7 +2,9 @@ import type { RoamingInfoData } from '@nordicsemiconductor/asset-tracker-cloud-d
 import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
 
 /**
- * Create roam object expected in Asset Tracker web app
+ * Transform Connectivity Monitoring LwM2M object into the roaming object expected by Asset Tracker web app
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/roaming.md
  */
 export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,

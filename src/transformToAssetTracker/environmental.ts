@@ -6,7 +6,9 @@ import type {
 } from '@nordicsemiconductor/lwm2m-types'
 
 /**
+ * Transform Temperature, Humidity and Pressure LwM2M objects into the environment object expected by Asset Tracker web app
  *
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/environment.md
  */
 export const transformToEnvironmental = (
 	temperature: Temperature_3303,

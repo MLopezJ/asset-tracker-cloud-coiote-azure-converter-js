@@ -2,7 +2,9 @@ import type { BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs/
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
 
 /**
- * Transform input into battery format
+ * Transform Device LwM2M object into the battery object expected by Asset Tracker web app
+ *
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js/blob/saga/documents/battery.md
  */
 export const transformToBattery = (
 	device: Device_3,
