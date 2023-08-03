@@ -1,4 +1,4 @@
-import type { objects } from '../transform'
+import type { objects } from '../buildAssetTrackerFormat'
 import { TransformToAssetTracker } from './assetTracker'
 
 describe('TransformToAssetTracker', () => {

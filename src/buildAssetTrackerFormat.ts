@@ -24,7 +24,7 @@ export type objects = {
 	customObjects: customObject
 }
 
-export const transformation = (
+export const buildAssetTrackerFormat = (
 	input: AssetTrackerLwM2MFormat,
 	serverTime: number,
 ): assetTracker | undefined => {

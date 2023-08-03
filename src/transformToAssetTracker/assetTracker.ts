@@ -5,7 +5,7 @@ import {
 	Humidity_3304_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { objects } from '../transform'
+import type { objects } from '../buildAssetTrackerFormat'
 import { transformToBattery } from './battery'
 import { transformToEnvironmental } from './environmental'
 

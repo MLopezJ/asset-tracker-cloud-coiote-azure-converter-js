@@ -1,8 +1,8 @@
 import type { AzureReportedData as assetTracker } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
+import { buildAssetTrackerFormat } from './buildAssetTrackerFormat'
 import { checkLwM2MFormat } from './checkLwM2MFormat'
 import { getAssetTrackerObjects } from './getAssetTrackerObjects'
 import { removeCoioteFormat } from './removeCoioteFormat'
-import { transformation } from './transform'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value>
@@ -42,16 +42,19 @@ export const converter = async (
 	}
 
 	// step # 2
-	const assetTrackerLwM2MFormat = removeCoioteFormat(objects)
+	const assetTrackerLwM2M = removeCoioteFormat(objects)
 
 	// step # 3
-	const check = checkLwM2MFormat(assetTrackerLwM2MFormat)
+	const check = checkLwM2MFormat(assetTrackerLwM2M)
 	if (check instanceof Error) {
 		throw check
 	}
 
 	// step # 4
-	const result = transformation(assetTrackerLwM2MFormat, 1563968743666) //buildAssetTrackerFormat
+	const assetTrackerWebAppInput = buildAssetTrackerFormat(
+		assetTrackerLwM2M,
+		1563968743666,
+	)
 
-	return result
+	return assetTrackerWebAppInput
 }
