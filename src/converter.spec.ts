@@ -1,5 +1,6 @@
 import type { deviceTwin } from './converter'
 import { converter } from './converter'
+import { Config_50009_urn } from './getAssetTrackerObjects'
 
 describe('converter', () => {
 	it(`should transform device twin to expected format`, async () => {
@@ -219,7 +220,7 @@ describe('converter', () => {
 								'11': {},
 							},
 						},
-						'5009': {
+						[Config_50009_urn]: {
 							'0': {
 								'0': {
 									value: true,
