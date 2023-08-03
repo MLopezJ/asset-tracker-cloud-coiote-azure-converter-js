@@ -544,6 +544,8 @@ into the final expected format (Asset Tracker web application input).
 
 ## Notes
 
+### Missing values
+
 There are some values from
 [Asset Tracker Web App](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 whose origin is still missing.
@@ -555,3 +557,14 @@ whose origin is still missing.
 
 more info:
 [data transicion](https://github.com/MLopezJ/nRF-Asset-Tracker-through-Coiote-flow#data-transicion)
+
+### Timestamp Hierarchy
+
+The timestamp values reported in the final output of the process follows the
+next hierarchy in order to select the value to be reported:
+
+1. Resource value of the object related to timestamp
+2. $lastUpdated value from the resource reported in device twin metadata
+3. $lastUpdated value from the instance reported in device twin metadata
+4. $lastUpdated value from the object reported in device twin metadata
+5. $lastUpdated value reported to the metadata object in device twin
