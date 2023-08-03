@@ -384,7 +384,7 @@ between Coiote and Azure.
 ## Expected output
 
 The output is an object with the struct described in the
-[Asset Tracker web application](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
+[Asset Tracker Web Application input](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 
 ```json
 {
@@ -458,71 +458,31 @@ See [example.ts](src/example.ts)
 
 ## Transformation steps
 
-To achieve the expected result, the program executes 4 different processes on
-the data and its structure:
+To achieve the expected result, the program executes 4 processes on the data and
+its structure:
 
-1. Group
-2. Remove Coiote format
-3. Check
-4. Transform
+1. Pick the required objects
+2. Remove Coiote format and set LwM2M format
+3. Check LwM2M format
+4. Build the Asset Tracker Web App expected input
 
-### 1- Group
+### 1- Pick required objects
 
-Split the input data in 2 groups:
+In order to build the Asset Tracker Web App expected input, there is required
+the following objects:
 
-- LwM2M objects
-- Custom objects.
+| ID    | Name                    | Required in                                                    |
+| ----- | ----------------------- | -------------------------------------------------------------- |
+| 3     | Device                  | [Battery](documents/battery.md), [Device](documents/device.md) |
+| 4     | Connectivity Monitoring | [Roaming](documents/roaming.md)                                |
+| 6     | Location                | [GNSS](documents/gnss.md)                                      |
+| 3303  | Temperature             | [Environment](documents/environment.md)                        |
+| 3304  | Humidity                | [Environment](documents/environment.md)                        |
+| 3323  | Pressure                | [Environment](documents/environment.md)                        |
+| 50009 | Config                  | [Config](documents/config.md)                                  |
 
-The [LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is
-used to determinate if the object is LwM2M type.
-
-```ts
-const input = {
-  "6": {
-    "0": {
-      "0": { value: -43.5723 },
-      "1": { value: 153.2176 },
-      "2": { value: 2 },
-      "3": {},
-    },
-  },
-  "50009": {
-    "0": {
-      "0": { value: true },
-      "2": { value: 120 },
-      "3": { value: 600 },
-    },
-  },
-};
-
-const output = {
-  lwm2m: [
-    {
-      [Location_6_urn]: {
-        "0": {
-          "0": { value: -43.5723 },
-          "1": { value: 153.2176 },
-          "2": { value: 2 },
-          "3": {},
-        },
-      },
-    },
-  ],
-  customObjects: [
-    {
-      "50009": {
-        "0": {
-          "0": { value: true },
-          "2": { value: 120 },
-          "3": { value: 600 },
-        },
-      },
-    },
-  ],
-};
-```
-
-More examples: [tests](src/group.spec.ts)
+Those structures are selected from the input and the rest of objects are
+ignored.
 
 ### 2- Remove Coiote format
 
@@ -531,9 +491,7 @@ removed from the objects and a new object is built using the json schema of it
 as reference.
 
 ```ts
-const input = {
-  lwm2m: [
-    {
+const input =  {
       [Location_6_urn]: {
         "0": {
           "0": { value: -43.5723 },
@@ -543,41 +501,34 @@ const input = {
         },
       },
     },
-  ],
-  customObjects: [
     {
-      "50009": {
+      [Config_50009_urn]: {
         "0": {
           "0": { value: true },
           "2": { value: 120 },
           "3": { value: 600 },
         },
       },
-    },
-  ],
-};
+    }
 
 const output = {
-  lwm2m: {
-    [Location_6_urn]: {
+  [Location_6_urn]: {
       "0": -43.5723,
       "1": 153.2176,
       "2": 2,
     },
-  },
-  customObjects: {
-    "50009": {
+   [Config_50009_urn]: {
       "0": true,
       "2": 120,
       "3": 600,
     },
-  },
 };
 ```
 
-More examples: [tests](src/removeCoioteFormat.spec.ts)
+The last code was a minimalist example of the process. More examples in
+[tests](src/removeCoioteFormat.spec.ts)
 
-### 3- Check
+### 3- Check LwM2M format
 
 Same as before, the input for this step is the output from previous one. In this
 check step, the
@@ -585,16 +536,16 @@ check step, the
 to determine if the LwM2M objects follows the expected data format.
 [example](src/checkLwM2MFormat.spec.ts)
 
-### 4- Transform
+### 4- Build
 
-If the check is successful, the result of step # 2 is used to transform into
-Asset Tracker web application format (final expected format).
+If the check is successful, the result of step # 2 is used to be transformed
+into the final expected format (Asset Tracker web application input).
 [example](src/transform.spec.ts)
 
 ## Notes
 
 There are some values from
-[Asset Tracker web app](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
+[Asset Tracker Web App](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 whose origin is still missing.
 
 - `hdg` from `gnss`
