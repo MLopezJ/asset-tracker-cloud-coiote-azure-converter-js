@@ -32,7 +32,11 @@ export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<assetTracker | undefined> => {
 	const input = deviceTwin.properties.reported.lwm2m
-	// const serverTimestamp = deviceTwin.properties.reported.$metadata.$lastUpdated // default timestamp
+
+	const unixTimestamp = Date.parse(
+		deviceTwin.properties.reported.$metadata.$lastUpdated,
+	)
+	const serverTimestamp = unixTimestamp.valueOf()
 
 	// step # 1
 	const objects = await getAssetTrackerObjects(input)
@@ -53,7 +57,7 @@ export const converter = async (
 	// step # 4
 	const assetTrackerWebAppInput = buildAssetTrackerFormat(
 		assetTrackerLwM2M,
-		1563968743666,
+		serverTimestamp,
 	)
 
 	return assetTrackerWebAppInput

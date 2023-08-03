@@ -311,7 +311,7 @@ describe('converter', () => {
 				ip: ['10.160.120.155'],
 				eest: 7,
 			},
-			ts: 1563968743666,
+			ts: 1688731863032,
 		}
 
 		const battery = {
@@ -325,7 +325,7 @@ describe('converter', () => {
 				hum: 30,
 				atmp: 10,
 			},
-			ts: 1563968743666,
+			ts: 1688731863032,
 		}
 
 		const gnss = {
