@@ -2,13 +2,8 @@ import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToGnss } from './gnss'
 
 describe('transformToGnss', () => {
-	let serverTime: number
-
-	beforeEach(() => {
-		serverTime = 45612456
-	})
-
 	it('should create gnss', () => {
+		const serverTime = 45612456
 		const input: Location_6 = {
 			'0': -43.5723,
 			'1': 153.2176,
@@ -32,6 +27,7 @@ describe('transformToGnss', () => {
 	})
 
 	it('should create gnss using server time', () => {
+		const serverTime = 45612456
 		const input: Location_6 = {
 			'0': -43.5723,
 			'1': 153.2176,

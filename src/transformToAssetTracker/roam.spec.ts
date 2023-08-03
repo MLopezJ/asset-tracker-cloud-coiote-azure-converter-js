@@ -2,13 +2,8 @@ import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToRoam } from './roam'
 
 describe('transformToRoam', () => {
-	let serverTime: number
-
-	beforeEach(() => {
-		serverTime = 1563968743666
-	})
-
 	it('should create roam object', () => {
+		const serverTime = 1563968743666
 		const connectMonitoring: ConnectivityMonitoring_4 = {
 			'0': 6, // Network Bearer
 			'1': 6,

@@ -2,13 +2,8 @@ import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToDevice } from './device'
 
 describe('transformToDevice', () => {
-	let serverTime: number
-
-	beforeEach(() => {
-		serverTime = 12345677
-	})
-
 	it('should create device', () => {
+		const serverTime = 12345677
 		const input: Device_3 = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',
@@ -34,6 +29,7 @@ describe('transformToDevice', () => {
 	})
 
 	it('should create device with server timestamp', () => {
+		const serverTime = 12345677
 		const input: Device_3 = {
 			'0': 'Nordic Semiconductor ASA',
 			'1': 'Thingy:91',

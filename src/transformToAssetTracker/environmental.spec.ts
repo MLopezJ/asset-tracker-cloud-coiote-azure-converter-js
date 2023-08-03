@@ -1,13 +1,8 @@
 import { transformToEnvironmental } from './environmental'
 
 describe('transformToEnvironmental', () => {
-	let serverTime: number
-
-	beforeEach(() => {
-		serverTime = 45612456
-	})
-
 	it('should create Env with LwM2M objects', () => {
+		const serverTime = 45612456
 		const temperature = [{ '5700': 15 }]
 		const humidity = [{ '5700': 30 }]
 		const barometer = [
@@ -34,6 +29,7 @@ describe('transformToEnvironmental', () => {
 	})
 
 	it('should return undefined if Environmental values are not found in LwM2M objects', () => {
+		const serverTime = 45612456
 		const temperature = [{ '5700': 15 }]
 		const humidity = [{}]
 		const barometer = [
