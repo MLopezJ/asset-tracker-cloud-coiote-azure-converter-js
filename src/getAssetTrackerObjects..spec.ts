@@ -7,6 +7,7 @@ import {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import {
+	Config_50009_urn,
 	getAssetTrackerObjects,
 	requiredAssetTrackerObjects,
 	type assetTrackerObjects,
@@ -148,7 +149,7 @@ describe('getAssetTrackerObjects', () => {
 			[Temperature_3303_urn]: {},
 			[Humidity_3304_urn]: {},
 			[Pressure_3323_urn]: {},
-			'50009': {},
+			[Config_50009_urn]: {},
 		}
 
 		const result = await getAssetTrackerObjects(input)
@@ -164,11 +165,8 @@ describe('getAssetTrackerObjects', () => {
 		] as keyof assetTrackerObjects
 
 		// All objects from the expected output should exist in the result
-		const check = result.filter((element) => {
-			const key = Object.keys(element)[0]
-			return key === requiredAssetTrackerObjectKey
-		})
-
-		expect(check.length).toBe(1)
+		expect(
+			(result as assetTrackerObjects)[`${requiredAssetTrackerObjectKey}`],
+		).not.toBe(undefined)
 	})
 })

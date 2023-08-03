@@ -7,9 +7,10 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { lwm2mCoiote } from './converter'
+import type { instance, lwm2mCoiote } from './converter'
 
 // list of objects needed to build Asset Tracker object
+export const Config_50009_urn = '50009'
 export const requiredAssetTrackerObjects = [
 	ConnectivityMonitoring_4_urn,
 	Device_3_urn,
@@ -17,17 +18,17 @@ export const requiredAssetTrackerObjects = [
 	Location_6_urn,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
-	'50009', // Config
+	Config_50009_urn, // Config
 ]
 
 export type assetTrackerObjects = {
-	ConnectivityMonitoring_4_urn: Record<string | number | symbol, unknown>
-	Device_3_urn: Record<string | number | symbol, unknown>
-	Humidity_3304_urn: Record<string | number | symbol, unknown>
-	Location_6_urn: Record<string | number | symbol, unknown>
-	Pressure_3323_urn: Record<string | number | symbol, unknown>
-	Temperature_3303_urn: Record<string | number | symbol, unknown>
-	'50009': Record<string | number | symbol, unknown>
+	[ConnectivityMonitoring_4_urn]: instance
+	[Device_3_urn]: instance
+	[Humidity_3304_urn]: instance
+	[Location_6_urn]: instance
+	[Pressure_3323_urn]: instance
+	[Temperature_3303_urn]: instance
+	[Config_50009_urn]: instance
 }
 
 /**
@@ -37,20 +38,30 @@ export type assetTrackerObjects = {
  */
 export const getAssetTrackerObjects = async (
 	input: lwm2mCoiote,
-): Promise<assetTrackerObjects[]> => {
-	const objects = []
+): Promise<assetTrackerObjects | Error> => {
+	const requiredObjects = Object.entries(input).map(async (element) => {
+		const [objectId, value] = element
 
-	for (const [objectId, value] of Object.entries(input)) {
 		const urn = await getURN(objectId)
 
 		if (urn === undefined) {
 			if (requiredAssetTrackerObjects.includes(objectId) === true)
-				objects.push({ [`${objectId}`]: value })
+				return { [`${objectId}`]: value }
 		} else {
 			if (requiredAssetTrackerObjects.includes(urn) === true)
-				objects.push({ [`${urn}`]: value })
+				return { [`${urn}`]: value }
 		}
-	}
+		return undefined
+	})
 
-	return objects as assetTrackerObjects[]
+	return Promise.all(requiredObjects)
+		.then((objects) => {
+			return objects
+				.filter((obj) => obj !== undefined) // remove empty values
+				.reduce((previous, current) => {
+					// make it an object
+					return { ...current, ...previous }
+				}, {}) as assetTrackerObjects
+		})
+		.catch((err) => Error(err))
 }
