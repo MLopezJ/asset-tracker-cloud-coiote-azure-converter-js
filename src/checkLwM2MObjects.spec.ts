@@ -31,8 +31,8 @@ describe('checkLwM2MObjects', () => {
 				'19': '3.2.1',
 			},
 		}
-		expect(checkLwM2MObjects(input as unknown as Partial<LwM2MDocument>)).toBe(
-			false,
-		)
+		expect(
+			checkLwM2MObjects(input as unknown as Partial<LwM2MDocument>),
+		).toBeInstanceOf(Error)
 	})
 })

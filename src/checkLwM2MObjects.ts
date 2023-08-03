@@ -4,13 +4,12 @@ import { validate } from '@nordicsemiconductor/lwm2m-types'
 /**
  * Check if input follows the expected data format described by @nordicsemiconductor/lwm2m-types lib
  */
-export const checkLwM2MObjects = (input: Partial<LwM2MDocument>): boolean => {
+export const checkLwM2MObjects = (
+	input: Partial<LwM2MDocument>,
+): true | Error => {
 	const maybeValidLwM2M = validate(input)
-	let check = true
 	if ('errors' in maybeValidLwM2M) {
-		console.error(maybeValidLwM2M.errors)
-		check = false
+		return Error(JSON.stringify(maybeValidLwM2M.errors))
 	}
-
-	return check
+	return true
 }
