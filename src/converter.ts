@@ -16,7 +16,11 @@ export type lwm2mCoiote = Record<objectId, instance>
 export type deviceTwin = {
 	properties: {
 		desired: unknown
-		reported: { lwm2m: lwm2mCoiote; $metadata: unknown; $version: number }
+		reported: {
+			lwm2m: lwm2mCoiote
+			$metadata: { $lastUpdated: string; lwm2m: unknown }
+			$version: number
+		}
 	}
 }
 
@@ -28,6 +32,7 @@ export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<assetTracker | undefined> => {
 	const input = deviceTwin.properties.reported.lwm2m
+	// const serverTimestamp = deviceTwin.properties.reported.$metadata.$lastUpdated // default timestamp
 
 	// step # 1
 	const objects = await getAssetTrackerObjects(input)

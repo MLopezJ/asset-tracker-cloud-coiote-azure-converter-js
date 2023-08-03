@@ -250,6 +250,7 @@ describe('converter', () => {
 						},
 					},
 					$metadata: {
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
 						lwm2m: {
 							'3347': {
 								'0': {
