@@ -145,6 +145,9 @@ describe('converter', () => {
 								'5700': {
 									value: 30,
 								},
+								'5518': {
+									value: 167318632,
+								},
 							},
 						},
 						'3323': {
@@ -325,7 +328,7 @@ describe('converter', () => {
 				hum: 30,
 				atmp: 10,
 			},
-			ts: 1688731863032,
+			ts: 167318632,
 		}
 
 		const gnss = {

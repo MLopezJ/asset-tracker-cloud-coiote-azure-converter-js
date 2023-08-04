@@ -41,9 +41,9 @@ export const TransformToAssetTracker = (
 		temperature,
 		humidity,
 		barometer,
-		1,
+		{} as unknown as metadata,
 	)
-	if (enviromental === undefined) return undefined
+	if (enviromental instanceof Error) return undefined
 
 	const gnss = transformToGnss()
 

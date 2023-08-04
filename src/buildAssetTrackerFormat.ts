@@ -63,7 +63,7 @@ export const buildAssetTrackerFormat = (
 		temperature,
 		humidity,
 		pressure,
-		serverTime,
+		{} as unknown as metadata, // TODO: update
 	)
 	const gnss = transformToGnss(location, serverTime)
 	const cfg = transformToConfig(config as Config_50009)
@@ -72,7 +72,7 @@ export const buildAssetTrackerFormat = (
 
 	if (
 		bat instanceof Error || // TODO: return error
-		env === undefined ||
+		env instanceof Error || // TODO: return error
 		gnss === undefined ||
 		cfg === undefined ||
 		dev === undefined ||
