@@ -1,5 +1,6 @@
 import type { BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
+import { Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import { getTimestamp, type metadata } from '../utils/getTimestamp'
 
 /**
  * Transform Device LwM2M object into the battery object expected by Asset Tracker web app
@@ -8,14 +9,18 @@ import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
  */
 export const transformToBattery = (
 	device: Device_3,
-	serverTime: number,
-): BatteryData | undefined => {
+	deviceTwinMetadata: metadata,
+): BatteryData | Error => {
 	const value = typeof device[7] === 'object' ? device[7][0] : device[7]
-	const time = device[13] !== undefined ? device[13] : serverTime
+	const time =
+		device[13] !== undefined
+			? device[13]
+			: getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
+
+	if (time instanceof Error) return time
 
 	if (value === undefined) {
-		console.log('Power source voltage is undefined')
-		return undefined
+		return Error(`Power source voltage is undefined: ${value}`)
 	}
 
 	return {

@@ -5,6 +5,7 @@ import {
 	Humidity_3304_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import type { metadata } from 'src/utils/getTimestamp'
 import type { objects } from '../buildAssetTrackerFormat'
 import { transformToBattery } from './battery'
 import { transformToEnvironmental } from './environmental'
@@ -33,8 +34,8 @@ export const TransformToAssetTracker = (
 
 	const roamingInfo = transformToRoamingInfo()
 
-	const batery = transformToBattery(deviceObject, 1)
-	if (batery === undefined) return undefined
+	const batery = transformToBattery(deviceObject, {} as unknown as metadata)
+	if (batery instanceof Error) return undefined
 
 	const enviromental = transformToEnvironmental(
 		temperature,

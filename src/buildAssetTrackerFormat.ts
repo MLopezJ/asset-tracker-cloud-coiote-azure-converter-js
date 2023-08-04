@@ -17,6 +17,7 @@ import { transformToDevice } from './transformToAssetTracker/device'
 import { transformToEnvironmental } from './transformToAssetTracker/environmental'
 import { transformToGnss } from './transformToAssetTracker/gnss'
 import { transformToRoam } from './transformToAssetTracker/roam'
+import type { metadata } from './utils/getTimestamp'
 import type { customObject } from './utils/setCustomFormat'
 
 export type objects = {
@@ -57,7 +58,7 @@ export const buildAssetTrackerFormat = (
 		return undefined
 	}
 
-	const bat = transformToBattery(deviceObject, serverTime)
+	const bat = transformToBattery(deviceObject, {} as unknown as metadata) // TODO: update
 	const env = transformToEnvironmental(
 		temperature,
 		humidity,
@@ -70,7 +71,7 @@ export const buildAssetTrackerFormat = (
 	const roam = transformToRoam(connectivityMonitoring, serverTime)
 
 	if (
-		bat === undefined ||
+		bat instanceof Error || // TODO: return error
 		env === undefined ||
 		gnss === undefined ||
 		cfg === undefined ||
