@@ -1,5 +1,6 @@
 import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
+import { Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import { getTimestamp, type metadata } from '../utils/getTimestamp'
 
 /**
  * Transform Device LwM2M object into the device object expected by Asset Tracker web app
@@ -8,22 +9,28 @@ import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
  */
 export const transformToDevice = (
 	device: Device_3,
-	serverTime: number,
-): DeviceData | undefined => {
-	const time = device[13] !== undefined ? device[13] : serverTime
+	deviceTwinMetadata: metadata,
+): DeviceData | Error => {
+	const time =
+		device[13] !== undefined
+			? device[13]
+			: getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
+
+	if (time instanceof Error) return time
 
 	if (
 		device[2] === undefined ||
 		device[3] === undefined ||
 		device[0] === undefined
-	) {
-		console.error('missing values: ', {
-			imei: device[2],
-			modV: device[3],
-			brdV: device[0],
-		})
-		return undefined
-	}
+	)
+		return Error(
+			`missing values: ${{
+				imei: device[2],
+				modV: device[3],
+				brdV: device[0],
+			}}`,
+		)
+
 	const dev = {
 		v: {
 			imei: device[2],

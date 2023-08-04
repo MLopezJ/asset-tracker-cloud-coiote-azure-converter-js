@@ -67,7 +67,7 @@ export const buildAssetTrackerFormat = (
 	)
 	const gnss = transformToGnss(location, {} as unknown as metadata) // TODO: update
 	const cfg = transformToConfig(config as Config_50009)
-	const dev = transformToDevice(deviceObject, serverTime)
+	const dev = transformToDevice(deviceObject, {} as unknown as metadata) // TODO: update
 	const roam = transformToRoam(connectivityMonitoring, serverTime)
 
 	if (
@@ -75,7 +75,7 @@ export const buildAssetTrackerFormat = (
 		env instanceof Error || // TODO: return error
 		gnss instanceof Error || // TODO: return error
 		cfg === undefined ||
-		dev === undefined ||
+		dev instanceof Error || // TODO: return error
 		roam === undefined
 	) {
 		console.error('missing values: ', {
