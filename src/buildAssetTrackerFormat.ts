@@ -65,7 +65,7 @@ export const buildAssetTrackerFormat = (
 		pressure,
 		{} as unknown as metadata, // TODO: update
 	)
-	const gnss = transformToGnss(location, serverTime)
+	const gnss = transformToGnss(location, {} as unknown as metadata) // TODO: update
 	const cfg = transformToConfig(config as Config_50009)
 	const dev = transformToDevice(deviceObject, serverTime)
 	const roam = transformToRoam(connectivityMonitoring, serverTime)
@@ -73,7 +73,7 @@ export const buildAssetTrackerFormat = (
 	if (
 		bat instanceof Error || // TODO: return error
 		env instanceof Error || // TODO: return error
-		gnss === undefined ||
+		gnss instanceof Error || // TODO: return error
 		cfg === undefined ||
 		dev === undefined ||
 		roam === undefined

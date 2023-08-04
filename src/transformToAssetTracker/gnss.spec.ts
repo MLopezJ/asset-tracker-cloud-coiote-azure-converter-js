@@ -2,8 +2,26 @@ import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToGnss } from './gnss'
 
 describe('transformToGnss', () => {
+	const deviceTwinMetadata = {
+		$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+		lwm2m: {
+			'3': {
+				'0': {
+					'13': {
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						value: {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						},
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			},
+			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+		},
+	}
+
 	it('should create gnss', () => {
-		const serverTime = 45612456
 		const input: Location_6 = {
 			'0': -43.5723,
 			'1': 153.2176,
@@ -23,16 +41,16 @@ describe('transformToGnss', () => {
 			},
 			ts: 1665149633,
 		}
-		expect(transformToGnss(input, serverTime)).toMatchObject(expected)
+		expect(transformToGnss(input, deviceTwinMetadata)).toMatchObject(expected)
 	})
 
 	it('should create gnss using server time', () => {
-		const serverTime = 45612456
 		const input: Location_6 = {
 			'0': -43.5723,
 			'1': 153.2176,
 			'2': 170.528305,
 			'3': 24.798573,
+			// '5': 1665149633, // timestamp from Location object
 			'6': 0.579327,
 		} as unknown as Location_6
 
@@ -45,8 +63,8 @@ describe('transformToGnss', () => {
 				spd: 0.579327,
 				hdg: 176.12, // ***** origin missing *****
 			},
-			ts: serverTime,
+			ts: 1688731863032,
 		}
-		expect(transformToGnss(input, serverTime)).toMatchObject(expected)
+		expect(transformToGnss(input, deviceTwinMetadata)).toMatchObject(expected)
 	})
 })
