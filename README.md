@@ -567,4 +567,5 @@ next hierarchy in order to select the value to be reported:
 2. $lastUpdated value from the resource reported in device twin metadata
 3. $lastUpdated value from the instance reported in device twin metadata
 4. $lastUpdated value from the object reported in device twin metadata
-5. $lastUpdated value reported to the metadata object in device twin
+5. $lastUpdated value from the LwM2M reported in device twin metadata
+6. $lastUpdated value reported to the metadata object in device twin
