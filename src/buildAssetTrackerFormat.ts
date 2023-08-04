@@ -27,7 +27,7 @@ export type objects = {
 
 export const buildAssetTrackerFormat = (
 	input: AssetTrackerLwM2MFormat,
-	serverTime: number,
+	deviceTwinMetadata: metadata,
 ): assetTracker | undefined => {
 	const deviceObject = input[Device_3_urn]
 	const temperature = input[Temperature_3303_urn]
@@ -58,17 +58,17 @@ export const buildAssetTrackerFormat = (
 		return undefined
 	}
 
-	const bat = transformToBattery(deviceObject, {} as unknown as metadata) // TODO: update
+	const bat = transformToBattery(deviceObject, deviceTwinMetadata) // TODO: update
 	const env = transformToEnvironmental(
 		temperature,
 		humidity,
 		pressure,
-		{} as unknown as metadata, // TODO: update
+		deviceTwinMetadata, // TODO: update
 	)
-	const gnss = transformToGnss(location, {} as unknown as metadata) // TODO: update
+	const gnss = transformToGnss(location, deviceTwinMetadata) // TODO: update
 	const cfg = transformToConfig(config as Config_50009)
-	const dev = transformToDevice(deviceObject, {} as unknown as metadata) // TODO: update
-	const roam = transformToRoam(connectivityMonitoring, serverTime)
+	const dev = transformToDevice(deviceObject, deviceTwinMetadata) // TODO: update
+	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata) // TODO: update
 
 	if (
 		bat instanceof Error || // TODO: return error
@@ -76,7 +76,7 @@ export const buildAssetTrackerFormat = (
 		gnss instanceof Error || // TODO: return error
 		cfg === undefined ||
 		dev instanceof Error || // TODO: return error
-		roam === undefined
+		roam instanceof Error // TODO: return error
 	) {
 		console.error('missing values: ', {
 			bat,

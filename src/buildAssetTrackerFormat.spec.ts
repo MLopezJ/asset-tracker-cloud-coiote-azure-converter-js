@@ -11,7 +11,43 @@ import { Config_50009_urn } from './getAssetTrackerObjects'
 
 describe('transform', () => {
 	it('should build the expected input of the Asset tracker web app', () => {
-		const serverTime = 1563968743666
+		const metadata = {
+			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			lwm2m: {
+				'3': {
+					'0': {
+						'0': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						'3': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						'7': {
+							$lastUpdated: '2023-08-03T12:11:03.0324459Z',
+							value: {
+								// selected value should be this one
+								$lastUpdated: '2023-08-03T12:11:03.0324459Z',
+							},
+						},
+						'13': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			},
+		}
 		const input = {
 			[Device_3_urn]: {
 				'0': 'Nordic Semiconductor ASA',
@@ -147,7 +183,7 @@ describe('transform', () => {
 					ip: '10.160.225.39', // /4/0/4
 					eest: 7, // ***** origin missing *****
 				},
-				ts: 1563968743666, // server timestamp
+				ts: 1688731863032, // server timestamp
 			},
 			firmware: {
 				fwUpdateStatus: 'current',
@@ -156,6 +192,6 @@ describe('transform', () => {
 			},
 		}
 
-		expect(buildAssetTrackerFormat(input, serverTime)).toMatchObject(output)
+		expect(buildAssetTrackerFormat(input, metadata)).toMatchObject(output)
 	})
 })

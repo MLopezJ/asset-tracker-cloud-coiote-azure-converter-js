@@ -3,6 +3,7 @@ import { buildAssetTrackerFormat } from './buildAssetTrackerFormat'
 import { checkLwM2MFormat } from './checkLwM2MFormat'
 import { getAssetTrackerObjects } from './getAssetTrackerObjects'
 import { removeCoioteFormat } from './removeCoioteFormat'
+import type { metadata } from './utils/getTimestamp'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value>
@@ -32,11 +33,8 @@ export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<assetTracker | undefined> => {
 	const input = deviceTwin.properties.reported.lwm2m
-
-	const unixTimestamp = Date.parse(
-		deviceTwin.properties.reported.$metadata.$lastUpdated,
-	)
-	const serverTimestamp = unixTimestamp.valueOf()
+	const deviceTwinMetadata = deviceTwin.properties.reported
+		.$metadata as metadata
 
 	// step # 1
 	const objects = await getAssetTrackerObjects(input)
@@ -57,7 +55,7 @@ export const converter = async (
 	// step # 4
 	const assetTrackerWebAppInput = buildAssetTrackerFormat(
 		assetTrackerLwM2M,
-		serverTimestamp,
+		deviceTwinMetadata,
 	)
 
 	return assetTrackerWebAppInput

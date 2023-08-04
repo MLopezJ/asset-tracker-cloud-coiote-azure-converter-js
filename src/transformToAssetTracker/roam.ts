@@ -1,5 +1,9 @@
 import type { RoamingInfoData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
+import {
+	ConnectivityMonitoring_4,
+	ConnectivityMonitoring_4_urn,
+} from '@nordicsemiconductor/lwm2m-types'
+import { getTimestamp, type metadata } from '../utils/getTimestamp'
 
 /**
  * Transform Connectivity Monitoring LwM2M object into the roaming object expected by Asset Tracker web app
@@ -8,16 +12,31 @@ import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
  */
 export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
-	serverTime: number,
-): RoamingInfoData | undefined => {
+	deviceTwinMetadata: metadata,
+): RoamingInfoData | Error => {
 	if (
 		connectivityMonitoring[12] === undefined ||
 		connectivityMonitoring[8] === undefined ||
 		connectivityMonitoring[10] === undefined ||
 		connectivityMonitoring[9] === undefined
-	) {
-		return undefined
-	}
+	)
+		return Error(
+			`required values are missing: ${{
+				12: connectivityMonitoring[12],
+				8: connectivityMonitoring[8],
+				10: connectivityMonitoring[10],
+				9: connectivityMonitoring[9],
+			}}`,
+		)
+
+	const time = getTimestamp(
+		ConnectivityMonitoring_4_urn,
+		12,
+		deviceTwinMetadata,
+	)
+
+	if (time instanceof Error) return time
+
 	return {
 		v: {
 			band: 3, // ***** origin missing *****
@@ -31,6 +50,6 @@ export const transformToRoam = (
 			ip: connectivityMonitoring[4], // /4/0/4
 			eest: 7, // ***** origin missing *****
 		},
-		ts: serverTime, // server timestamp
+		ts: time,
 	}
 }

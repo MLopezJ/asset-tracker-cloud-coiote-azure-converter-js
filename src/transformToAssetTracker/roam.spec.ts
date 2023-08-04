@@ -2,8 +2,26 @@ import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToRoam } from './roam'
 
 describe('transformToRoam', () => {
+	const deviceTwinMetadata = {
+		$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+		lwm2m: {
+			'4': {
+				'0': {
+					'12': {
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						value: {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+						},
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			},
+			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+		},
+	}
+
 	it('should create roam object', () => {
-		const serverTime = 1563968743666
 		const connectMonitoring: ConnectivityMonitoring_4 = {
 			'0': 6, // Network Bearer
 			'1': 6,
@@ -29,11 +47,11 @@ describe('transformToRoam', () => {
 				ip: '10.160.225.39', // /4/0/4
 				eest: 7, // ***** origin missing *****
 			},
-			ts: 1563968743666, // server timestamp
+			ts: 1688731863032,
 		}
 
-		expect(transformToRoam(connectMonitoring, serverTime)).toMatchObject(
-			expected,
-		)
+		expect(
+			transformToRoam(connectMonitoring, deviceTwinMetadata),
+		).toMatchObject(expected)
 	})
 })
