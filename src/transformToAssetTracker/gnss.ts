@@ -1,6 +1,9 @@
 import type { GNSSData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { Location_6, Location_6_urn } from '@nordicsemiconductor/lwm2m-types'
-import { getTimestamp, type metadata } from '../utils/getTimestamp'
+import {
+	type Location_6,
+	Location_6_urn,
+} from '@nordicsemiconductor/lwm2m-types'
+import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Location LwM2M object into the environment object expected by Asset Tracker web app
@@ -24,10 +27,8 @@ export const transformToGnss = (
 			}}`,
 		)
 
-	const time =
-		location[5] !== undefined
-			? location[5]
-			: getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
+	const time: unknown =
+		location[5] ?? getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
 
 	if (time instanceof Error) return time
 
@@ -40,6 +41,6 @@ export const transformToGnss = (
 			spd: location[6],
 			hdg: 176.12, // ***** origin missing *****
 		},
-		ts: time,
+		ts: time as number,
 	}
 }

@@ -1,9 +1,9 @@
 import type { RoamingInfoData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
-	ConnectivityMonitoring_4,
+	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { getTimestamp, type metadata } from '../utils/getTimestamp'
+import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Connectivity Monitoring LwM2M object into the roaming object expected by Asset Tracker web app

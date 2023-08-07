@@ -16,7 +16,7 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noEmit": true,
-    "verbatimModuleSyntax": false, // TODO: update to true
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
       "@nordicsemiconductor/coiote-azure-converter-js": ["index.d.ts"]

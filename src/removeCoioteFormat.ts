@@ -13,10 +13,13 @@ import type {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 
-import { assetTrackerObjects, Config_50009_urn } from './getAssetTrackerObjects'
+import {
+	type assetTrackerObjects,
+	Config_50009_urn,
+} from './getAssetTrackerObjects.js'
 import type { Config_50009 } from './schemas/Config_50009'
-import { setCustomFormat } from './utils/setCustomFormat'
-import { setLwM2MFormat } from './utils/setLwM2MFormat'
+import { setCustomFormat } from './utils/setCustomFormat.js'
+import { setLwM2MFormat } from './utils/setLwM2MFormat.js'
 
 export type AssetTrackerLwM2MFormat = {
 	[ConnectivityMonitoring_4_urn]: ConnectivityMonitoring_4

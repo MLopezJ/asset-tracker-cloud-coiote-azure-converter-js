@@ -1,11 +1,11 @@
 import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
 import {
 	getTimestamp,
-	instance_metadata,
-	lwm2m_metadata,
-	resource_metadata,
-	value_metadata,
-} from './getTimestamp'
+	type instance_metadata,
+	type lwm2m_metadata,
+	type resource_metadata,
+	type value_metadata,
+} from './getTimestamp.js'
 
 const objectURN = Device_3_urn
 const resourceId = 7

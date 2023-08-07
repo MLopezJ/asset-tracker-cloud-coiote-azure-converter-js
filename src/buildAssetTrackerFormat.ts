@@ -4,19 +4,19 @@ import {
 	Device_3_urn,
 	Humidity_3304_urn,
 	Location_6_urn,
-	LwM2MDocument,
+	type LwM2MDocument,
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { Config_50009_urn } from './getAssetTrackerObjects'
+import { Config_50009_urn } from './getAssetTrackerObjects.js'
 import type { AssetTrackerLwM2MFormat } from './removeCoioteFormat'
 import type { Config_50009 } from './schemas/Config_50009'
-import { transformToBattery } from './transformToAssetTracker/battery'
-import { transformToConfig } from './transformToAssetTracker/config'
-import { transformToDevice } from './transformToAssetTracker/device'
-import { transformToEnvironmental } from './transformToAssetTracker/environmental'
-import { transformToGnss } from './transformToAssetTracker/gnss'
-import { transformToRoam } from './transformToAssetTracker/roam'
+import { transformToBattery } from './transformToAssetTracker/battery.js'
+import { transformToConfig } from './transformToAssetTracker/config.js'
+import { transformToDevice } from './transformToAssetTracker/device.js'
+import { transformToEnvironmental } from './transformToAssetTracker/environmental.js'
+import { transformToGnss } from './transformToAssetTracker/gnss.js'
+import { transformToRoam } from './transformToAssetTracker/roam.js'
 import type { metadata } from './utils/getTimestamp'
 import type { customObject } from './utils/setCustomFormat'
 
@@ -50,7 +50,7 @@ export const buildAssetTrackerFormat = (
 			deviceObject,
 			temperature,
 			humidity,
-			pressure: pressure,
+			pressure,
 			location,
 			connectivityMonitoring,
 			config,

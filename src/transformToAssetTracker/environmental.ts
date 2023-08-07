@@ -1,13 +1,13 @@
 import type { EnvironmentData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
-	Humidity_3304,
+	type Humidity_3304,
 	Humidity_3304_urn,
-	Pressure_3323,
+	type Pressure_3323,
 	Pressure_3323_urn,
-	Temperature_3303,
+	type Temperature_3303,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { getTimestamp, metadata } from '../utils/getTimestamp'
+import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Temperature, Humidity and Pressure LwM2M objects into the environment object expected by Asset Tracker web app
@@ -31,10 +31,10 @@ export const transformToEnvironmental = (
 		? temperature[0]['5518']
 		: undefined
 
-	if (time === undefined && humidity[0] && humidity[0]['5518'] != undefined)
+	if (time === undefined && humidity[0]?.['5518'] != undefined)
 		time = humidity[0]['5518']
 
-	if (time === undefined && pressure[0] && pressure[0]['5518'] != undefined)
+	if (time === undefined && pressure[0]?.['5518'] != undefined)
 		time = pressure[0]['5518']
 
 	if (time === undefined)

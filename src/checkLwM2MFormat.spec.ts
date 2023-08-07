@@ -1,9 +1,9 @@
 import {
 	Device_3_urn,
 	Location_6_urn,
-	LwM2MDocument,
+	type LwM2MDocument,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkLwM2MFormat } from './checkLwM2MFormat'
+import { checkLwM2MFormat } from './checkLwM2MFormat.js'
 
 describe('checkLwM2MFormat', () => {
 	it('should return true if object has the LwM2M struct', () => {

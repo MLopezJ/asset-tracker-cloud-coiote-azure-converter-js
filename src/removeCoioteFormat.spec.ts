@@ -6,8 +6,11 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { assetTrackerObjects, Config_50009_urn } from './getAssetTrackerObjects'
-import { removeCoioteFormat } from './removeCoioteFormat'
+import {
+	type assetTrackerObjects,
+	Config_50009_urn,
+} from './getAssetTrackerObjects.js'
+import { removeCoioteFormat } from './removeCoioteFormat.js'
 
 describe('removeCoioteFormat', () => {
 	it('should build lwm2m format', () => {
