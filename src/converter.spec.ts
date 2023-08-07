@@ -1,6 +1,6 @@
 import type { deviceTwin } from './converter'
-import { converter } from './converter'
-import { Config_50009_urn } from './getAssetTrackerObjects'
+import { converter } from './converter.js'
+import { Config_50009_urn } from './getAssetTrackerObjects.js'
 
 describe('converter', () => {
 	it(`should transform device twin to expected format`, async () => {
@@ -349,7 +349,7 @@ describe('converter', () => {
 			roam: roamingInfo,
 			bat: battery,
 			env: environmental,
-			gnss: gnss,
+			gnss,
 		}
 
 		expect(await converter(coioteAzureLwM2M)).toMatchObject(result)

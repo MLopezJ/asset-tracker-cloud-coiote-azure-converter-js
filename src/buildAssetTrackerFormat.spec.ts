@@ -6,8 +6,8 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { buildAssetTrackerFormat } from './buildAssetTrackerFormat'
-import { Config_50009_urn } from './getAssetTrackerObjects'
+import { buildAssetTrackerFormat } from './buildAssetTrackerFormat.js'
+import { Config_50009_urn } from './getAssetTrackerObjects.js'
 
 describe('transform', () => {
 	it('should build the expected input of the Asset tracker web app', () => {

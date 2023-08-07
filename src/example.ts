@@ -1,5 +1,5 @@
 import type { deviceTwin } from './converter'
-import { converter } from './converter'
+import { converter } from './converter.js'
 
 const deviceTwin: deviceTwin = {
 	properties: {

@@ -11,7 +11,7 @@ import {
 	getAssetTrackerObjects,
 	requiredAssetTrackerObjects,
 	type assetTrackerObjects,
-} from './getAssetTrackerObjects'
+} from './getAssetTrackerObjects.js'
 
 describe('getAssetTrackerObjects', () => {
 	it('should pick objects required in Asset Tracker from input and build a new object from it', async () => {

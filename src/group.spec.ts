@@ -2,7 +2,7 @@ import {
 	Barometer_3315_urn,
 	Location_6_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { group } from './group'
+import { group } from './group.js'
 
 describe('Step 1: group', () => {
 	it(`Should split Coiote's Azure LwM2M json in 2 groups`, async () => {
