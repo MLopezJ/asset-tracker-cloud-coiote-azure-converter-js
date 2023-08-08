@@ -1,7 +1,7 @@
 import customObjectsSchema from '../../customObjects.schema.json'
 import type { lwm2mCoiote } from '../converter'
-import { convertObjectUsingSchema } from './convertObjectUsingSchema'
-import { removeFormat } from './removeFormat'
+import { convertObjectUsingSchema } from './convertObjectUsingSchema.js'
+import { removeFormat } from './removeFormat.js'
 
 export type customObjectValue = Record<string, number | string | boolean>
 export type customObject = Record<string, customObjectValue>
@@ -10,7 +10,6 @@ export type customObject = Record<string, customObjectValue>
  * Remove coiote format from custom object and set format taking custom object schema if it exist
  */
 export const setCustomFormat = (object: lwm2mCoiote): customObject => {
-
 	const urn = Object.keys(object)[0] as string
 	const instances = Object.values(object)[0]
 

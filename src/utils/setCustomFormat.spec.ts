@@ -1,84 +1,83 @@
 import type { instance, lwm2mCoiote } from '../converter'
-import { setCustomFormat } from './setCustomFormat'
+import { setCustomFormat } from './setCustomFormat.js'
 
 describe('setCustomFormat', () => {
-	it.each(
+	it.each([
 		[
-			[
-				{
-					'50001': {
+			{
+				'50001': {
+					'0': {
 						'0': {
-							'0': {
-								value: 5,
-							},
-							'1': {
-								value: 128,
-							},
-							'6': {},
-							'7': {
-								value: 403,
-							},
-							'8': {},
-							'9': {},
-							'10': {},
-							'11': {},
+							value: 5,
 						},
+						'1': {
+							value: 128,
+						},
+						'6': {},
+						'7': {
+							value: 403,
+						},
+						'8': {},
+						'9': {},
+						'10': {},
+						'11': {},
 					},
 				},
+			},
 
-				{'50001': {
+			{
+				'50001': {
 					'0': 5,
 					'1': 128,
 					'7': 403,
-				}}
-			],
-			[
-				{
-					'50009': {
+				},
+			},
+		],
+		[
+			{
+				'50009': {
+					'0': {
 						'0': {
-							'0': {
-								value: true,
-							},
-							'2': {
-								value: 120,
-							},
-							'3': {
-								value: 600,
-							},
-							'4': {
-								value: 7200,
-							},
-							'1': {
-								value: 120,
-							},
-							'5': {
-								value: 8.5,
-							},
-							'8': {
-								value: 2.5,
-							},
-							'9': {
-								value: 0.5,
-							},
+							value: true,
+						},
+						'2': {
+							value: 120,
+						},
+						'3': {
+							value: 600,
+						},
+						'4': {
+							value: 7200,
+						},
+						'1': {
+							value: 120,
+						},
+						'5': {
+							value: 8.5,
+						},
+						'8': {
+							value: 2.5,
+						},
+						'9': {
+							value: 0.5,
 						},
 					},
 				},
-				{
-					'50009': {
-						'0': true,
-						'2': 120,
-						'3': 600,
-						'4': 7200,
-						'1': 120,
-						'5': 8.5,
-						'8': 2.5,
-						'9': 0.5,
-					}
-				}
-
-			]
-		]
-	)('should build custom format for object: %s', (input, expected) => {
+			},
+			{
+				'50009': {
+					'0': true,
+					'2': 120,
+					'3': 600,
+					'4': 7200,
+					'1': 120,
+					'5': 8.5,
+					'8': 2.5,
+					'9': 0.5,
+				},
+			},
+		],
+	])('should build custom format for object: %s', (input, expected) => {
 		expect(setCustomFormat(input)).toMatchObject(expected)
 	})
 
