@@ -594,7 +594,6 @@ describe('converter', () => {
 		try {
 			await converter(coioteAzureLwM2M)
 		} catch (e: any) {
-			console.log(e.message)
 			expect(e.message).not.toBe(undefined)
 		}
 	})
@@ -839,7 +838,6 @@ describe('converter', () => {
 		try {
 			await converter(coioteAzureLwM2M)
 		} catch (e: any) {
-			console.log(e.message)
 			expect(e.message).not.toBe(undefined)
 		}
 	})
@@ -1124,7 +1122,6 @@ describe('converter', () => {
 		try {
 			await converter(coioteAzureLwM2M)
 		} catch (e: any) {
-			console.log(e.message)
 			expect(e.message).not.toBe(undefined)
 		}
 	})
