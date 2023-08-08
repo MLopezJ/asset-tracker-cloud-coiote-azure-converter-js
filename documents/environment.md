@@ -18,4 +18,4 @@
 | temp  | Temperature reading from external sensor                 | number  |               |         | Yes      |
 | hum   | Humidity reading from external sensor                    | number  | 1             | 100     | Yes      |
 | atmp  | Atmospheric pressure reading from external sensor in kPa | number  | 0             |         | Yes      |
-| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 | Yes     |
+| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 |         | Yes      |

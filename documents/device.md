@@ -20,4 +20,4 @@
 | iccid | SIM ICCID                                                | string  | 19            | 20         | ["89450421180216216095"] | Yes      |
 | modV  | Modem Firmware Version                                   | string  | 1             |            | ["mfw_nrf9160_1.0.0"]    | Yes      |
 | brdV  | Board Version                                            | string  | 1             |            | ["thingy91_nrf9160"]     | Yes      |
-| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 | Yes        |
+| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 |            |                          | Yes      |

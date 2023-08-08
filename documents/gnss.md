@@ -24,4 +24,4 @@
 | alt   | Altitude above WGS-84 ellipsoid in meters                | number  |               |         | Yes      |
 | spd   | Horizontal speed in meters                               | number  | 0             |         | Yes      |
 | hdg   | Heading of movement in degrees                           | number  | 0             | 360     | Yes      |
-| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 | Yes     |
+| ts    | Timestamp as Unix epoch with millisecond precision (UTC) | integer | 1234567890123 |         | Yes      |
