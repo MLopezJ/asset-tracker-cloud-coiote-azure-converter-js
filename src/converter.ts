@@ -19,7 +19,7 @@ export type deviceTwin = {
 		desired: unknown
 		reported: {
 			lwm2m: lwm2mCoiote
-			$metadata: { $lastUpdated: string; lwm2m: unknown } // TODO: set LwM2M type
+			$metadata: metadata
 			$version: number
 		}
 	}
@@ -33,8 +33,7 @@ export const converter = async (
 	deviceTwin: deviceTwin,
 ): Promise<assetTracker | undefined> => {
 	const input = deviceTwin.properties.reported.lwm2m
-	const deviceTwinMetadata = deviceTwin.properties.reported
-		.$metadata as metadata
+	const deviceTwinMetadata = deviceTwin.properties.reported.$metadata
 
 	// step # 1
 	const objects = await getAssetTrackerObjects(input)

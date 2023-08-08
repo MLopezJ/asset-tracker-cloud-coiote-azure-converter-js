@@ -580,3 +580,5 @@ next hierarchy in order to select the value to be reported:
 4. $lastUpdated value from the object reported in device twin metadata
 5. $lastUpdated value from the LwM2M reported in device twin metadata
 6. $lastUpdated value reported to the metadata object in device twin
+
+[device twin metadata](src/utils/getTimestamp.ts) type
