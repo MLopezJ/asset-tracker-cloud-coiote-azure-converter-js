@@ -1,5 +1,5 @@
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
-import { transformToDevice } from './device'
+import { transformToDevice } from './device.js'
 
 describe('transformToDevice', () => {
 	const deviceTwinMetadata = {

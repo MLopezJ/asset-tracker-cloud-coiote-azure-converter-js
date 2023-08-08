@@ -1,5 +1,5 @@
 import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
-import { transformToRoam } from './roam'
+import { transformToRoam } from './roam.js'
 
 describe('transformToRoam', () => {
 	const deviceTwinMetadata = {

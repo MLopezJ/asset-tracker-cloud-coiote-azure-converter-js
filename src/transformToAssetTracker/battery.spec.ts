@@ -1,4 +1,4 @@
-import { transformToBattery } from './battery'
+import { transformToBattery } from './battery.js'
 
 describe('transformToBattery', () => {
 	const deviceTwinMetadata = {

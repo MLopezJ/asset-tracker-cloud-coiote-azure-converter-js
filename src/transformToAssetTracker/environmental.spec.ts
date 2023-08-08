@@ -1,4 +1,4 @@
-import { transformToEnvironmental } from './environmental'
+import { transformToEnvironmental } from './environmental.js'
 
 describe('transformToEnvironmental', () => {
 	const deviceTwinMetadata = {

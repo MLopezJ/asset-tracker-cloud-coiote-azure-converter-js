@@ -1,5 +1,5 @@
 import type { Config_50009 } from 'src/schemas/Config_50009'
-import { transformToConfig } from './config'
+import { transformToConfig } from './config.js'
 
 describe('transformToConfig', () => {
 	it('should create config', () => {

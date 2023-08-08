@@ -1,5 +1,5 @@
 import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
-import { transformToGnss } from './gnss'
+import { transformToGnss } from './gnss.js'
 
 describe('transformToGnss', () => {
 	const deviceTwinMetadata = {
