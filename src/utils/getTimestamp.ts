@@ -3,10 +3,10 @@ import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 type lastUpdate = { $lastUpdated: string }
 export type value_metadata = { value: lastUpdate; $lastUpdated: string }
 
-type resourceId = number // string
+type resourceId = number // TODO: string
 export type resource_metadata = Record<resourceId, value_metadata> & lastUpdate
 
-type instanceId = number // string
+type instanceId = number // TODO: string
 export type instance_metadata = Record<instanceId, resource_metadata> &
 	lastUpdate
 
