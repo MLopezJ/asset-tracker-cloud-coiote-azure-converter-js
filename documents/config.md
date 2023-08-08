@@ -4,17 +4,17 @@
 
 ## Data
 
-| Property | LwM2M        |
-| -------- | -------      |
-| act      | 50009.0.0    |
-| actwt    | 50009.0.2    | 
-| mvres    | 50009.0.3    | 
-| mvt      | 50009.0.4    | 
-| loct     | 50009.0.1    |
-| accath   | 50009.0.5    |
-| accith   | 50009.0.8    | 
-| accito   | 50009.0.9    | 
-| nod      | **????**     |
+| Property | LwM2M     |
+| -------- | --------- |
+| act      | 50009.0.0 |
+| actwt    | 50009.0.2 |
+| mvres    | 50009.0.3 |
+| mvt      | 50009.0.4 |
+| loct     | 50009.0.1 |
+| accath   | 50009.0.5 |
+| accith   | 50009.0.8 |
+| accito   | 50009.0.9 |
+| nod      | **????**  |
 
 ## Description
 
@@ -29,4 +29,3 @@
 | accith   | Accelerometer inactivity threshold (in m/s²): Maximum absolute value for an accelerometer reading to be considered stillness. Must be smaller than the accelerometer activity threshold. | number           | 0       | 78.4532    | 5.2                                    | Yes      |
 | accito   | Accelerometer inactivity timeout (in s): Hysteresis timeout for stillness detection. Must be smaller than the movement resolution.                                                       | number           | 0.08    | 5242.88    | 1.7                                    | Yes      |
 | nod      | List of modules which should be disabled when sampling data.                                                                                                                             | array of strings |         |            | ["gnss"], ["ncell"], ["gnss", "ncell"] | Yes      |
-

@@ -1,4 +1,4 @@
-import { convertObjectUsingSchema } from './convertObjectUsingSchema'
+import { convertObjectUsingSchema } from './convertObjectUsingSchema.js'
 
 describe('convertObjectUsingSchema', () => {
 	it('should convert object using object type definition schema', () => {

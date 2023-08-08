@@ -1,4 +1,4 @@
-import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance'
+import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
 
 describe('convertToLwM2MArrayInstance', () => {
 	it(`should convert list using array type definition schema`, () => {

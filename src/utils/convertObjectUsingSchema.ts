@@ -1,6 +1,6 @@
 import type { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
 import type { instance } from '../converter'
-import { convertResourceUsingSchema } from '../utils/convertResourceUsingSchema'
+import { convertResourceUsingSchema } from '../utils/convertResourceUsingSchema.js'
 
 type instances = Record<string, unknown> | undefined
 

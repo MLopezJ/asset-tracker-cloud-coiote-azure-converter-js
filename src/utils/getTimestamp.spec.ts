@@ -1,6 +1,6 @@
 import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
 import type { lwm2m_metadata, metadata } from './getTimestamp'
-import { getTimestamp } from './getTimestamp'
+import { getTimestamp } from './getTimestamp.js'
 
 describe('getTimestamp', () => {
 	it(`should get timestamp from RESOURCE's value reported in device twin`, () => {

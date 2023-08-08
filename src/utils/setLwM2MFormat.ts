@@ -1,8 +1,8 @@
 import type { LwM2MDocument } from '@nordicsemiconductor/lwm2m-types'
 import { LwM2MDocumentSchema } from '@nordicsemiconductor/lwm2m-types'
 import type { objectWithUrn } from '../group'
-import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance'
-import { convertToLwM2MInstance } from './convertToLwM2MInstance'
+import { convertToLwM2MArrayInstance } from './convertToLwM2MArrayInstance.js'
+import { convertToLwM2MInstance } from './convertToLwM2MInstance.js'
 
 /**
  * Set LwM2M format using @nordicsemiconductor/lwm2m-types json schema

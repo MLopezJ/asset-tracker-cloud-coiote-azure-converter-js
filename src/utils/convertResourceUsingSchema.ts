@@ -1,6 +1,6 @@
 import type { list, value } from '../converter'
-import { checkResource } from '../utils/checkResource'
-import { setDataType } from '../utils/setDataType'
+import { checkResource } from '../utils/checkResource.js'
+import { setDataType } from '../utils/setDataType.js'
 
 /**
  * Use the schema definition to set new data type to resource

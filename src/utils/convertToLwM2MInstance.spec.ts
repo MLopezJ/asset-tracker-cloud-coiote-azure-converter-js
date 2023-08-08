@@ -1,4 +1,4 @@
-import { convertToLwM2MInstance } from './convertToLwM2MInstance'
+import { convertToLwM2MInstance } from './convertToLwM2MInstance.js'
 
 describe('convertToLwM2MInstance', () => {
 	it('should convert object using object type definition schema', () => {

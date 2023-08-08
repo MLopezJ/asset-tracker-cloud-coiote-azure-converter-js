@@ -1,17 +1,21 @@
-import { setDataType } from "./setDataType"
+import { setDataType } from './setDataType.js'
 
 describe('setDataType', () => {
 	it('should return string if not data type is specified (default option)', () => {
 		expect(setDataType({ value: 1 })).toBe('1')
 	})
 
-    it('should transform input in array', () => {
-        const list = { '0': { value: 8 }, '1': { value: 10 }, attributes: { dim: '2' }}
-        const result = setDataType(list)
-		expect(result).toMatchObject([8,10])
-        if(Array.isArray(result)){
-            expect(result.length).toBe(Number(list.attributes.dim))
-        }
+	it('should transform input in array', () => {
+		const list = {
+			'0': { value: 8 },
+			'1': { value: 10 },
+			attributes: { dim: '2' },
+		}
+		const result = setDataType(list)
+		expect(result).toMatchObject([8, 10])
+		if (Array.isArray(result)) {
+			expect(result.length).toBe(Number(list.attributes.dim))
+		}
 	})
 
 	it.each([

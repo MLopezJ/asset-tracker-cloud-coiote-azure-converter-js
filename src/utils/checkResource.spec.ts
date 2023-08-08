@@ -1,5 +1,5 @@
 import type { value } from 'src/converter'
-import { checkResource } from './checkResource'
+import { checkResource } from './checkResource.js'
 
 describe('checkResource', () => {
 	it('should return true when required resource value is not undefined', () => {

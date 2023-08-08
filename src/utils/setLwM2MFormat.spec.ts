@@ -3,7 +3,7 @@ import {
 	Location_6_urn,
 	LwM2MServer_1_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { setLwM2MFormat } from './setLwM2MFormat'
+import { setLwM2MFormat } from './setLwM2MFormat.js'
 
 describe('setLwM2MFormat', () => {
 	it.each([

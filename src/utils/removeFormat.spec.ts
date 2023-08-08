@@ -1,4 +1,4 @@
-import { removeFormat } from './removeFormat'
+import { removeFormat } from './removeFormat.js'
 
 describe('removeFormat', () => {
 	it.each([
