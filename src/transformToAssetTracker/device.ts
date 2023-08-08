@@ -38,7 +38,5 @@ export const transformToDevice = (
 		ts: time,
 	}
 
-	// TODO: check with https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/Reported.ts#L6
-
 	return dev
 }

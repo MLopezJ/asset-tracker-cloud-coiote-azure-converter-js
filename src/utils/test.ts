@@ -11,6 +11,7 @@ const objectURN = Device_3_urn
 const resourceId = 7
 
 // TODO: this is temporal
+// remove this when solve TODO in src/utils/getTimestamp.ts
 
 const value = {
 	$lastUpdated: '2023-07-07T12:11:03.0324459Z',
