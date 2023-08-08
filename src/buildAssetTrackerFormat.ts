@@ -93,12 +93,3 @@ export const buildAssetTrackerFormat = (
 		},
 	}
 }
-
-/*
-// @throws Error
-	type assertNotAnError = <T>(maybeAnError: Error | T)=> T
-	const notAnError: assertNotAnError= (v) => {
-		if (v instanceof Error) throw v
-		return  v
-	}
-*/
