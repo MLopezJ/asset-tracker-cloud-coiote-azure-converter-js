@@ -20,12 +20,12 @@ export const transformToGnss = (
 		location[6] === undefined
 	)
 		return Error(
-			`required values are missing: ${{
+			`required values are missing: ${JSON.stringify({
 				lat: location[0],
 				alt: location[2],
 				spd: location[6],
-			}}`,
-		)
+			})}`,
+		) // TODO: improve error message
 
 	const time: unknown =
 		location[5] ?? getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
