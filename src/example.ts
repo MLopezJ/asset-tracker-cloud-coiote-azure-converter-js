@@ -216,7 +216,7 @@ const deviceTwin: deviceTwin = {
 						'11': {},
 					},
 				},
-				'5009': {
+				'50009': {
 					'0': {
 						'0': {
 							value: true,
