@@ -381,6 +381,8 @@ between Coiote and Azure.
 }
 ```
 
+full device twin object here: [input.js](documents/input.ts)
+
 ## Expected output
 
 The output is an object with the struct described in the
