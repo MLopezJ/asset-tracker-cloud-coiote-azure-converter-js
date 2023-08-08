@@ -19,7 +19,7 @@ export type deviceTwin = {
 		desired: unknown
 		reported: {
 			lwm2m: lwm2mCoiote
-			$metadata: { $lastUpdated: string; lwm2m: unknown }
+			$metadata: { $lastUpdated: string; lwm2m: unknown } // TODO: set LwM2M type
 			$version: number
 		}
 	}
