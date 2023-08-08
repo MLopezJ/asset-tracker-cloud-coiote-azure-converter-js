@@ -8,6 +8,8 @@ import {
 } from '@nordicsemiconductor/lwm2m-types'
 import { buildAssetTrackerFormat } from './buildAssetTrackerFormat.js'
 import { Config_50009_urn } from './getAssetTrackerObjects.js'
+import type { AssetTrackerLwM2MFormat } from './removeCoioteFormat.js'
+import type { metadata } from './utils/getTimestamp'
 
 describe('transform', () => {
 	it('should build the expected input of the Asset tracker web app', () => {
@@ -61,17 +63,17 @@ describe('transform', () => {
 				'19': '3.2.1',
 			},
 			[ConnectivityMonitoring_4_urn]: {
-				'0': 6, // Network Bearer
+				'0': 6,
 				'1': 6,
-				'2': -97, // Radio Signal Strength
+				'2': -97,
 				'3': 0,
-				'4': '10.160.225.39', // IP Addresses
+				'4': '10.160.225.39',
 				'7': 'ibasis.iot',
-				'8': 33703719, // Cell ID
+				'8': 33703719,
 				'9': 2,
 				'10': 2420,
 				'11': 0,
-				'12': 12, // LAC = Location Area Code
+				'12': 12,
 			},
 			[Location_6_urn]: {
 				'0': -43.5723,
@@ -153,37 +155,37 @@ describe('transform', () => {
 				ts: 1665149633,
 			},
 			cfg: {
-				loct: 120, // /5009/0/1
-				act: true, // /5009/0/0
-				actwt: 120, // /5009/0/2
-				mvres: 600, // /5009/0/3
-				mvt: 7200, // /5009/0/4
-				accath: 8.5, // /5009/0/5
-				accith: 2.5, // /5009/0/8
-				accito: 0.5, // /5009/0/9
+				loct: 120,
+				act: true,
+				actwt: 120,
+				mvres: 600,
+				mvt: 7200,
+				accath: 8.5,
+				accith: 2.5,
+				accito: 0.5,
 				nod: [],
 			},
 			dev: {
 				v: {
-					imei: '351358815340515', // /3/0/2
+					imei: '351358815340515',
 					iccid: '89450421180216216095', // ***** origin missing *****
-					modV: '22.8.1+0', // /3/0/3
-					brdV: 'Nordic Semiconductor ASA', // /3/0/0
+					modV: '22.8.1+0',
+					brdV: 'Nordic Semiconductor ASA',
 				},
-				ts: 1675874731000, // /3/0/13 || server timestamp
+				ts: 1675874731000,
 			},
 			roam: {
 				v: {
 					band: 3, // ***** origin missing *****
-					nw: '6', //'NB-IoT', // /4/0/0
-					rsrp: -97, // 4/0/2
-					area: 12, // /4/0/12
-					mccmnc: 24202, // /4/0/10 & /4/0/9
-					cell: 33703719, // /4/0/8
-					ip: '10.160.225.39', // /4/0/4
+					nw: '6',
+					rsrp: -97,
+					area: 12,
+					mccmnc: 24202,
+					cell: 33703719,
+					ip: '10.160.225.39',
 					eest: 7, // ***** origin missing *****
 				},
-				ts: 1688731863032, // server timestamp
+				ts: 1688731863032,
 			},
 			firmware: {
 				fwUpdateStatus: 'current',
@@ -193,5 +195,115 @@ describe('transform', () => {
 		}
 
 		expect(buildAssetTrackerFormat(input, metadata)).toMatchObject(output)
+	})
+
+	it('should return error if required objects are missing', () => {
+		const metadata = {
+			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			lwm2m: {},
+		} as metadata
+		const input = {} as unknown as AssetTrackerLwM2MFormat
+
+		expect(buildAssetTrackerFormat(input, metadata)).toBeInstanceOf(Error)
+	})
+
+	it('should return error if transformation process went wrong', () => {
+		const metadata = {
+			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			lwm2m: {
+				'3': {
+					'0': {
+						'0': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						'3': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						'7': {
+							$lastUpdated: '2023-08-03T12:11:03.0324459Z',
+							value: {
+								// selected value should be this one
+								$lastUpdated: '2023-08-03T12:11:03.0324459Z',
+							},
+						},
+						'13': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			},
+		}
+		const input = {
+			[Device_3_urn]: {}, // Object 3 is missing
+			[ConnectivityMonitoring_4_urn]: {
+				'0': 6,
+				'1': 6,
+				'2': -97,
+				'3': 0,
+				'4': '10.160.225.39',
+				'7': 'ibasis.iot',
+				'8': 33703719,
+				'9': 2,
+				'10': 2420,
+				'11': 0,
+				'12': 12,
+			},
+			[Location_6_urn]: {
+				'0': -43.5723,
+				'1': 153.2176,
+				'2': 170.528305,
+				'3': 24.798573,
+				'5': 1665149633,
+				'6': 0.579327,
+			},
+			[Temperature_3303_urn]: [
+				{
+					'5518': 1651820400,
+					'5601': 23.51,
+					'5602': 23.51,
+					'5603': -40,
+					'5604': 85,
+					'5700': 24.57,
+					'5701': 'Celsius degrees',
+				},
+			],
+			[Humidity_3304_urn]: [
+				{
+					'5518': 1651820400,
+					'5601': 31.06,
+					'5602': 31.06,
+					'5603': 0,
+					'5604': 100,
+					'5700': 28.93,
+					'5701': '%',
+				},
+			],
+			[Pressure_3323_urn]: [
+				{
+					'5518': 1651820400,
+					'5601': 98.24,
+					'5602': 98.24,
+					'5603': 30,
+					'5604': 110,
+					'5700': 98.23,
+					'5701': 'kPa',
+				},
+			],
+			[Config_50009_urn]: {}, // Object 50009 is missing
+		} as unknown as AssetTrackerLwM2MFormat
+
+		expect(buildAssetTrackerFormat(input, metadata)).toBeInstanceOf(Error)
 	})
 })

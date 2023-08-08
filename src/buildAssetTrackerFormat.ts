@@ -25,69 +25,59 @@ export type objects = {
 	customObjects: customObject
 }
 
+/**
+ * Check and transform input into expected format
+ */
 export const buildAssetTrackerFormat = (
 	input: AssetTrackerLwM2MFormat,
 	deviceTwinMetadata: metadata,
-): assetTracker | undefined => {
-	const deviceObject = input[Device_3_urn]
+): assetTracker | Error => {
+	const device = input[Device_3_urn]
+	if (device === undefined) return Error('Device (3) object is missing')
+
 	const temperature = input[Temperature_3303_urn]
+	if (temperature === undefined)
+		return Error('Temperature (3303) object is missing')
+
 	const humidity = input[Humidity_3304_urn]
+	if (humidity === undefined) return Error('Humidity (3304) object is missing')
+
 	const pressure = input[Pressure_3323_urn]
+	if (pressure === undefined) return Error('Pressure (3323) object is missing')
+
 	const location = input[Location_6_urn]
+	if (location === undefined) return Error('Location (6) object is missing')
+
 	const connectivityMonitoring = input[ConnectivityMonitoring_4_urn]
+	if (connectivityMonitoring === undefined)
+		return Error('Connectivity Monitoring (4) object is missing')
+
 	const config = input[Config_50009_urn]
+	if (config === undefined) return Error('Config (50009) object is missing')
 
-	if (
-		deviceObject === undefined ||
-		temperature === undefined ||
-		humidity === undefined ||
-		pressure === undefined ||
-		location === undefined ||
-		connectivityMonitoring === undefined ||
-		config === undefined
-	) {
-		console.error('missing values: ', {
-			deviceObject,
-			temperature,
-			humidity,
-			pressure,
-			location,
-			connectivityMonitoring,
-			config,
-		})
-		return undefined
-	}
+	const bat = transformToBattery(device, deviceTwinMetadata)
+	if (bat instanceof Error) return bat
 
-	const bat = transformToBattery(deviceObject, deviceTwinMetadata) // TODO: update
 	const env = transformToEnvironmental(
 		temperature,
 		humidity,
 		pressure,
-		deviceTwinMetadata, // TODO: update
+		deviceTwinMetadata,
 	)
-	const gnss = transformToGnss(location, deviceTwinMetadata) // TODO: update
-	const cfg = transformToConfig(config as Config_50009)
-	const dev = transformToDevice(deviceObject, deviceTwinMetadata) // TODO: update
-	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata) // TODO: update
+	if (env instanceof Error) return env
 
-	if (
-		bat instanceof Error || // TODO: return error
-		env instanceof Error || // TODO: return error
-		gnss instanceof Error || // TODO: return error
-		cfg === undefined ||
-		dev instanceof Error || // TODO: return error
-		roam instanceof Error // TODO: return error
-	) {
-		console.error('missing values: ', {
-			bat,
-			env,
-			gnss,
-			cfg,
-			dev,
-			roam,
-		})
-		return undefined
-	}
+	const gnss = transformToGnss(location, deviceTwinMetadata)
+	if (gnss instanceof Error) return gnss
+
+	const cfg = transformToConfig(config as Config_50009)
+	if (cfg === undefined)
+		return Error('Transformation of config is not possible')
+
+	const dev = transformToDevice(device, deviceTwinMetadata)
+	if (dev instanceof Error) return dev
+
+	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata)
+	if (roam instanceof Error) return roam
 
 	return {
 		bat,
@@ -103,3 +93,12 @@ export const buildAssetTrackerFormat = (
 		},
 	}
 }
+
+/*
+// @throws Error
+	type assertNotAnError = <T>(maybeAnError: Error | T)=> T
+	const notAnError: assertNotAnError= (v) => {
+		if (v instanceof Error) throw v
+		return  v
+	}
+*/
