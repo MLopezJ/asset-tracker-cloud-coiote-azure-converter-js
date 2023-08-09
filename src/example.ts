@@ -329,10 +329,5 @@ try {
 		},
 		ts: 1563968743666,
 	},
-	firmware: {
-		fwUpdateStatus: 'current',
-		currentFwVersion: '0.0.0-development',
-		pendingFwVersion: '',
-	},
 }
  */

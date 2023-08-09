@@ -445,11 +445,6 @@ The output is an object with the struct described in the
       "eest": 5 // ***** origin missing *****
     },
     "ts": 1563968743666
-  },
-  "firmware": {
-    "fwUpdateStatus": "current",
-    "currentFwVersion": "0.0.0-development",
-    "pendingFwVersion": ""
   }
 }
 ```

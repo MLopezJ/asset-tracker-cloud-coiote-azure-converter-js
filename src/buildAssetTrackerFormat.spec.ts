@@ -187,11 +187,6 @@ describe('transform', () => {
 				},
 				ts: 1688731863032,
 			},
-			firmware: {
-				fwUpdateStatus: 'current',
-				currentFwVersion: '0.0.0-development',
-				pendingFwVersion: '',
-			},
 		}
 
 		expect(buildAssetTrackerFormat(input, metadata)).toMatchObject(output)

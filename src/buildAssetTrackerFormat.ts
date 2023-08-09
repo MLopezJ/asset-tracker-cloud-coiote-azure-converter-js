@@ -76,10 +76,5 @@ export const buildAssetTrackerFormat = (
 		cfg,
 		dev,
 		roam,
-		firmware: {
-			fwUpdateStatus: 'current',
-			currentFwVersion: '0.0.0-development',
-			pendingFwVersion: '',
-		},
 	}
 }
