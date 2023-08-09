@@ -274,9 +274,12 @@ const deviceTwin: deviceTwin = {
 	},
 }
 
-const assetTrackerWebAppInput = await converter(deviceTwin)
-
-console.log(assetTrackerWebAppInput)
+try {
+	const result = await converter(deviceTwin)
+	console.log(result)
+} catch (error) {
+	console.error('There is an error when trying to convert')
+}
 
 /**
 {

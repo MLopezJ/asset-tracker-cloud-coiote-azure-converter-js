@@ -55,14 +55,3 @@ export const converter = async (
 
 	return assetTrackerWebAppInput
 }
-
-// End user
-/*
-try {
-	const obj = await converter(input)
-} catch (error) {
-	console.error('There is an error when trying to convert')
-	exit(1)
-}
-*/
-// now obj == asset tracker object
