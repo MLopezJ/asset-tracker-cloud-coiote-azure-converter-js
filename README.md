@@ -409,7 +409,7 @@ The output is an object with the struct described in the
       "acc": 24.798573,
       "alt": 170.528305,
       "spd": 0.579327,
-      "hdg": 176.12 // ***** origin missing *****
+      "hdg": 0 // ***** origin missing *****
     },
     "ts": 1563968752991
   },
@@ -442,7 +442,7 @@ The output is an object with the struct described in the
       "mccmnc": 24202,
       "cell": 33703719,
       "ip": "10.81.183.99",
-      "eest": 7 // ***** origin missing *****
+      "eest": 5 // ***** origin missing *****
     },
     "ts": 1563968743666
   },
@@ -454,35 +454,9 @@ The output is an object with the struct described in the
 }
 ```
 
-| Key  | Object tracking                  |
-| ---- | -------------------------------- |
-| bat  | [Link](documents/battery.md)     |
-| env  | [Link](documents/environment.md) |
-| gnss | [Link](documents/battery.md)     |
-| cfg  | [Link](documents/config.md)      |
-| dev  | [Link](documents/device.md)      |
-| roam | [Link](documents/roaming.md)     |
+## Data transition
 
-## Usage
-
-See [example.ts](src/example.ts)
-
-## Transformation steps
-
-To achieve the expected result, the program executes 4 processes on the data and
-its structure:
-
-1. Pick the required objects
-2. Remove Coiote format and set LwM2M format
-3. Check LwM2M format
-4. Build the Asset Tracker Web App expected input
-
-### 1- Pick required objects
-
-In order to build the Asset Tracker Web App expected input, there is required
-the following objects:
-
-| ID                                                                                                                                                | Name                    | Required in                                             |
+| LwM2M                                                                                                                                             | Name                    | Asset Tracker                                           |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------- |
 | [3](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3-1_1.xml)                                                     | Device                  | [bat](documents/battery.md), [dev](documents/device.md) |
 | [4](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/4-1_1.xml)                                                     | Connectivity Monitoring | [roam](documents/roaming.md)                            |
@@ -492,66 +466,18 @@ the following objects:
 | [3323](https://github.com/OpenMobileAlliance/lwm2m-registry/blob/prod/version_history/3323-1_1.xml)                                               | Pressure                | [env](documents/environment.md)                         |
 | [50009](https://github.com/NordicSemiconductor/asset-tracker-cloud-firmware-aws/blob/saga/src/cloud/lwm2m_integration/config_object_descript.xml) | Config                  | [cfg](documents/config.md)                              |
 
-Those structures are selected from the input and the rest of objects are
-ignored.
+## Usage
 
-### 2- Remove Coiote format
-
-The input for this step is the output from last one. Here, the Coiote format is
-removed from the objects and a new object is built using the json schema of it
-as reference.
-
-```ts
-const input =  {
-      [Location_6_urn]: {
-        "0": {
-          "0": { value: -43.5723 },
-          "1": { value: 153.2176 },
-          "2": { value: 2 },
-          "3": {},
-        },
-      },
-    },
-    {
-      [Config_50009_urn]: {
-        "0": {
-          "0": { value: true },
-          "2": { value: 120 },
-          "3": { value: 600 },
-        },
-      },
-    }
-
-const output = {
-  [Location_6_urn]: {
-      "0": -43.5723,
-      "1": 153.2176,
-      "2": 2,
-    },
-   [Config_50009_urn]: {
-      "0": true,
-      "2": 120,
-      "3": 600,
-    },
-};
+```JavaScript
+try {
+	const result = await converter(deviceTwin)
+	console.log(result)
+} catch (error) {
+	console.error('There is an error when trying to convert')
+}
 ```
 
-The last code was a minimalist example of the process. More examples in
-[tests](src/removeCoioteFormat.spec.ts)
-
-### 3- Check LwM2M format
-
-Same as before, the input for this step is the output from previous one. In this
-check step, the
-[LwM2M Types lib](https://github.com/NordicSemiconductor/lwm2m-types-js) is used
-to determine if the LwM2M objects follows the expected data format.
-[example](src/checkLwM2MFormat.spec.ts)
-
-### 4- Build
-
-If the check is successful, the result of step # 2 is used to be transformed
-into the final expected format (Asset Tracker web application input).
-[example](src/transform.spec.ts)
+See [example.ts](src/example.ts)
 
 ## Notes
 
@@ -572,7 +498,7 @@ more info:
 
 ### Default LwM2M version
 
-The default LwM2M version used by this converted is `1.1`.
+The default LwM2M version used by this converter is `1.1`.
 
 [Timestamp Hierarchy](#timestamp-hierarchy) is implemented to catch error
 related to missing timestamp resources in version `1.0`.
