@@ -58,28 +58,16 @@ export const buildAssetTrackerFormat = (
 	if (config === undefined) throw new Error('Config (50009) object is missing')
 
 	const bat = transformToBattery(device, deviceTwinMetadata)
-	if (bat instanceof Error) throw bat
-
 	const env = transformToEnvironmental(
 		temperature,
 		humidity,
 		pressure,
 		deviceTwinMetadata,
 	)
-	if (env instanceof Error) throw env
-
 	const gnss = transformToGnss(location, deviceTwinMetadata)
-	if (gnss instanceof Error) throw gnss
-
 	const cfg = transformToConfig(config as Config_50009)
-	if (cfg === undefined)
-		throw new Error('Transformation of config is not possible')
-
 	const dev = transformToDevice(device, deviceTwinMetadata)
-	if (dev instanceof Error) throw dev
-
 	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata)
-	if (roam instanceof Error) throw roam
 
 	return {
 		bat,

@@ -10,7 +10,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToDevice = (
 	device: Device_3,
 	deviceTwinMetadata: metadata,
-): DeviceData | Error => {
+): DeviceData => {
 	const time = device[13] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
 	if (

@@ -13,7 +13,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
 	deviceTwinMetadata: metadata,
-): RoamingInfoData | Error => {
+): RoamingInfoData => {
 	if (
 		connectivityMonitoring[12] === undefined ||
 		connectivityMonitoring[8] === undefined ||
