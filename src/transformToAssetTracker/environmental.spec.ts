@@ -52,7 +52,7 @@ describe('transformToEnvironmental', () => {
 		).toMatchObject(result)
 	})
 
-	it('should return undefined if Environmental values are not found in LwM2M objects', () => {
+	it('should throw error if Environmental values are not found in LwM2M objects', () => {
 		const temperature = [{ '5700': 15 }]
 		const humidity = [{}] // missing required value
 		const pressure = [
@@ -64,14 +64,14 @@ describe('transformToEnvironmental', () => {
 			},
 		]
 
-		expect(
+		expect(() =>
 			transformToEnvironmental(
 				temperature,
 				humidity as any,
 				pressure,
 				deviceTwinMetadata,
 			),
-		).toBeInstanceOf(Error)
+		).toThrow(Error)
 	})
 
 	it('should follow Timestamp Hierarchy in case timestamp is not found from LwM2M objects', () => {

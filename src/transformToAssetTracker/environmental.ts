@@ -19,15 +19,21 @@ export const transformToEnvironmental = (
 	humidity: Humidity_3304,
 	pressure: Pressure_3323,
 	deviceTwinMetadata: metadata,
-): EnvironmentData | Error => {
+): EnvironmentData => {
 	const temp = temperature[0] ? temperature[0]['5700'] : undefined
 	const hum = humidity[0] ? humidity[0]['5700'] : undefined
 	const atmp = pressure[0] ? pressure[0]['5700'] : undefined
 
 	if (temp === undefined || hum === undefined || atmp === undefined)
-		return Error(`input format is not the expected: ${{ temp, hum, atmp }}`)
+		throw new Error(
+			`input format is not the expected: ${{
+				temperature,
+				humidity,
+				pressure,
+			}}`,
+		)
 
-	let time: number | undefined | Error = temperature[0]
+	let time: number | undefined = temperature[0]
 		? temperature[0]['5518']
 		: undefined
 
@@ -37,14 +43,17 @@ export const transformToEnvironmental = (
 	if (time === undefined && pressure[0]?.['5518'] != undefined)
 		time = pressure[0]['5518']
 
-	if (time === undefined)
-		time = getTimestamp(Temperature_3303_urn, 5518, deviceTwinMetadata)
-	if (time instanceof Error)
-		time = getTimestamp(Humidity_3304_urn, 5518, deviceTwinMetadata)
-	if (time instanceof Error)
-		time = getTimestamp(Pressure_3323_urn, 5518, deviceTwinMetadata)
-
-	if (time instanceof Error) return time
+	if (time === undefined) {
+		try {
+			time = getTimestamp(Temperature_3303_urn, 5518, deviceTwinMetadata)
+		} catch {
+			try {
+				time = getTimestamp(Humidity_3304_urn, 5518, deviceTwinMetadata)
+			} catch {
+				time = getTimestamp(Pressure_3323_urn, 5518, deviceTwinMetadata)
+			}
+		}
+	}
 
 	return {
 		v: {

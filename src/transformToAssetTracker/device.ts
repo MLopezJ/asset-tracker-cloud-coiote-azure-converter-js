@@ -13,14 +13,12 @@ export const transformToDevice = (
 ): DeviceData | Error => {
 	const time = device[13] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
-	if (time instanceof Error) return time
-
 	if (
 		device[2] === undefined ||
 		device[3] === undefined ||
 		device[0] === undefined
 	)
-		return Error(
+		throw new Error(
 			`missing values: ${{
 				imei: device[2],
 				modV: device[3],

@@ -128,11 +128,11 @@ describe('getTimestamp', () => {
 		expect(getTimestamp(objectURN, resourceId, metadata)).toBe(1691248543032)
 	})
 
-	it(`should receive Error when metadata objects is empty`, () => {
+	it(`should throw error when metadata objects is empty`, () => {
 		const objectURN = Device_3_urn
 		const resourceId = 7
 		const metadata = {} as metadata
 
-		expect(getTimestamp(objectURN, resourceId, metadata)).toBeInstanceOf(Error)
+		expect(() => getTimestamp(objectURN, resourceId, metadata)).toThrow(Error)
 	})
 })

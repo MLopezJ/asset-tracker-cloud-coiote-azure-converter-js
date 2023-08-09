@@ -10,15 +10,12 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToBattery = (
 	device: Device_3,
 	deviceTwinMetadata: metadata,
-): BatteryData | Error => {
+): BatteryData => {
 	const value = typeof device[7] === 'object' ? device[7][0] : device[7]
 	const time = device[13] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
-	if (time instanceof Error) return time
-
-	if (value === undefined) {
-		return Error(`Power source voltage is undefined: ${value}`)
-	}
+	if (value === undefined)
+		throw new Error(`Power source voltage (/3/0/7) is undefined. ${device}`)
 
 	return {
 		v: value,

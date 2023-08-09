@@ -25,11 +25,11 @@ export const getTimestamp = (
 	objectURN: string,
 	resourceId: number,
 	metadata: metadata,
-): number | Error => {
+): number => {
 	const { ObjectID } = parseURN(objectURN)
 	let lastUpdated = undefined
 	if (metadata.lwm2m === undefined)
-		return Error(`metadata object does not exist: ${metadata}`)
+		throw new Error(`metadata object does not exist: ${metadata}`)
 
 	const objectMetadata = metadata.lwm2m[ObjectID as unknown as number] // TODO: this make no sense
 	if (objectMetadata !== undefined) {
@@ -72,7 +72,7 @@ export const getTimestamp = (
 	}
 	// metadata
 
-	return Error(`Not possible to select timestamp: ${metadata}`)
+	throw new Error(`Not possible to select timestamp from: ${metadata}`)
 }
 
 /**

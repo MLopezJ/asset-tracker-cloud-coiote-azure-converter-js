@@ -13,24 +13,22 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToGnss = (
 	location: Location_6,
 	deviceTwinMetadata: metadata,
-): GNSSData | Error => {
+): GNSSData => {
 	if (
 		location[3] === undefined ||
 		location[2] === undefined ||
 		location[6] === undefined
 	)
-		return Error(
+		throw new Error(
 			`required values are missing: ${JSON.stringify({
 				lat: location[0],
 				alt: location[2],
 				spd: location[6],
 			})}`,
-		) // TODO: improve error message
+		)
 
-	const time: unknown =
+	const time =
 		location[5] ?? getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
-
-	if (time instanceof Error) return time
 
 	return {
 		v: {
@@ -41,6 +39,6 @@ export const transformToGnss = (
 			spd: location[6],
 			hdg: 176.12, // ***** origin missing *****
 		},
-		ts: time as number,
+		ts: time,
 	}
 }

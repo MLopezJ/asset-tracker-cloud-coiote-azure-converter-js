@@ -52,7 +52,7 @@ describe('transformToBattery', () => {
 			'19': '3.2.1',
 		}
 
-		expect(transformToBattery(device, deviceTwinMetadata)).toBeInstanceOf(Error)
+		expect(() => transformToBattery(device, deviceTwinMetadata)).toThrow(Error)
 	})
 
 	it('should follow Timestamp Hierarchy in case timestamp is not found from Device object', () => {

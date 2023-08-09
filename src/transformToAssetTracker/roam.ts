@@ -20,7 +20,7 @@ export const transformToRoam = (
 		connectivityMonitoring[10] === undefined ||
 		connectivityMonitoring[9] === undefined
 	)
-		return Error(
+		throw new Error(
 			`required values are missing: ${{
 				12: connectivityMonitoring[12],
 				8: connectivityMonitoring[8],
@@ -34,8 +34,6 @@ export const transformToRoam = (
 		12,
 		deviceTwinMetadata,
 	)
-
-	if (time instanceof Error) return time
 
 	return {
 		v: {
