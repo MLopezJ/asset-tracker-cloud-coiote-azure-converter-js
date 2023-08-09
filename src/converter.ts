@@ -45,9 +45,5 @@ export const converter = async (
 		deviceTwinMetadata,
 	)
 
-	if (assetTrackerWebAppInput instanceof Error) {
-		throw assetTrackerWebAppInput
-	}
-
 	return assetTrackerWebAppInput
 }
