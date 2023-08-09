@@ -27,7 +27,7 @@ npm test
 ## Coverage
 
 ```
-npm test --coverage
+npm test -- --coverage
 ```
 
 ## Expected input
