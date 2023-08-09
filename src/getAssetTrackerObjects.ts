@@ -41,8 +41,6 @@ export const getAssetTrackerObjects = async (
 ): Promise<assetTrackerObjects> => {
 	const requiredObjects = Object.entries(input).map(
 		async ([objectId, value]) => {
-			// const [objectId, value] = element
-
 			const urn = await getURN(objectId)
 
 			if (urn === undefined) {
@@ -56,7 +54,6 @@ export const getAssetTrackerObjects = async (
 		},
 	)
 
-	// mix async and promise(then)
 	return (await Promise.all(requiredObjects))
 		.filter((obj) => obj !== undefined) // remove empty values
 		.reduce(
