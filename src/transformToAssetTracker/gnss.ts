@@ -14,6 +14,7 @@ export const transformToGnss = (
 	location: Location_6,
 	deviceTwinMetadata: metadata,
 ): GNSSData => {
+	const defaultHdg = 0
 	if (
 		location[3] === undefined ||
 		location[2] === undefined ||
@@ -37,7 +38,7 @@ export const transformToGnss = (
 			acc: location[3],
 			alt: location[2],
 			spd: location[6],
-			hdg: 176.12, // ***** origin missing *****
+			hdg: defaultHdg, // ***** origin missing *****
 		},
 		ts: time,
 	}

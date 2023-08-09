@@ -11,6 +11,7 @@ export const transformToDevice = (
 	device: Device_3,
 	deviceTwinMetadata: metadata,
 ): DeviceData => {
+	const defaultIccid = '0000000000000000000'
 	const time = device[13] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
 	if (
@@ -29,7 +30,7 @@ export const transformToDevice = (
 	const dev = {
 		v: {
 			imei: device[2],
-			iccid: '89450421180216216095', // ***** origin missing *****
+			iccid: defaultIccid, // ***** origin missing *****
 			modV: device[3],
 			brdV: device[0],
 		},

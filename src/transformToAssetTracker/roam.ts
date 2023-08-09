@@ -14,6 +14,8 @@ export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
 	deviceTwinMetadata: metadata,
 ): RoamingInfoData => {
+	const defaultBand = 1
+	const defaultEest = 5
 	if (
 		connectivityMonitoring[12] === undefined ||
 		connectivityMonitoring[8] === undefined ||
@@ -37,7 +39,7 @@ export const transformToRoam = (
 
 	return {
 		v: {
-			band: 3, // ***** origin missing *****
+			band: defaultBand, // ***** origin missing *****
 			nw: String(connectivityMonitoring[0]), // /4/0/0
 			rsrp: connectivityMonitoring[2], // 4/0/2
 			area: connectivityMonitoring[12], // /4/0/12
@@ -46,7 +48,7 @@ export const transformToRoam = (
 			), // /4/0/10 & /4/0/9
 			cell: connectivityMonitoring[8], // /4/0/8
 			ip: connectivityMonitoring[4], // /4/0/4
-			eest: 7, // ***** origin missing *****
+			eest: defaultEest, // ***** origin missing *****
 		},
 		ts: time,
 	}

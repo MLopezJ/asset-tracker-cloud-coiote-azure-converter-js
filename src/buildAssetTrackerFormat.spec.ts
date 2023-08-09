@@ -150,7 +150,7 @@ describe('transform', () => {
 					acc: 24.798573,
 					alt: 170.528305,
 					spd: 0.579327,
-					hdg: 176.12, // ***** origin missing *****
+					hdg: 0, // ***** origin missing *****
 				},
 				ts: 1665149633,
 			},
@@ -168,7 +168,7 @@ describe('transform', () => {
 			dev: {
 				v: {
 					imei: '351358815340515',
-					iccid: '89450421180216216095', // ***** origin missing *****
+					iccid: '0000000000000000000', // ***** origin missing *****
 					modV: '22.8.1+0',
 					brdV: 'Nordic Semiconductor ASA',
 				},
@@ -176,14 +176,14 @@ describe('transform', () => {
 			},
 			roam: {
 				v: {
-					band: 3, // ***** origin missing *****
+					band: 1, // ***** origin missing *****
 					nw: '6',
 					rsrp: -97,
 					area: 12,
 					mccmnc: 24202,
 					cell: 33703719,
 					ip: '10.160.225.39',
-					eest: 7, // ***** origin missing *****
+					eest: 5, // ***** origin missing *****
 				},
 				ts: 1688731863032,
 			},

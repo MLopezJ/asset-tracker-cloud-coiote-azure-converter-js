@@ -295,7 +295,7 @@ describe('converter', () => {
 		const device = {
 			v: {
 				imei: '351358815340515',
-				iccid: '89450421180216216095',
+				iccid: '0000000000000000000',
 				modV: '22.8.1+0',
 				brdV: 'Nordic Semiconductor ASA',
 			},
@@ -304,14 +304,14 @@ describe('converter', () => {
 
 		const roamingInfo = {
 			v: {
-				band: 3,
+				band: 1,
 				nw: '6',
 				rsrp: -85,
 				area: 12,
 				mccmnc: 2422,
 				cell: 34237196,
 				ip: ['10.160.120.155'],
-				eest: 7,
+				eest: 5,
 			},
 			ts: 1688731863032,
 		}
@@ -337,7 +337,7 @@ describe('converter', () => {
 				acc: 24.798573,
 				alt: 2,
 				spd: 5,
-				hdg: 176.12,
+				hdg: 0,
 			},
 			ts: 1665149633,
 		}

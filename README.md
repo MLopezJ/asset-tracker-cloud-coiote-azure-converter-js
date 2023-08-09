@@ -427,7 +427,7 @@ The output is an object with the struct described in the
   "dev": {
     "v": {
       "imei": "352656106111232",
-      "iccid": "89450421180216216095", // ***** origin missing *****
+      "iccid": "0000000000000000000", // ***** origin missing *****
       "modV": "mfw_nrf9160_1.0.0",
       "brdV": "thingy91_nrf9160"
     },
@@ -561,10 +561,11 @@ There are some values from
 [Asset Tracker Web App](https://github.com/NordicSemiconductor/asset-tracker-cloud-docs/blob/saga/docs/cloud-protocol/state.reported.azure.json)
 whose origin is still missing.
 
-- `hdg` from `gnss`
-- `iccid` from `dev`
-- `band` from `roam`
-- `eest` from `roam`
+- `hdg` from `gnss`. Until find the origin, default value is `0`
+- `iccid` from `dev`. Until find the origin, default value is
+  `'0000000000000000000'`
+- `band` from `roam`. Until find the origin, default value is `3`
+- `eest` from `roam`. Until find the origin, default value is `5`
 
 more info:
 [data transicion](https://github.com/MLopezJ/nRF-Asset-Tracker-through-Coiote-flow#data-transicion)

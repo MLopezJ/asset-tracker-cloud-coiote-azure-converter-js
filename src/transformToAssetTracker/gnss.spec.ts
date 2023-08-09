@@ -37,7 +37,7 @@ describe('transformToGnss', () => {
 				acc: 24.798573,
 				alt: 170.528305,
 				spd: 0.579327,
-				hdg: 176.12, // ***** origin missing *****
+				hdg: 0, // ***** origin missing *****
 			},
 			ts: 1665149633,
 		}
@@ -61,7 +61,7 @@ describe('transformToGnss', () => {
 				acc: 24.798573,
 				alt: 170.528305,
 				spd: 0.579327,
-				hdg: 176.12, // ***** origin missing *****
+				hdg: 0, // ***** origin missing *****
 			},
 			ts: 1688731863032,
 		}
