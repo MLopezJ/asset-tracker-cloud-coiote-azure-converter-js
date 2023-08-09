@@ -35,20 +35,16 @@ export const converter = async (
 	const input = deviceTwin.properties.reported.lwm2m
 	const deviceTwinMetadata = deviceTwin.properties.reported.$metadata
 
-	// step # 1
 	const objects = await getAssetTrackerObjects(input)
-
-	// step # 2
 	const assetTrackerLwM2M = removeCoioteFormat(objects)
 
-	// step # 3
 	checkLwM2MFormat(assetTrackerLwM2M)
 
-	// step # 4
 	const assetTrackerWebAppInput = buildAssetTrackerFormat(
 		assetTrackerLwM2M,
 		deviceTwinMetadata,
 	)
+
 	if (assetTrackerWebAppInput instanceof Error) {
 		throw assetTrackerWebAppInput
 	}
