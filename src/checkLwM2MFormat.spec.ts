@@ -31,8 +31,8 @@ describe('checkLwM2MFormat', () => {
 				'19': '3.2.1',
 			},
 		}
-		expect(
+		expect(() =>
 			checkLwM2MFormat(input as unknown as Partial<LwM2MDocument>),
-		).toBeInstanceOf(Error)
+		).toThrow()
 	})
 })

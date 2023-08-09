@@ -204,7 +204,7 @@ describe('transform', () => {
 		} as metadata
 		const input = {} as unknown as AssetTrackerLwM2MFormat
 
-		expect(buildAssetTrackerFormat(input, metadata)).toBeInstanceOf(Error)
+		expect(() => buildAssetTrackerFormat(input, metadata)).toThrow(Error)
 	})
 
 	it('should return error if transformation process went wrong', () => {
@@ -304,6 +304,6 @@ describe('transform', () => {
 			[Config_50009_urn]: {}, // Object 50009 is missing
 		} as unknown as AssetTrackerLwM2MFormat
 
-		expect(buildAssetTrackerFormat(input, metadata)).toBeInstanceOf(Error)
+		expect(() => buildAssetTrackerFormat(input, metadata)).toThrow(Error)
 	})
 })

@@ -38,17 +38,28 @@ export const removeCoioteFormat = (
 	input: assetTrackerObjects,
 ): AssetTrackerLwM2MFormat => {
 	const result = Object.entries(input)
-		.map((element) => {
-			const [objectId, value] = element
+		// .map(([objectId, value]) => {
+		// 	if (objectId === Config_50009_urn) {
+		// 		return setCustomFormat({ [`${objectId}`]: value })
+		// 	}
+
+		// 	return setLwM2MFormat({ [`${objectId}`]: value })
+		// })
+		.reduce((previous, [objectId, value]) => {
+			// make it an object
 			if (objectId === Config_50009_urn) {
-				return setCustomFormat({ [`${objectId}`]: value })
+				return {
+					...previous,
+					...setCustomFormat({ [`${objectId}`]: value }),
+				}
 			}
 
-			return setLwM2MFormat({ [`${objectId}`]: value })
-		})
-		.reduce((previous, current) => {
-			// make it an object
-			return { ...current, ...previous }
+			return {
+				...previous,
+				...setLwM2MFormat({ [`${objectId}`]: value }),
+			}
+
+			// { ...current, ...previous }
 		}, {})
 
 	return result as AssetTrackerLwM2MFormat

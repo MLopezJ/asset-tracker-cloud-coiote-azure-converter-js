@@ -38,30 +38,31 @@ export type assetTrackerObjects = {
  */
 export const getAssetTrackerObjects = async (
 	input: lwm2mCoiote,
-): Promise<assetTrackerObjects | Error> => {
-	const requiredObjects = Object.entries(input).map(async (element) => {
-		const [objectId, value] = element
+): Promise<assetTrackerObjects> => {
+	const requiredObjects = Object.entries(input).map(
+		async ([objectId, value]) => {
+			// const [objectId, value] = element
 
-		const urn = await getURN(objectId)
+			const urn = await getURN(objectId)
 
-		if (urn === undefined) {
-			if (requiredAssetTrackerObjects.includes(objectId) === true)
-				return { [`${objectId}`]: value }
-		} else {
-			if (requiredAssetTrackerObjects.includes(urn) === true)
-				return { [`${urn}`]: value }
-		}
-		return undefined
-	})
+			if (urn === undefined) {
+				if (requiredAssetTrackerObjects.includes(objectId) === true)
+					return { [`${objectId}`]: value }
+			} else {
+				if (requiredAssetTrackerObjects.includes(urn) === true)
+					return { [`${urn}`]: value }
+			}
+			return undefined
+		},
+	)
 
-	return Promise.all(requiredObjects)
-		.then((objects) => {
-			return objects
-				.filter((obj) => obj !== undefined) // remove empty values
-				.reduce((previous, current) => {
-					// make it an object
-					return { ...current, ...previous }
-				}, {}) as assetTrackerObjects
-		})
-		.catch((err) => Error(err))
+	// mix async and promise(then)
+	return (await Promise.all(requiredObjects))
+		.filter((obj) => obj !== undefined) // remove empty values
+		.reduce(
+			(previous, current) =>
+				// make it an object
+				({ ...current, ...previous }),
+			{},
+		) as assetTrackerObjects
 }

@@ -31,25 +31,18 @@ export type deviceTwin = {
  */
 export const converter = async (
 	deviceTwin: deviceTwin,
-): Promise<assetTracker | undefined> => {
+): Promise<assetTracker> => {
 	const input = deviceTwin.properties.reported.lwm2m
 	const deviceTwinMetadata = deviceTwin.properties.reported.$metadata
 
 	// step # 1
 	const objects = await getAssetTrackerObjects(input)
 
-	if (objects instanceof Error) {
-		throw objects
-	}
-
 	// step # 2
 	const assetTrackerLwM2M = removeCoioteFormat(objects)
 
 	// step # 3
-	const check = checkLwM2MFormat(assetTrackerLwM2M)
-	if (check instanceof Error) {
-		throw check
-	}
+	checkLwM2MFormat(assetTrackerLwM2M)
 
 	// step # 4
 	const assetTrackerWebAppInput = buildAssetTrackerFormat(
@@ -62,3 +55,14 @@ export const converter = async (
 
 	return assetTrackerWebAppInput
 }
+
+// End user
+/*
+try {
+	const obj = await converter(input)
+} catch (error) {
+	console.error('There is an error when trying to convert')
+	exit(1)
+}
+*/
+// now obj == asset tracker object

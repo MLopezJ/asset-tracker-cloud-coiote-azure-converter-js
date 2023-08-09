@@ -31,32 +31,34 @@ export type objects = {
 export const buildAssetTrackerFormat = (
 	input: AssetTrackerLwM2MFormat,
 	deviceTwinMetadata: metadata,
-): assetTracker | Error => {
+): assetTracker => {
 	const device = input[Device_3_urn]
-	if (device === undefined) return Error('Device (3) object is missing')
+	if (device === undefined) throw new Error('Device (3) object is missing')
 
 	const temperature = input[Temperature_3303_urn]
 	if (temperature === undefined)
-		return Error('Temperature (3303) object is missing')
+		throw new Error('Temperature (3303) object is missing')
 
 	const humidity = input[Humidity_3304_urn]
-	if (humidity === undefined) return Error('Humidity (3304) object is missing')
+	if (humidity === undefined)
+		throw new Error('Humidity (3304) object is missing')
 
 	const pressure = input[Pressure_3323_urn]
-	if (pressure === undefined) return Error('Pressure (3323) object is missing')
+	if (pressure === undefined)
+		throw new Error('Pressure (3323) object is missing')
 
 	const location = input[Location_6_urn]
-	if (location === undefined) return Error('Location (6) object is missing')
+	if (location === undefined) throw new Error('Location (6) object is missing')
 
 	const connectivityMonitoring = input[ConnectivityMonitoring_4_urn]
 	if (connectivityMonitoring === undefined)
-		return Error('Connectivity Monitoring (4) object is missing')
+		throw new Error('Connectivity Monitoring (4) object is missing')
 
 	const config = input[Config_50009_urn]
-	if (config === undefined) return Error('Config (50009) object is missing')
+	if (config === undefined) throw new Error('Config (50009) object is missing')
 
 	const bat = transformToBattery(device, deviceTwinMetadata)
-	if (bat instanceof Error) return bat
+	if (bat instanceof Error) throw bat
 
 	const env = transformToEnvironmental(
 		temperature,
@@ -64,20 +66,20 @@ export const buildAssetTrackerFormat = (
 		pressure,
 		deviceTwinMetadata,
 	)
-	if (env instanceof Error) return env
+	if (env instanceof Error) throw env
 
 	const gnss = transformToGnss(location, deviceTwinMetadata)
-	if (gnss instanceof Error) return gnss
+	if (gnss instanceof Error) throw gnss
 
 	const cfg = transformToConfig(config as Config_50009)
 	if (cfg === undefined)
-		return Error('Transformation of config is not possible')
+		throw new Error('Transformation of config is not possible')
 
 	const dev = transformToDevice(device, deviceTwinMetadata)
-	if (dev instanceof Error) return dev
+	if (dev instanceof Error) throw dev
 
 	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata)
-	if (roam instanceof Error) return roam
+	if (roam instanceof Error) throw roam
 
 	return {
 		bat,
