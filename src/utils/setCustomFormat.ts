@@ -14,7 +14,7 @@ export const setCustomFormat = (object: lwm2mCoiote): customObject => {
 	const instances = Object.values(object)[0]
 
 	if (urn === undefined || instances === undefined) {
-		console.error('missing values ', { urn, instances })
+		console.warn('missing values ', { urn, instances })
 		return {}
 	}
 
