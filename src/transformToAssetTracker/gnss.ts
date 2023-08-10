@@ -16,15 +16,15 @@ export const transformToGnss = (
 ): GNSSData => {
 	const defaultHdg = 0
 	if (
-		location[3] === undefined ||
-		location[2] === undefined ||
-		location[6] === undefined
+		location['3'] === undefined ||
+		location['2'] === undefined ||
+		location['6'] === undefined
 	)
 		throw new Error(
 			`required values are missing: ${JSON.stringify({
-				lat: location[0],
-				alt: location[2],
-				spd: location[6],
+				lat: location['0'],
+				alt: location['2'],
+				spd: location['6'],
 			})}`,
 		)
 
@@ -43,3 +43,5 @@ export const transformToGnss = (
 		ts: time,
 	}
 }
+
+// export const allRequired = () => false //TODO: remove

@@ -11,8 +11,9 @@ export const transformToBattery = (
 	device: Device_3,
 	deviceTwinMetadata: metadata,
 ): BatteryData => {
-	const value = typeof device[7] === 'object' ? device[7][0] : device[7]
-	const time = device[13] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
+	const value = typeof device[7] === 'object' ? device[7][0] : device[7] // TODO: check type definition vs schema description
+	const time =
+		device['13'] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
 	if (value === undefined)
 		throw new Error(`Power source voltage (/3/0/7) is undefined. ${device}`)

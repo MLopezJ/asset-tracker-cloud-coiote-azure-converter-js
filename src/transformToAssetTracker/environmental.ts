@@ -20,9 +20,9 @@ export const transformToEnvironmental = (
 	pressure: Pressure_3323,
 	deviceTwinMetadata: metadata,
 ): EnvironmentData => {
-	const temp = temperature[0] ? temperature[0]['5700'] : undefined
-	const hum = humidity[0] ? humidity[0]['5700'] : undefined
-	const atmp = pressure[0] ? pressure[0]['5700'] : undefined
+	const temp = temperature?.[0]?.['5700']
+	const hum = humidity?.[0]?.['5700']
+	const atmp = pressure?.[0]?.['5700']
 
 	if (temp === undefined || hum === undefined || atmp === undefined)
 		throw new Error(
@@ -33,16 +33,10 @@ export const transformToEnvironmental = (
 			}}`,
 		)
 
-	let time: number | undefined = temperature[0]
-		? temperature[0]['5518']
-		: undefined
-
-	if (time === undefined && humidity[0]?.['5518'] != undefined)
-		time = humidity[0]['5518']
-
-	if (time === undefined && pressure[0]?.['5518'] != undefined)
-		time = pressure[0]['5518']
-
+	let time =
+		temperature?.[0]?.['5518'] ??
+		humidity?.[0]?.['5518'] ??
+		pressure?.[0]?.['5518']
 	if (time === undefined) {
 		try {
 			time = getTimestamp(Temperature_3303_urn, 5518, deviceTwinMetadata)
@@ -54,6 +48,16 @@ export const transformToEnvironmental = (
 			}
 		}
 	}
+
+	// getTimestamp([Temperature_3303_urn, Humidity_3304_urn, Pressure_3323_urn], 5518, deviceTwinMetadata)
+
+	/*
+
+	[].reduce((timestamp, obj) => {
+		const time = getTimestamp(obj, 5518, deviceTwinMetadata)
+		if 
+	}, undefined)
+	*/
 
 	return {
 		v: {

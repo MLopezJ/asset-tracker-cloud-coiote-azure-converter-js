@@ -12,30 +12,29 @@ export const transformToDevice = (
 	deviceTwinMetadata: metadata,
 ): DeviceData => {
 	const defaultIccid = '0000000000000000000'
-	const time = device[13] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
+	const time =
+		device['13'] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
 	if (
-		device[2] === undefined ||
-		device[3] === undefined ||
-		device[0] === undefined
+		device['2'] === undefined ||
+		device['3'] === undefined ||
+		device['0'] === undefined
 	)
 		throw new Error(
 			`missing values: ${{
-				imei: device[2],
-				modV: device[3],
-				brdV: device[0],
+				imei: device['2'],
+				modV: device['3'],
+				brdV: device['0'],
 			}}`,
 		)
 
-	const dev = {
+	return {
 		v: {
-			imei: device[2],
+			imei: device['2'],
 			iccid: defaultIccid, // ***** origin missing *****
-			modV: device[3],
-			brdV: device[0],
+			modV: device['3'],
+			brdV: device['0'],
 		},
 		ts: time,
 	}
-
-	return dev
 }
