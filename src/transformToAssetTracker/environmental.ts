@@ -51,14 +51,6 @@ export const transformToEnvironmental = (
 
 	// getTimestamp([Temperature_3303_urn, Humidity_3304_urn, Pressure_3323_urn], 5518, deviceTwinMetadata)
 
-	/*
-
-	[].reduce((timestamp, obj) => {
-		const time = getTimestamp(obj, 5518, deviceTwinMetadata)
-		if 
-	}, undefined)
-	*/
-
 	return {
 		v: {
 			temp,

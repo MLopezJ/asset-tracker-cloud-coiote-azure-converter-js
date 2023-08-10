@@ -19,33 +19,39 @@ export type metadata = {
 }
 
 /**
- * Set hierarchy to select the timestamp from Device Twin
+ *
+ * Pick timestamp from metadata object following Timestamp Hierarchy
+ * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js#timestamp-hierarchy
  */
-export const getTimestamp = (
-	objectURN: string,
-	resourceId: number,
+const timestampHierarchy = (
 	metadata: metadata,
-): number => {
-	const { ObjectID } = parseURN(objectURN)
+	ObjectID: string,
+	resourceId: number,
+):
+	| { value: number }
+	| {
+			errors: string
+	  } => {
 	let lastUpdated = undefined
 	if (metadata.lwm2m === undefined)
-		throw new Error(`metadata object does not exist: ${metadata}`)
+		return { errors: `metadata object does not exist: ${metadata}` }
 
 	const objectMetadata = metadata.lwm2m[ObjectID as unknown as number] // TODO: this make no sense
 	if (objectMetadata !== undefined) {
 		if (objectMetadata?.['0'] !== undefined) {
 			// resource metadata
-			lastUpdated = objectMetadata?.['0']?.[resourceId]?.value?.['$lastUpdated']
+			lastUpdated =
+				objectMetadata?.['0']?.[`${resourceId}`]?.value?.['$lastUpdated']
 
 			if (lastUpdated !== undefined) {
-				return fromStringToUnixTimestamp(lastUpdated)
+				return { value: fromStringToUnixTimestamp(lastUpdated) }
 			}
 			// resource metadata
 
 			// instance metadata
 			lastUpdated = objectMetadata?.['0']?.['$lastUpdated']
 			if (lastUpdated !== undefined) {
-				return fromStringToUnixTimestamp(lastUpdated)
+				return { value: fromStringToUnixTimestamp(lastUpdated) }
 			}
 			// instance metadata
 		}
@@ -53,7 +59,7 @@ export const getTimestamp = (
 		// Object metadata
 		lastUpdated = objectMetadata?.['$lastUpdated']
 		if (lastUpdated !== undefined) {
-			return fromStringToUnixTimestamp(lastUpdated)
+			return { value: fromStringToUnixTimestamp(lastUpdated) }
 		}
 		// Object metadata
 	}
@@ -61,18 +67,35 @@ export const getTimestamp = (
 	// LwM2M metadata
 	lastUpdated = metadata.lwm2m?.['$lastUpdated']
 	if (lastUpdated !== undefined) {
-		return fromStringToUnixTimestamp(lastUpdated)
+		return { value: fromStringToUnixTimestamp(lastUpdated) }
 	}
 	// LwM2M metadata
 
 	// metadata
 	lastUpdated = metadata['$lastUpdated']
 	if (lastUpdated !== undefined) {
-		return fromStringToUnixTimestamp(lastUpdated)
+		return { value: fromStringToUnixTimestamp(lastUpdated) }
 	}
 	// metadata
 
-	throw new Error(`Not possible to select timestamp from: ${metadata}`)
+	return { errors: `Not possible to select timestamp from: ${metadata}` }
+}
+
+/**
+ * Get the related timestamp in Device Twin metadata for resource
+ */
+export const getTimestamp = (
+	objectURN: string,
+	resourceId: number,
+	metadata: metadata,
+): number => {
+	const { ObjectID } = parseURN(objectURN)
+	const maybeValidTimestamp = timestampHierarchy(metadata, ObjectID, resourceId)
+	// TODO: objectURN as []
+	if ('errors' in maybeValidTimestamp) {
+		throw new Error(maybeValidTimestamp.errors)
+	}
+	return maybeValidTimestamp.value
 }
 
 /**
