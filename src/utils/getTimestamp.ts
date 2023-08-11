@@ -85,17 +85,31 @@ const timestampHierarchy = (
  * Get the related timestamp in Device Twin metadata for resource
  */
 export const getTimestamp = (
-	objectURN: string,
+	objectURN: string | string[],
 	resourceId: number,
 	metadata: metadata,
 ): number => {
-	const { ObjectID } = parseURN(objectURN)
-	const maybeValidTimestamp = timestampHierarchy(metadata, ObjectID, resourceId)
-	// TODO: objectURN as []
-	if ('errors' in maybeValidTimestamp) {
-		throw new Error(maybeValidTimestamp.errors)
+	const objectsURNs =
+		Array.isArray(objectURN) === true ? objectURN : [objectURN]
+	let timestamp = 0
+
+	for (const urn of objectsURNs) {
+		const { ObjectID } = parseURN(urn as string)
+		const maybeValidTimestamp = timestampHierarchy(
+			metadata,
+			ObjectID,
+			resourceId,
+		)
+
+		if ('errors' in maybeValidTimestamp) {
+			throw new Error(maybeValidTimestamp.errors)
+		}
+
+		if (timestamp === undefined || maybeValidTimestamp.value > timestamp)
+			timestamp = maybeValidTimestamp.value
 	}
-	return maybeValidTimestamp.value
+
+	return timestamp
 }
 
 /**

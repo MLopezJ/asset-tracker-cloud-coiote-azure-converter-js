@@ -37,19 +37,13 @@ export const transformToEnvironmental = (
 		temperature?.[0]?.['5518'] ??
 		humidity?.[0]?.['5518'] ??
 		pressure?.[0]?.['5518']
-	if (time === undefined) {
-		try {
-			time = getTimestamp(Temperature_3303_urn, 5518, deviceTwinMetadata)
-		} catch {
-			try {
-				time = getTimestamp(Humidity_3304_urn, 5518, deviceTwinMetadata)
-			} catch {
-				time = getTimestamp(Pressure_3323_urn, 5518, deviceTwinMetadata)
-			}
-		}
-	}
 
-	// getTimestamp([Temperature_3303_urn, Humidity_3304_urn, Pressure_3323_urn], 5518, deviceTwinMetadata)
+	if (time === undefined)
+		time = getTimestamp(
+			[Temperature_3303_urn, Humidity_3304_urn, Pressure_3323_urn],
+			5518,
+			deviceTwinMetadata,
+		)
 
 	return {
 		v: {

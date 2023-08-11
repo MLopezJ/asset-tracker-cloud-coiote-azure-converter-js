@@ -1,4 +1,9 @@
-import { Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import {
+	Device_3_urn,
+	Humidity_3304_urn,
+	Pressure_3323_urn,
+	Temperature_3303_urn,
+} from '@nordicsemiconductor/lwm2m-types'
 import type { lwm2m_metadata, metadata } from './getTimestamp'
 import { getTimestamp } from './getTimestamp.js'
 
@@ -134,5 +139,58 @@ describe('getTimestamp', () => {
 		const metadata = {} as metadata
 
 		expect(() => getTimestamp(objectURN, resourceId, metadata)).toThrow(Error)
+	})
+
+	it(`shlould get more recent timestamp frorm a set of objects`, () => {
+		const objectsURNs = [
+			Temperature_3303_urn,
+			Humidity_3304_urn,
+			Pressure_3323_urn,
+		]
+		const resourceId = 5518
+		const metadata = {
+			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			lwm2m: {
+				'3303': {
+					'0': {
+						'5518': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				'3304': {
+					'0': {
+						'5518': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								// selected value should be this one
+								$lastUpdated: '2023-08-08T12:11:03.0324459Z',
+							},
+						},
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				'3323': {
+					'0': {
+						'5518': {
+							$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							value: {
+								$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+							},
+						},
+						$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+					},
+					$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+				},
+				$lastUpdated: '2023-07-07T12:11:03.0324459Z',
+			},
+		}
+		expect(getTimestamp(objectsURNs, resourceId, metadata)).toBe(1691496663032)
 	})
 })
