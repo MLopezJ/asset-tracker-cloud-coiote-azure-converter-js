@@ -1,6 +1,6 @@
 import type { deviceTwin } from './converter'
 import { converter } from './converter.js'
-import { Config_50009_urn } from './getAssetTrackerObjects.js'
+import { Config_50009_urn } from './converterSteps/getAssetTrackerObjects.js'
 
 describe('converter', () => {
 	it(`should transform device twin to expected format`, async () => {

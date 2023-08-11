@@ -9,7 +9,7 @@ import {
 import { buildAssetTrackerFormat } from './buildAssetTrackerFormat.js'
 import { Config_50009_urn } from './getAssetTrackerObjects.js'
 import type { AssetTrackerLwM2MFormat } from './removeCoioteFormat.js'
-import type { metadata } from './utils/getTimestamp'
+import type { metadata } from '../utils/getTimestamp'
 
 describe('transform', () => {
 	it('should build the expected input of the Asset tracker web app', () => {

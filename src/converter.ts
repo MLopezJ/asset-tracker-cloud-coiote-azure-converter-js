@@ -1,8 +1,9 @@
 import type { AzureReportedData as assetTracker } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
-import { buildAssetTrackerFormat } from './buildAssetTrackerFormat.js'
-import { checkLwM2MFormat } from './checkLwM2MFormat.js'
-import { getAssetTrackerObjects } from './getAssetTrackerObjects.js'
-import { removeCoioteFormat } from './removeCoioteFormat.js'
+import { buildAssetTrackerFormat } from './converterSteps/buildAssetTrackerFormat.js'
+import { checkLwM2MFormat } from './converterSteps/checkLwM2MFormat.js'
+import { getAssetTrackerObjects } from './converterSteps/getAssetTrackerObjects.js'
+import { removeCoioteFormat } from './converterSteps/removeCoioteFormat.js'
+
 import type { metadata } from './utils/getTimestamp'
 
 export type value = { value: string | number | boolean }
