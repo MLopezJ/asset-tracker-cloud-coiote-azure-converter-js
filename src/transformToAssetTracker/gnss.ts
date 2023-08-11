@@ -3,6 +3,7 @@ import {
 	type Location_6,
 	Location_6_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import { checkAllRequired } from '../utils/checkAllRequired.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -18,38 +19,25 @@ export const transformToGnss = (
 	const lat = location['0']
 	const alt = location['2']
 	const spd = location['6']
+	const lng = location['1']
+	const acc = location['3']
 
-	// TODO: continue this
-	maybeValidRequiredValues = checkAllRequired()
-
-	if (error in maybeValidRequiredValues)
-		if (
-			location['3'] === undefined ||
-			location['2'] === undefined ||
-			location['6'] === undefined
-		)
-			throw new Error(
-				`required values are missing: ${JSON.stringify({
-					lat: location['0'],
-					alt: location['2'],
-					spd: location['6'],
-				})}`,
-			)
+	const maybeValidRequiredValues = checkAllRequired({ lat, alt, spd, lng, acc })
+	if ('error' in maybeValidRequiredValues)
+		throw new Error(maybeValidRequiredValues.error)
 
 	const time =
 		location[5] ?? getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
 
 	return {
 		v: {
-			lng: location[1],
-			lat: location[0],
-			acc: location[3],
-			alt: location[2],
-			spd: location[6],
+			lng,
+			lat,
+			acc: acc as number,
+			alt: alt as number,
+			spd: spd as number,
 			hdg: defaultHdg, // ***** origin missing *****
 		},
 		ts: time,
 	}
 }
-
-// export const allRequired = () => false //TODO: remove

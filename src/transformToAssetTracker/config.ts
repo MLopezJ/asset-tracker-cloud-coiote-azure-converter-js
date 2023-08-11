@@ -1,5 +1,6 @@
 import type { ConfigData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import type { Config_50009 } from 'src/schemas/Config_50009'
+import { checkAllRequired } from '../utils/checkAllRequired.js'
 
 /**
  * Transform Config object into the config object expected by Asset Tracker web app
@@ -16,7 +17,7 @@ export const transformToConfig = (input: Config_50009): ConfigData => {
 	const accith = input[8]
 	const accito = input[9]
 
-	return {
+	const config = {
 		loct,
 		act,
 		actwt,
@@ -27,4 +28,9 @@ export const transformToConfig = (input: Config_50009): ConfigData => {
 		accito,
 		nod: [],
 	}
+	const maybeValidRequiredValues = checkAllRequired(config)
+	if ('error' in maybeValidRequiredValues)
+		throw new Error(maybeValidRequiredValues.error)
+
+	return config
 }

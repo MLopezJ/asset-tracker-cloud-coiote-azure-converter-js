@@ -1,5 +1,6 @@
 import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { type Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import { checkAllRequired } from '../utils/checkAllRequired.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -12,28 +13,23 @@ export const transformToDevice = (
 	deviceTwinMetadata: metadata,
 ): DeviceData => {
 	const defaultIccid = '0000000000000000000'
+	const imei = device['2']
+	const modV = device['3']
+	const brdV = device['0']
+
+	const maybeValidRequiredValues = checkAllRequired({ imei, modV, brdV })
+	if ('error' in maybeValidRequiredValues)
+		throw new Error(maybeValidRequiredValues.error)
+
 	const time =
 		device['13'] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
-	if (
-		device['2'] === undefined ||
-		device['3'] === undefined ||
-		device['0'] === undefined
-	)
-		throw new Error(
-			`missing values: ${{
-				imei: device['2'],
-				modV: device['3'],
-				brdV: device['0'],
-			}}`,
-		)
-
 	return {
 		v: {
-			imei: device['2'],
+			imei: device['2']!,
 			iccid: defaultIccid, // ***** origin missing *****
-			modV: device['3'],
-			brdV: device['0'],
+			modV: device['3']!,
+			brdV: device['0']!,
 		},
 		ts: time,
 	}

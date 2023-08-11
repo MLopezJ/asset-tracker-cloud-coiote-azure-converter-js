@@ -1,5 +1,6 @@
 import type { BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { type Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
+import { checkAllRequired } from '../utils/checkAllRequired.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -15,11 +16,14 @@ export const transformToBattery = (
 	const time =
 		device['13'] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
-	if (value === undefined)
-		throw new Error(`Power source voltage (/3/0/7) is undefined. ${device}`)
+	const maybeValidRequiredValues = checkAllRequired({
+		'Power source voltage': value,
+	})
+	if ('error' in maybeValidRequiredValues)
+		throw new Error(maybeValidRequiredValues.error)
 
 	return {
-		v: value,
+		v: value as number,
 		ts: time,
 	}
 }

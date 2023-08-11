@@ -165,8 +165,6 @@ describe('getAssetTrackerObjects', () => {
 		] as keyof assetTrackerObjects
 
 		// All objects from the expected output should exist in the result
-		expect(
-			(result as assetTrackerObjects)[`${requiredAssetTrackerObjectKey}`],
-		).not.toBe(undefined)
+		expect(result[`${requiredAssetTrackerObjectKey}`]).not.toBe(undefined)
 	})
 })

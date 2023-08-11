@@ -3,6 +3,7 @@ import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import { checkAllRequired } from '../utils/checkAllRequired.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -16,20 +17,17 @@ export const transformToRoam = (
 ): RoamingInfoData => {
 	const defaultBand = 1
 	const defaultEest = 5
-	if (
-		connectivityMonitoring[12] === undefined ||
-		connectivityMonitoring[8] === undefined ||
-		connectivityMonitoring[10] === undefined ||
-		connectivityMonitoring[9] === undefined
-	)
-		throw new Error(
-			`required values are missing: ${{
-				12: connectivityMonitoring[12],
-				8: connectivityMonitoring[8],
-				10: connectivityMonitoring[10],
-				9: connectivityMonitoring[9],
-			}}`,
-		)
+	const nw = String(connectivityMonitoring[0])
+	const rsrp = connectivityMonitoring[2]
+	const area = connectivityMonitoring[12]
+	const smcc = connectivityMonitoring[10]
+	const smnc = connectivityMonitoring[9]
+	const cell = connectivityMonitoring[8]
+	const ip = connectivityMonitoring[4]
+
+	const maybeValidRequiredValues = checkAllRequired({ area, cell, smcc, smnc })
+	if ('error' in maybeValidRequiredValues)
+		throw new Error(maybeValidRequiredValues.error)
 
 	const time = getTimestamp(
 		ConnectivityMonitoring_4_urn,
@@ -40,14 +38,14 @@ export const transformToRoam = (
 	return {
 		v: {
 			band: defaultBand, // ***** origin missing *****
-			nw: String(connectivityMonitoring[0]), // /4/0/0
-			rsrp: connectivityMonitoring[2], // 4/0/2
-			area: connectivityMonitoring[12], // /4/0/12
+			nw,
+			rsrp,
+			area: area!,
 			mccmnc: Number(
 				`${connectivityMonitoring[10]}${connectivityMonitoring[9]}`,
 			), // /4/0/10 & /4/0/9
-			cell: connectivityMonitoring[8], // /4/0/8
-			ip: connectivityMonitoring[4], // /4/0/4
+			cell: cell!,
+			ip,
 			eest: defaultEest, // ***** origin missing *****
 		},
 		ts: time,

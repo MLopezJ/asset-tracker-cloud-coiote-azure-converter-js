@@ -7,6 +7,7 @@ import {
 	type Temperature_3303,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
+import { checkAllRequired } from '../utils/checkAllRequired.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -24,14 +25,9 @@ export const transformToEnvironmental = (
 	const hum = humidity?.[0]?.['5700']
 	const atmp = pressure?.[0]?.['5700']
 
-	if (temp === undefined || hum === undefined || atmp === undefined)
-		throw new Error(
-			`input format is not the expected: ${{
-				temperature,
-				humidity,
-				pressure,
-			}}`,
-		)
+	const maybeValidRequiredValues = checkAllRequired({ temp, hum, atmp })
+	if ('error' in maybeValidRequiredValues)
+		throw new Error(maybeValidRequiredValues.error)
 
 	let time =
 		temperature?.[0]?.['5518'] ??
@@ -47,9 +43,9 @@ export const transformToEnvironmental = (
 
 	return {
 		v: {
-			temp,
-			hum,
-			atmp,
+			temp: temp!,
+			hum: hum!,
+			atmp: atmp!,
 		},
 		ts: time,
 	}
