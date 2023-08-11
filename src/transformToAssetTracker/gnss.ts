@@ -15,18 +15,26 @@ export const transformToGnss = (
 	deviceTwinMetadata: metadata,
 ): GNSSData => {
 	const defaultHdg = 0
-	if (
-		location['3'] === undefined ||
-		location['2'] === undefined ||
-		location['6'] === undefined
-	)
-		throw new Error(
-			`required values are missing: ${JSON.stringify({
-				lat: location['0'],
-				alt: location['2'],
-				spd: location['6'],
-			})}`,
+	const lat = location['0']
+	const alt = location['2']
+	const spd = location['6']
+
+	// TODO: continue this
+	maybeValidRequiredValues = checkAllRequired()
+
+	if (error in maybeValidRequiredValues)
+		if (
+			location['3'] === undefined ||
+			location['2'] === undefined ||
+			location['6'] === undefined
 		)
+			throw new Error(
+				`required values are missing: ${JSON.stringify({
+					lat: location['0'],
+					alt: location['2'],
+					spd: location['6'],
+				})}`,
+			)
 
 	const time =
 		location[5] ?? getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
