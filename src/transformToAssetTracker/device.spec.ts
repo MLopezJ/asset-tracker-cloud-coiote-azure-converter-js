@@ -1,4 +1,4 @@
-import { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
+import type { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToDevice } from './device.js'
 
@@ -29,7 +29,7 @@ describe('transformToDevice', () => {
 			'2': '351358815340515',
 			'3': '22.8.1+0',
 			'11': 0,
-			'13': 1675874731000,
+			'13': 1675874731, // 000
 			'16': 'UQ',
 			'19': '3.2.1',
 		}

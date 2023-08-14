@@ -1,6 +1,6 @@
 import {
 	Device,
-	DeviceData,
+	type DeviceData,
 	validateWithType,
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { type Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
@@ -20,7 +20,9 @@ export const transformToDevice = (
 	const modV = device['3']
 	const brdV = device['0']
 	const time =
-		device['13'] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
+		device['13'] != null
+			? Number(`${device[13]}000`)
+			: getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
 	const object = {
 		v: {

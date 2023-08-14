@@ -299,7 +299,7 @@ describe('converter', () => {
 				modV: '22.8.1+0',
 				brdV: 'Nordic Semiconductor ASA',
 			},
-			ts: 1476186613,
+			ts: 1476186613000,
 		}
 
 		const roamingInfo = {
@@ -318,7 +318,7 @@ describe('converter', () => {
 
 		const battery = {
 			v: 80,
-			ts: 1476186613,
+			ts: 1476186613, //000
 		}
 
 		const environmental = {
