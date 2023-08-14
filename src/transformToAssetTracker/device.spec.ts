@@ -1,3 +1,4 @@
+import { DeviceData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 import type { Device_3 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToDevice } from './device.js'
 
@@ -43,7 +44,11 @@ describe('transformToDevice', () => {
 			ts: 1675874731000, // /3/0/13
 		}
 
-		expect(transformToDevice(input, deviceTwinMetadata)).toMatchObject(expected)
+		const device = transformToDevice(input, deviceTwinMetadata) as {
+			result: DeviceData
+		}
+
+		expect(device.result).toMatchObject(expected)
 	})
 
 	it('should follow Timestamp Hierarchy in case timestamp is not found from Device object', () => {
@@ -68,6 +73,27 @@ describe('transformToDevice', () => {
 			ts: 1688731863032,
 		}
 
-		expect(transformToDevice(input, deviceTwinMetadata)).toMatchObject(expected)
+		const device = transformToDevice(input, deviceTwinMetadata) as {
+			result: DeviceData
+		}
+		expect(device.result).toMatchObject(expected)
+	})
+
+	it('should return error in case a required value is missing', () => {
+		const input: Device_3 = {
+			'0': 'Nordic Semiconductor ASA',
+			'1': 'Thingy:91',
+			'2': '351358815340515',
+			//'3': '22.8.1+0', // required value missing
+			'11': 0,
+			'13': 1675874731000,
+			'16': 'UQ',
+			'19': '3.2.1',
+		}
+
+		const result = transformToDevice(input, deviceTwinMetadata) as {
+			error: Error
+		}
+		expect(result.error).not.toBe(undefined)
 	})
 })

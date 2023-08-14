@@ -1,4 +1,8 @@
-import { Device, DeviceData, validateWithType } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
+import {
+	Device,
+	DeviceData,
+	validateWithType,
+} from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { type Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
@@ -10,40 +14,36 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToDevice = (
 	device: Device_3,
 	deviceTwinMetadata: metadata,
-): { error: Error} | { result: DeviceData} => {
+): { error: Error } | { result: DeviceData } => {
 	const defaultIccid = '0000000000000000000'
 	const imei = device['2']
 	const modV = device['3']
 	const brdV = device['0']
-
 	const time =
 		device['13'] ?? getTimestamp(Device_3_urn, 13, deviceTwinMetadata)
 
-	const result = {
+	const object = {
 		v: {
-			imei: ensureDefined(imei),
+			imei,
 			iccid: defaultIccid, // ***** origin missing *****
-			modV: ensureDefined(modV),
-			brdV: ensureDefined(brdV),
+			modV,
+			brdV,
 		},
 		ts: time,
 	}
 
-	/*
-	const validate =
-	validateWithType(Device)
-	*/
-	const maybeValidDeviceData = validateWithType(Device)(result)
+	const maybeValidDeviceData = validateWithType(Device)(object)
 	if ('errors' in maybeValidDeviceData) {
-		return { error: new Error(JSON.stringify(maybeValidDeviceData.errors))}
+		return { error: new Error(JSON.stringify(maybeValidDeviceData.errors)) }
 	}
 
-	//return { result: maybeValidDeviceData}
-
-	return result
+	return { result: maybeValidDeviceData }
 }
 
-const ensureDefined = <V>(maybeValue: V | null | undefined) => {
-	if (maybeValue === null || maybeValue === undefined) throw Error(`Value may not be undefined!`)
+/*
+export const ensureDefined = <V>(maybeValue: V | null | undefined) => {
+	if (maybeValue === null || maybeValue === undefined)
+		throw Error(`Value may not be undefined!`)
 	return maybeValue
 }
+*/

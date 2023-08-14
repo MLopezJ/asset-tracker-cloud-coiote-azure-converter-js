@@ -66,7 +66,12 @@ export const buildAssetTrackerFormat = (
 	)
 	const gnss = transformToGnss(location, deviceTwinMetadata)
 	const cfg = transformToConfig(config as Config_50009)
-	const dev = transformToDevice(device, deviceTwinMetadata)
+
+	const maybeValidDevice = transformToDevice(device, deviceTwinMetadata)
+	if ('error' in maybeValidDevice)
+		throw new Error('Device (3) object is missing')
+	const dev = maybeValidDevice.result
+
 	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata)
 
 	return {
