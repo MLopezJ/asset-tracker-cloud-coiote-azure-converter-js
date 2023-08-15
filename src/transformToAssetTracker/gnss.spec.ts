@@ -1,3 +1,4 @@
+import type { GNSSData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 import type { Location_6 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToGnss } from './gnss.js'
 
@@ -39,9 +40,12 @@ describe('transformToGnss', () => {
 				spd: 0.579327,
 				hdg: 0, // ***** origin missing *****
 			},
-			ts: 1665149633,
+			ts: 1665149633000,
 		}
-		expect(transformToGnss(input, deviceTwinMetadata)).toMatchObject(expected)
+		const gnss = transformToGnss(input, deviceTwinMetadata) as {
+			result: GNSSData
+		}
+		expect(gnss.result).toMatchObject(expected)
 	})
 
 	it('should create gnss using server time', () => {
@@ -65,6 +69,10 @@ describe('transformToGnss', () => {
 			},
 			ts: 1688731863032,
 		}
-		expect(transformToGnss(input, deviceTwinMetadata)).toMatchObject(expected)
+
+		const gnss = transformToGnss(input, deviceTwinMetadata) as {
+			result: GNSSData
+		}
+		expect(gnss.result).toMatchObject(expected)
 	})
 })

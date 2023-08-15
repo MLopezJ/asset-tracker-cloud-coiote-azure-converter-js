@@ -152,7 +152,7 @@ describe('transform', () => {
 					spd: 0.579327,
 					hdg: 0, // ***** origin missing *****
 				},
-				ts: 1665149633,
+				ts: 1665149633000,
 			},
 			cfg: {
 				loct: 120,

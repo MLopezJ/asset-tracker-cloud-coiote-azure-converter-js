@@ -76,7 +76,10 @@ export const buildAssetTrackerFormat = (
 	}
 	const env = maybeValidEnvironment.result
 
-	const gnss = transformToGnss(location, deviceTwinMetadata)
+	const maybeValidGnss = transformToGnss(location, deviceTwinMetadata)
+	if ('error' in maybeValidGnss) throw new Error('GNSS object can not be build')
+	const gnss = maybeValidGnss.result
+
 	const cfg = transformToConfig(config as Config_50009)
 
 	const maybeValidDevice = transformToDevice(device, deviceTwinMetadata)

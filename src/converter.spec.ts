@@ -339,7 +339,7 @@ describe('converter', () => {
 				spd: 5,
 				hdg: 0,
 			},
-			ts: 1665149633,
+			ts: 1665149633000,
 		}
 
 		const result = {

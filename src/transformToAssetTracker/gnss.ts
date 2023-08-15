@@ -1,9 +1,13 @@
-import type { GNSSData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
+import {
+	GNSS,
+	type GNSSData,
+	validateWithType,
+} from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	type Location_6,
 	Location_6_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkAllRequired } from '../utils/checkAllRequired.js'
+import { fromSecondsToMilliseconds } from '../utils/fromSecondsToMilliseconds.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -14,7 +18,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToGnss = (
 	location: Location_6,
 	deviceTwinMetadata: metadata,
-): GNSSData => {
+): { result: GNSSData } | { error: Error } => {
 	const defaultHdg = 0
 	const lat = location['0']
 	const alt = location['2']
@@ -22,22 +26,26 @@ export const transformToGnss = (
 	const lng = location['1']
 	const acc = location['3']
 
-	const maybeValidRequiredValues = checkAllRequired({ lat, alt, spd, lng, acc })
-	if ('error' in maybeValidRequiredValues)
-		throw new Error(maybeValidRequiredValues.error)
-
 	const time =
-		location[5] ?? getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
+		location['5'] != null
+			? fromSecondsToMilliseconds(location['5'])
+			: getTimestamp(Location_6_urn, 5, deviceTwinMetadata)
 
-	return {
+	const object = {
 		v: {
 			lng,
 			lat,
-			acc: acc as number,
-			alt: alt as number,
-			spd: spd as number,
+			acc,
+			alt,
+			spd,
 			hdg: defaultHdg, // ***** origin missing *****
 		},
 		ts: time,
 	}
+
+	const maybeValidGnss = validateWithType(GNSS)(object)
+	if ('errors' in maybeValidGnss)
+		return { error: new Error(JSON.stringify(maybeValidGnss.errors)) }
+
+	return { result: maybeValidGnss }
 }
