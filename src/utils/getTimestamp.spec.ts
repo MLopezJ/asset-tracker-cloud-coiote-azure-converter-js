@@ -133,15 +133,17 @@ describe('getTimestamp', () => {
 		expect(getTimestamp(objectURN, resourceId, metadata)).toBe(1691248543032)
 	})
 
-	it(`should throw error when metadata objects is empty`, () => {
+	it(`should return error when metadata objects is empty`, () => {
 		const objectURN = Device_3_urn
 		const resourceId = 7
 		const metadata = {} as metadata
-
-		expect(() => getTimestamp(objectURN, resourceId, metadata)).toThrow(Error)
+		const result = getTimestamp(objectURN, resourceId, metadata) as {
+			error: Error
+		}
+		expect(result.error).not.toBe(undefined)
 	})
 
-	it(`shlould get more recent timestamp frorm a set of objects`, () => {
+	it(`should get more recent timestamp from a set of objects in metadata`, () => {
 		const objectsURNs = [
 			Temperature_3303_urn,
 			Humidity_3304_urn,

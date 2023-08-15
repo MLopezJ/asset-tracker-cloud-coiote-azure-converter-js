@@ -1,4 +1,5 @@
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
+import { fromStringToUnixTimestamp } from './fromStringToUnixTimestamp.js'
 
 type lastUpdate = { $lastUpdated: string }
 export type value_metadata = { value: lastUpdate; $lastUpdated: string }
@@ -30,11 +31,15 @@ const timestampHierarchy = (
 ):
 	| { value: number }
 	| {
-			errors: string
+			error: Error
 	  } => {
 	let lastUpdated = undefined
 	if (metadata.lwm2m === undefined)
-		return { errors: `metadata object does not exist: ${metadata}` }
+		return {
+			error: new Error(
+				`lwm2m object does not exist in metadata: ${JSON.stringify(metadata)}`,
+			),
+		}
 
 	const objectMetadata = metadata.lwm2m[ObjectID as unknown as number] // TODO: this make no sense
 	if (objectMetadata !== undefined) {
@@ -78,7 +83,11 @@ const timestampHierarchy = (
 	}
 	// metadata
 
-	return { errors: `Not possible to select timestamp from: ${metadata}` }
+	return {
+		error: new Error(
+			`Not possible to select timestamp for resource '${resourceId}' in object '${ObjectID}' from: ${metadata}`,
+		),
+	}
 }
 
 /**
@@ -88,7 +97,7 @@ export const getTimestamp = (
 	objectURN: string | string[],
 	resourceId: number,
 	metadata: metadata,
-): number => {
+): number | { error: Error } => {
 	const objectsURNs =
 		Array.isArray(objectURN) === true ? objectURN : [objectURN]
 	let timestamp = 0
@@ -101,24 +110,12 @@ export const getTimestamp = (
 			resourceId,
 		)
 
-		if ('errors' in maybeValidTimestamp) {
-			throw new Error(maybeValidTimestamp.errors)
-		}
+		if ('error' in maybeValidTimestamp)
+			return { error: maybeValidTimestamp.error }
 
 		if (timestamp === undefined || maybeValidTimestamp.value > timestamp)
 			timestamp = maybeValidTimestamp.value
 	}
 
 	return timestamp
-}
-
-/**
- * Convert date time to Unix Timestamp
- *
- * from -> '2023-08-03T12:11:03.0324459Z'
- * to -> 1691064663032
- */
-const fromStringToUnixTimestamp = (time: string) => {
-	const unixTimestamp = Date.parse(time)
-	return unixTimestamp.valueOf()
 }
