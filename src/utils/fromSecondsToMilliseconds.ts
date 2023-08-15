@@ -4,10 +4,12 @@
  */
 export const fromSecondsToMilliseconds = (
 	seconds: number,
-): number | { error: string } => {
+): number | { error: Error } => {
 	if (seconds < 999999999)
 		return {
-			error: `Input has not the expected length (10 digits): ${seconds}`,
+			error: new Error(
+				`Input has not the expected length (10 digits): ${seconds}`,
+			),
 		}
 	return seconds * 1000
 }

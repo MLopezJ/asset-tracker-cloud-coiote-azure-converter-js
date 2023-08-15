@@ -1,3 +1,4 @@
+import type { EnvironmentData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 import { transformToEnvironmental } from './environmental.js'
 
 describe('transformToEnvironmental', () => {
@@ -29,7 +30,7 @@ describe('transformToEnvironmental', () => {
 				'5602': 101705,
 				'5700': 101705,
 				'5701': 'Pa',
-				'5518': 45612456,
+				'5518': 4561245646,
 			},
 		]
 
@@ -39,20 +40,20 @@ describe('transformToEnvironmental', () => {
 				hum: 30,
 				atmp: 101705,
 			},
-			ts: 45612456,
+			ts: 4561245646000,
 		}
 
-		expect(
-			transformToEnvironmental(
-				temperature,
-				humidity,
-				pressure,
-				deviceTwinMetadata,
-			),
-		).toMatchObject(result)
+		const env = transformToEnvironmental(
+			temperature,
+			humidity,
+			pressure,
+			deviceTwinMetadata,
+		) as { result: EnvironmentData }
+
+		expect(env.result).toMatchObject(result)
 	})
 
-	it('should throw error if Environmental values are not found in LwM2M objects', () => {
+	it('should return error if Environment values are not found in LwM2M objects', () => {
 		const temperature = [{ '5700': 15 }]
 		const humidity = [{}] // missing required value
 		const pressure = [
@@ -64,14 +65,16 @@ describe('transformToEnvironmental', () => {
 			},
 		]
 
-		expect(() =>
-			transformToEnvironmental(
-				temperature,
-				humidity as any,
-				pressure,
-				deviceTwinMetadata,
-			),
-		).toThrow(Error)
+		const result = transformToEnvironmental(
+			temperature,
+			humidity as any,
+			pressure,
+			deviceTwinMetadata,
+		) as {
+			error: Error
+		}
+
+		expect(result.error).not.toBe(undefined)
 	})
 
 	it('should follow Timestamp Hierarchy in case timestamp is not found from LwM2M objects', () => {
@@ -87,20 +90,22 @@ describe('transformToEnvironmental', () => {
 			},
 		]
 
-		expect(
-			transformToEnvironmental(
-				temperature,
-				humidity as any,
-				pressure,
-				deviceTwinMetadata,
-			),
-		).toMatchObject({
+		const expected = {
 			v: {
 				temp: 15,
 				hum: 30,
 				atmp: 101705,
 			},
 			ts: 1688731863032,
-		})
+		}
+
+		const env = transformToEnvironmental(
+			temperature,
+			humidity as any,
+			pressure,
+			deviceTwinMetadata,
+		) as { result: EnvironmentData }
+
+		expect(env.result).toMatchObject(expected)
 	})
 })

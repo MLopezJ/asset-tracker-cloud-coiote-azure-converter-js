@@ -64,12 +64,18 @@ export const buildAssetTrackerFormat = (
 	}
 	const bat = maybeValidBattery.result
 
-	const env = transformToEnvironmental(
+	const maybeValidEnvironment = transformToEnvironmental(
 		temperature,
 		humidity,
 		pressure,
 		deviceTwinMetadata,
 	)
+	if ('error' in maybeValidEnvironment) {
+		console.log(maybeValidEnvironment)
+		throw new Error('Env object can not be build')
+	}
+	const env = maybeValidEnvironment.result
+
 	const gnss = transformToGnss(location, deviceTwinMetadata)
 	const cfg = transformToConfig(config as Config_50009)
 

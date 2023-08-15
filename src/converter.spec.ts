@@ -145,7 +145,7 @@ describe('converter', () => {
 									value: 30,
 								},
 								'5518': {
-									value: 167318632,
+									value: 1673186320,
 								},
 							},
 						},
@@ -327,7 +327,7 @@ describe('converter', () => {
 				hum: 30,
 				atmp: 10,
 			},
-			ts: 167318632,
+			ts: 1673186320000,
 		}
 
 		const gnss = {
@@ -456,7 +456,7 @@ describe('converter', () => {
 									value: 30,
 								},
 								'5518': {
-									value: 167318632,
+									value: 1673186320,
 								},
 							},
 						},
@@ -700,7 +700,7 @@ describe('converter', () => {
 									value: 30,
 								},
 								'5518': {
-									value: 167318632,
+									value: 1673186320,
 								},
 							},
 						},
@@ -984,7 +984,7 @@ describe('converter', () => {
 									value: 30,
 								},
 								'5518': {
-									value: 167318632,
+									value: 1673186320,
 								},
 							},
 						},

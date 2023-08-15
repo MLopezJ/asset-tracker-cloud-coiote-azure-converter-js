@@ -1,4 +1,8 @@
-import type { EnvironmentData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
+import {
+	Environment,
+	type EnvironmentData,
+	validateWithType,
+} from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	type Humidity_3304,
 	Humidity_3304_urn,
@@ -7,7 +11,7 @@ import {
 	type Temperature_3303,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkAllRequired } from '../utils/checkAllRequired.js'
+import { fromSecondsToMilliseconds } from '../utils/fromSecondsToMilliseconds.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -20,33 +24,38 @@ export const transformToEnvironmental = (
 	humidity: Humidity_3304,
 	pressure: Pressure_3323,
 	deviceTwinMetadata: metadata,
-): EnvironmentData => {
+): { result: EnvironmentData } | { error: Error } => {
 	const temp = temperature?.[0]?.['5700']
 	const hum = humidity?.[0]?.['5700']
 	const atmp = pressure?.[0]?.['5700']
 
-	const maybeValidRequiredValues = checkAllRequired({ temp, hum, atmp })
-	if ('error' in maybeValidRequiredValues)
-		throw new Error(maybeValidRequiredValues.error)
-
-	let time =
+	let time: number | undefined | { error: Error } =
 		temperature?.[0]?.['5518'] ??
 		humidity?.[0]?.['5518'] ??
 		pressure?.[0]?.['5518']
 
-	if (time === undefined)
-		time = getTimestamp(
-			[Temperature_3303_urn, Humidity_3304_urn, Pressure_3323_urn],
-			5518,
-			deviceTwinMetadata,
-		)
+	time =
+		time === undefined
+			? getTimestamp(
+					[Temperature_3303_urn, Humidity_3304_urn, Pressure_3323_urn],
+					5518,
+					deviceTwinMetadata,
+			  )
+			: fromSecondsToMilliseconds(time)
 
-	return {
+	const object = {
 		v: {
-			temp: temp!,
-			hum: hum!,
-			atmp: atmp!,
+			temp,
+			hum,
+			atmp,
 		},
 		ts: time,
 	}
+
+	const maybeValidEnvironment = validateWithType(Environment)(object)
+	if ('errors' in maybeValidEnvironment) {
+		return { error: new Error(JSON.stringify(maybeValidEnvironment.errors)) }
+	}
+
+	return { result: maybeValidEnvironment }
 }
