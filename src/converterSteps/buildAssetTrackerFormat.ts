@@ -57,7 +57,13 @@ export const buildAssetTrackerFormat = (
 	const config = input[Config_50009_urn]
 	if (config === undefined) throw new Error('Config (50009) object is missing')
 
-	const bat = transformToBattery(device, deviceTwinMetadata)
+	const maybeValidBattery = transformToBattery(device, deviceTwinMetadata)
+	if ('error' in maybeValidBattery) {
+		console.log(maybeValidBattery)
+		throw new Error('Device (3) object is missing')
+	}
+	const bat = maybeValidBattery.result
+
 	const env = transformToEnvironmental(
 		temperature,
 		humidity,

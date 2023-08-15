@@ -318,7 +318,7 @@ describe('converter', () => {
 
 		const battery = {
 			v: 80,
-			ts: 1476186613, //000
+			ts: 1476186613000,
 		}
 
 		const environmental = {

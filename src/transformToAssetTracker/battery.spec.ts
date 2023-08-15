@@ -1,3 +1,4 @@
+import type { BatteryData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 import { transformToBattery } from './battery.js'
 
 describe('transformToBattery', () => {
@@ -28,12 +29,15 @@ describe('transformToBattery', () => {
 			'3': '22.8.1+0',
 			'11': 0,
 			'7': 80,
-			'13': 1675874731000,
+			'13': 1675874731,
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
 
-		expect(transformToBattery(device, deviceTwinMetadata)).toMatchObject({
+		const battery = transformToBattery(device, deviceTwinMetadata) as {
+			result: BatteryData
+		}
+		expect(battery.result).toMatchObject({
 			v: 80,
 			ts: 1675874731000,
 		})
@@ -47,12 +51,15 @@ describe('transformToBattery', () => {
 			'3': '22.8.1+0',
 			'11': 0,
 			// '7': 80, Battery value
-			'13': 1675874731000,
+			'13': 1675874731,
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
 
-		expect(() => transformToBattery(device, deviceTwinMetadata)).toThrow(Error)
+		const battery = transformToBattery(device, deviceTwinMetadata) as {
+			error: Error
+		}
+		expect(battery.error).not.toBe(undefined)
 	})
 
 	it('should follow Timestamp Hierarchy in case timestamp is not found from Device object', () => {
@@ -63,12 +70,15 @@ describe('transformToBattery', () => {
 			'3': '22.8.1+0',
 			'11': 0,
 			'7': 80,
-			// '13': 1675874731000, // timestamp from Device object
+			// '13': 1675874731, // timestamp from Device object
 			'16': 'UQ',
 			'19': '3.2.1',
 		}
 
-		expect(transformToBattery(device, deviceTwinMetadata)).toMatchObject({
+		const battery = transformToBattery(device, deviceTwinMetadata) as {
+			result: BatteryData
+		}
+		expect(battery.result).toMatchObject({
 			v: 80,
 			ts: 1688731863032,
 		})
