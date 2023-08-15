@@ -1,3 +1,4 @@
+import type { RoamingInfoData } from '@nordicsemiconductor/asset-tracker-cloud-docs'
 import type { ConnectivityMonitoring_4 } from '@nordicsemiconductor/lwm2m-types'
 import { transformToRoam } from './roam.js'
 
@@ -50,8 +51,10 @@ describe('transformToRoam', () => {
 			ts: 1688731863032,
 		}
 
-		expect(
-			transformToRoam(connectMonitoring, deviceTwinMetadata),
-		).toMatchObject(expected)
+		const roam = transformToRoam(connectMonitoring, deviceTwinMetadata) as {
+			result: RoamingInfoData
+		}
+
+		expect(roam.result).toMatchObject(expected)
 	})
 })

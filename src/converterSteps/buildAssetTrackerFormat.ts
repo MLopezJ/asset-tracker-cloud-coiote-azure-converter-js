@@ -87,7 +87,12 @@ export const buildAssetTrackerFormat = (
 		throw new Error('Device (3) object is missing')
 	const dev = maybeValidDevice.result
 
-	const roam = transformToRoam(connectivityMonitoring, deviceTwinMetadata)
+	const maybeValidRoam = transformToRoam(
+		connectivityMonitoring,
+		deviceTwinMetadata,
+	)
+	if ('error' in maybeValidRoam) throw new Error('ROAM object can not be build')
+	const roam = maybeValidRoam.result
 
 	return {
 		bat,

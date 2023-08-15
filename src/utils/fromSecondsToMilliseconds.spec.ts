@@ -11,7 +11,7 @@ describe('fromSecondsToMilliseconds', () => {
 	)
 
 	it('should return error if input has not the expected length', () => {
-		const result = fromSecondsToMilliseconds(10) as { error: string }
+		const result = fromSecondsToMilliseconds(10) as { error: Error }
 		expect(result.error).not.toBe(undefined)
 	})
 })

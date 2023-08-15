@@ -1,9 +1,12 @@
-import type { RoamingInfoData } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
+import {
+	RoamingInfo,
+	type RoamingInfoData,
+	validateWithType,
+} from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { checkAllRequired } from '../utils/checkAllRequired.js'
 import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 
 /**
@@ -14,7 +17,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
 export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
 	deviceTwinMetadata: metadata,
-): RoamingInfoData => {
+): { result: RoamingInfoData } | { error: Error } => {
 	const defaultBand = 1
 	const defaultEest = 5
 	const nw = String(connectivityMonitoring[0])
@@ -23,31 +26,35 @@ export const transformToRoam = (
 	const smcc = connectivityMonitoring[10]
 	const smnc = connectivityMonitoring[9]
 	const cell = connectivityMonitoring[8]
-	const ip = connectivityMonitoring[4]
+	const ip =
+		Array.isArray(connectivityMonitoring[4]) === true
+			? connectivityMonitoring[4][0]
+			: connectivityMonitoring[4] // TODO: resolve
 
-	const maybeValidRequiredValues = checkAllRequired({ area, cell, smcc, smnc })
-	if ('error' in maybeValidRequiredValues)
-		throw new Error(maybeValidRequiredValues.error)
-
+	// get timestamp from metadata
 	const time = getTimestamp(
 		ConnectivityMonitoring_4_urn,
 		12,
 		deviceTwinMetadata,
 	)
 
-	return {
+	const object = {
 		v: {
 			band: defaultBand, // ***** origin missing *****
 			nw,
 			rsrp,
-			area: area!,
-			mccmnc: Number(
-				`${connectivityMonitoring[10]}${connectivityMonitoring[9]}`,
-			), // /4/0/10 & /4/0/9
-			cell: cell!,
+			area,
+			mccmnc: Number(`${smcc}${smnc}`), // /4/0/10 & /4/0/9
+			cell,
 			ip,
 			eest: defaultEest, // ***** origin missing *****
 		},
 		ts: time,
 	}
+
+	const maybeValidRoam = validateWithType(RoamingInfo)(object)
+	if ('errors' in maybeValidRoam)
+		return { error: new Error(JSON.stringify(maybeValidRoam.errors)) }
+
+	return { result: maybeValidRoam }
 }

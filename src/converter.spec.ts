@@ -111,7 +111,7 @@ describe('converter', () => {
 									value: 34237196,
 								},
 								'9': {
-									value: 2,
+									value: 20,
 								},
 								'10': {
 									value: 242,
@@ -308,9 +308,9 @@ describe('converter', () => {
 				nw: '6',
 				rsrp: -85,
 				area: 12,
-				mccmnc: 2422,
+				mccmnc: 24220,
 				cell: 34237196,
-				ip: ['10.160.120.155'],
+				ip: '10.160.120.155',
 				eest: 5,
 			},
 			ts: 1688731863032,
