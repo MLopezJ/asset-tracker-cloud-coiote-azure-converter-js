@@ -5,7 +5,7 @@ import {
 } from '@nordicsemiconductor/asset-tracker-cloud-docs/protocol'
 import { type Device_3, Device_3_urn } from '@nordicsemiconductor/lwm2m-types'
 import { fromSecondsToMilliseconds } from '../utils/fromSecondsToMilliseconds.js'
-import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
+import { getTimestamp, type Metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Device LwM2M object into the device object expected by Asset Tracker web app
@@ -14,7 +14,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
  */
 export const transformToDevice = (
 	device: Device_3,
-	deviceTwinMetadata: metadata,
+	deviceTwinMetadata: Metadata,
 ): { error: Error } | { result: DeviceData } => {
 	const defaultIccid = '0000000000000000000'
 	const imei = device['2']

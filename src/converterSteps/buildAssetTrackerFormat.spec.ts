@@ -9,7 +9,7 @@ import {
 import { buildAssetTrackerFormat } from './buildAssetTrackerFormat.js'
 import { Config_50009_urn } from './getAssetTrackerObjects.js'
 import type { AssetTrackerLwM2MFormat } from './removeCoioteFormat.js'
-import type { metadata } from '../utils/getTimestamp'
+import type { Metadata } from '../utils/getTimestamp'
 
 describe('transform', () => {
 	it('should build the expected input of the Asset tracker web app', () => {
@@ -196,7 +196,7 @@ describe('transform', () => {
 		const metadata = {
 			$lastUpdated: '2023-07-07T12:11:03.0324459Z',
 			lwm2m: {},
-		} as metadata
+		} as Metadata
 		const input = {} as unknown as AssetTrackerLwM2MFormat
 
 		expect(() => buildAssetTrackerFormat(input, metadata)).toThrow(Error)

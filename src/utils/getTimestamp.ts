@@ -1,22 +1,31 @@
 import { parseURN } from '@nordicsemiconductor/lwm2m-types'
 import { fromStringToUnixTimestamp } from './fromStringToUnixTimestamp.js'
 
-type lastUpdate = { $lastUpdated: string }
-export type value_metadata = { value: lastUpdate; $lastUpdated: string }
-
-type resourceId = number // TODO: string
-export type resource_metadata = Record<resourceId, value_metadata> & lastUpdate
-
-type instanceId = number // TODO: string
-export type instance_metadata = Record<instanceId, resource_metadata> &
-	lastUpdate
-
-type objectId = number
-export type lwm2m_metadata = Record<objectId, instance_metadata> & lastUpdate
-
-export type metadata = {
+export type Metadata = {
 	$lastUpdated: string
-	lwm2m: lwm2m_metadata
+	lwm2m: LwM2M_Metadata
+}
+
+export type LwM2M_Metadata = {
+	[key: `${number}`]: Obj // object ID : object
+	$lastUpdated: string
+}
+
+type Obj = {
+	[key: `${number}`]: Instance // Instance id : instance
+	$lastUpdated: string
+}
+
+type Instance = {
+	[key: `${number}`]: Resource // Resource id : resource
+	$lastUpdated: string
+}
+
+type Resource = {
+	$lastUpdated: string
+	value: {
+		$lastUpdated: string
+	}
 }
 
 /**
@@ -25,7 +34,7 @@ export type metadata = {
  * @see https://github.com/MLopezJ/asset-tracker-cloud-coiote-azure-converter-js#timestamp-hierarchy
  */
 const timestampHierarchy = (
-	metadata: metadata,
+	metadata: Metadata,
 	ObjectID: string,
 	resourceId: number,
 ):
@@ -41,47 +50,41 @@ const timestampHierarchy = (
 			),
 		}
 
-	const objectMetadata = metadata.lwm2m[ObjectID as unknown as number] // TODO: this make no sense
-	if (objectMetadata !== undefined) {
-		if (objectMetadata?.['0'] !== undefined) {
-			// resource metadata
-			lastUpdated =
-				objectMetadata?.['0']?.[`${resourceId}`]?.value?.['$lastUpdated']
+	const lwm2m = metadata.lwm2m
+	const object = lwm2m[`${ObjectID as unknown as number}`]
+	if (object !== undefined) {
+		const instance = object?.['0']
+		if (instance !== undefined) {
+			const resource = instance[`${resourceId}`]
 
+			if (resource !== undefined) {
+				lastUpdated = resource.value.$lastUpdated
+				if (lastUpdated !== undefined) {
+					return { value: fromStringToUnixTimestamp(lastUpdated) }
+				}
+			}
+
+			lastUpdated = instance?.['$lastUpdated']
 			if (lastUpdated !== undefined) {
 				return { value: fromStringToUnixTimestamp(lastUpdated) }
 			}
-			// resource metadata
-
-			// instance metadata
-			lastUpdated = objectMetadata?.['0']?.['$lastUpdated']
-			if (lastUpdated !== undefined) {
-				return { value: fromStringToUnixTimestamp(lastUpdated) }
-			}
-			// instance metadata
 		}
 
-		// Object metadata
-		lastUpdated = objectMetadata?.['$lastUpdated']
+		lastUpdated = object?.['$lastUpdated']
 		if (lastUpdated !== undefined) {
 			return { value: fromStringToUnixTimestamp(lastUpdated) }
 		}
-		// Object metadata
 	}
 
-	// LwM2M metadata
 	lastUpdated = metadata.lwm2m?.['$lastUpdated']
 	if (lastUpdated !== undefined) {
 		return { value: fromStringToUnixTimestamp(lastUpdated) }
 	}
-	// LwM2M metadata
 
-	// metadata
 	lastUpdated = metadata['$lastUpdated']
 	if (lastUpdated !== undefined) {
 		return { value: fromStringToUnixTimestamp(lastUpdated) }
 	}
-	// metadata
 
 	return {
 		error: new Error(
@@ -96,7 +99,7 @@ const timestampHierarchy = (
 export const getTimestamp = (
 	objectURN: string | string[],
 	resourceId: number,
-	metadata: metadata,
+	metadata: Metadata,
 ): number | { error: Error } => {
 	const objectsURNs =
 		Array.isArray(objectURN) === true ? objectURN : [objectURN]

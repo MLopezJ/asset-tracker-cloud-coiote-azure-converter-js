@@ -4,7 +4,7 @@ import {
 	Pressure_3323_urn,
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import type { lwm2m_metadata, metadata } from './getTimestamp'
+import type { LwM2M_Metadata, Metadata } from './getTimestamp'
 import { getTimestamp } from './getTimestamp.js'
 
 describe('getTimestamp', () => {
@@ -126,7 +126,7 @@ describe('getTimestamp', () => {
 		const resourceId = 7
 		const metadata = {
 			// LwM2M object does not exist
-			lwm2m: {} as unknown as lwm2m_metadata,
+			lwm2m: {} as unknown as LwM2M_Metadata,
 			$lastUpdated: '2023-08-05T15:15:43.0322359Z', // so the metadata reported time should be selected
 		}
 
@@ -136,7 +136,7 @@ describe('getTimestamp', () => {
 	it(`should return error when metadata objects is empty`, () => {
 		const objectURN = Device_3_urn
 		const resourceId = 7
-		const metadata = {} as metadata
+		const metadata = {} as Metadata
 		const result = getTimestamp(objectURN, resourceId, metadata) as {
 			error: Error
 		}

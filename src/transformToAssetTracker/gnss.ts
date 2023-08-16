@@ -8,7 +8,7 @@ import {
 	Location_6_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { fromSecondsToMilliseconds } from '../utils/fromSecondsToMilliseconds.js'
-import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
+import { getTimestamp, type Metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Location LwM2M object into the environment object expected by Asset Tracker web app
@@ -17,7 +17,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
  */
 export const transformToGnss = (
 	location: Location_6,
-	deviceTwinMetadata: metadata,
+	deviceTwinMetadata: Metadata,
 ): { result: GNSSData } | { error: Error } => {
 	const defaultHdg = 0
 	const lat = location['0']

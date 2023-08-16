@@ -17,7 +17,7 @@ import { transformToDevice } from '../transformToAssetTracker/device.js'
 import { transformToEnvironmental } from '../transformToAssetTracker/environmental.js'
 import { transformToGnss } from '../transformToAssetTracker/gnss.js'
 import { transformToRoam } from '../transformToAssetTracker/roam.js'
-import type { metadata } from '../utils/getTimestamp'
+import type { Metadata } from '../utils/getTimestamp'
 import type { customObject } from '../utils/setCustomFormat'
 
 export type objects = {
@@ -30,7 +30,7 @@ export type objects = {
  */
 export const buildAssetTrackerFormat = (
 	input: AssetTrackerLwM2MFormat,
-	deviceTwinMetadata: metadata,
+	deviceTwinMetadata: Metadata,
 ): assetTracker => {
 	const device = input[Device_3_urn]
 	if (device === undefined) throw new Error('Device (3) object is missing')

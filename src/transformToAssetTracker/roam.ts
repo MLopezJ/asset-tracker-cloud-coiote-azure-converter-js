@@ -7,7 +7,7 @@ import {
 	type ConnectivityMonitoring_4,
 	ConnectivityMonitoring_4_urn,
 } from '@nordicsemiconductor/lwm2m-types'
-import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
+import { getTimestamp, type Metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Connectivity Monitoring LwM2M object into the roaming object expected by Asset Tracker web app
@@ -16,7 +16,7 @@ import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
  */
 export const transformToRoam = (
 	connectivityMonitoring: ConnectivityMonitoring_4,
-	deviceTwinMetadata: metadata,
+	deviceTwinMetadata: Metadata,
 ): { result: RoamingInfoData } | { error: Error } => {
 	const defaultBand = 1
 	const defaultEest = 5

@@ -12,7 +12,7 @@ import {
 	Temperature_3303_urn,
 } from '@nordicsemiconductor/lwm2m-types'
 import { fromSecondsToMilliseconds } from '../utils/fromSecondsToMilliseconds.js'
-import { getTimestamp, type metadata } from '../utils/getTimestamp.js'
+import { getTimestamp, type Metadata } from '../utils/getTimestamp.js'
 
 /**
  * Transform Temperature, Humidity and Pressure LwM2M objects into the environment object expected by Asset Tracker web app
@@ -23,7 +23,7 @@ export const transformToEnvironmental = (
 	temperature: Temperature_3303,
 	humidity: Humidity_3304,
 	pressure: Pressure_3323,
-	deviceTwinMetadata: metadata,
+	deviceTwinMetadata: Metadata,
 ): { result: EnvironmentData } | { error: Error } => {
 	const temp = temperature?.[0]?.['5700']
 	const hum = humidity?.[0]?.['5700']

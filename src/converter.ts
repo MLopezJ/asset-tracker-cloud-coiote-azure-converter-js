@@ -4,7 +4,7 @@ import { checkLwM2MFormat } from './converterSteps/checkLwM2MFormat.js'
 import { getAssetTrackerObjects } from './converterSteps/getAssetTrackerObjects.js'
 import { removeCoioteFormat } from './converterSteps/removeCoioteFormat.js'
 
-import type { metadata } from './utils/getTimestamp'
+import type { Metadata } from './utils/getTimestamp'
 
 export type value = { value: string | number | boolean }
 export type list = Record<string, { dim: string } | value>
@@ -20,7 +20,7 @@ export type deviceTwin = {
 		desired: unknown
 		reported: {
 			lwm2m: lwm2mCoiote
-			$metadata: metadata
+			$metadata: Metadata
 			$version: number
 		}
 	}
